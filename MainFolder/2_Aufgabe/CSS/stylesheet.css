@@ -1,22 +1,39 @@
 body{
     margin: 0;
+    background-color: whitesmoke;
+    font-family: Arial, Helvetica, sans-serif;
 }
-main, footer{
-    margin-left: 5px;
-    margin-right: 5px;
+@media (min-width: 800px){
+    main, footer {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    #landingField{
+        height: 450px;/* Die gewünschte höhe */
+    }
 }
-#landingField{
-    height: 450px;/* Die gewünschte höhe */
-    width: auto;
-    background-color: black;
-    text-align: center;
-    padding-top: 225px;
+@media (max-width: 800px){
+    main, footer {
+        margin:0px;
+    }
+    #landingField{
+        height: 300px;
 
+     }
+}
+
+#landingField{
+    width: auto;
+    background-image: url(/MainFolder/2_Aufgabe/img/chapel-4684650_640.jpg);
+    background-size:100%;
+    text-align: center;
     color: white;
 }
+
 nav{
     padding-top: 5px;
     margin-top: 10px;
+    border-radius: 5px;
 }
 li a{
     padding: 8px 16px;
@@ -39,9 +56,12 @@ li a{
     text-align: center;
     text-decoration: none;
     color: black;
-    
 }
+nav li a:hover{
+    background-color: rgb(13, 105, 96);
+    border-color: rgb(13, 105, 96);
 
+}
 li{
     float: left;
 
@@ -59,15 +79,12 @@ position: sticky;
 top: 5px;
 }
 #topNav{
-    margin: 5px;
     margin-top: 0px;
 }
 li a:hover + #inNav{
-   
     opacity: 100;
 }
 #inNav:hover{
-    
     opacity: 100;
 }
 
@@ -76,13 +93,38 @@ li a:hover + #inNav{
     position: absolute;
     opacity: 0;
 }
-
-#mainText{
-    float: none;
+#active{
+    background-color: rgb(21, 167, 152);
 }
+.flexContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 25px;
+    background-color: wheat;
+    border-radius: 5px;
+    padding: 5px;
+}
+.flexItem{
+    width: 500px;
+}
+.flexItem-1{
+    order: 1;
+}
+.flexItem-2{
+    order: 2;
+}
+.flexItem-3{
+    order: 3;
+}
+.flexItem-4{
+    order: 3;
+}
+
 .backTop{
     background-color: khaki;
     margin-right: auto;
+    margin-top: 15px;
     width: 200px;
     
 
@@ -91,14 +133,19 @@ li a:hover + #inNav{
 
     border-radius: 5px;
     text-align: center;
+
 }
 
 .backTop a{
- 
+
     font-family: 'Zen Kurenaido', sans-serif;
     font-size: 24px;
     text-decoration: none;
     color: black;
     list-style-type: none;
     text-decoration: none;
+}
+.eventTable{
+    background-color: tomato;
+    border-radius: 5px;
 }
