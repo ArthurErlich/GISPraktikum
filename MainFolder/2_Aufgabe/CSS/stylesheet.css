@@ -1,7 +1,19 @@
 body{
     margin: 0;
 }
+main, footer{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+#landingField{
+    height: 450px;/* Die gewünschte höhe */
+    width: auto;
+    background-color: black;
+    text-align: center;
+    padding-top: 225px;
 
+    color: white;
+}
 nav{
     padding-top: 5px;
     margin-top: 10px;
@@ -47,7 +59,7 @@ position: sticky;
 top: 5px;
 }
 #topNav{
-    margin: 25px;
+    margin: 5px;
     margin-top: 0px;
 }
 li a:hover + #inNav{
@@ -67,4 +79,26 @@ li a:hover + #inNav{
 
 #mainText{
     float: none;
+}
+.backTop{
+    background-color: khaki;
+    margin-right: auto;
+    width: 200px;
+    
+
+    padding-top: 8px;
+    padding-bottom:8px ;
+
+    border-radius: 5px;
+    text-align: center;
+}
+
+.backTop a{
+ 
+    font-family: 'Zen Kurenaido', sans-serif;
+    font-size: 24px;
+    text-decoration: none;
+    color: black;
+    list-style-type: none;
+    text-decoration: none;
 }
