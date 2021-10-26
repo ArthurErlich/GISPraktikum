@@ -212,6 +212,9 @@ img{
     border-radius: 5px;
     text-align: center;
 }
+.backTop:hover {
+    background-color: #f72585;
+}
 
 .backTop a {
     font-family: 'Zen Kurenaido', sans-serif;
@@ -227,4 +230,12 @@ img{
     background-color: #B5179E;
     border-radius: 5px;
     color: white;
+}
+.linkTest[title]:hover::after{
+    background-color: black;
+    color: white;
+    content: attr(title);
+    font-size: 100pt;
+    position: absolute;
+    left: 0;
 }
