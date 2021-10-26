@@ -2,6 +2,7 @@ body{
     margin: 0;
     background-color: whitesmoke;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 13pt;
 }
 @media (min-width: 800px){
     main, footer {
@@ -9,7 +10,15 @@ body{
         margin-right: 100px;
     }
     #landingField{
-        height: 450px;/* Die gewünschte höhe */
+       height: 450px;/* Die gewünschte höhe */
+        letter-spacing: 5px;
+        background-size:100%;
+    }
+    .flexItem img{
+        max-width: 500px;
+    }
+    .flexItem video{
+        max-width: 500px;
     }
 }
 @media (max-width: 800px){
@@ -18,15 +27,37 @@ body{
     }
     #landingField{
         height: 300px;
+        letter-spacing: 2px;
+        background-size:210%;
      }
+     .flexItem img{
+         width: 90%;
+     }
+     .flexItem video{
+        max-width: 300px;
+    }
+}
+@media (max-width: 1150px){
+    #landingField{
+        height: 350px;
+        letter-spacing: 2px;
+     }
+}
+@media (min-width: 2400px){
+    main, footer {
+        margin-left: 500px;
+        margin-right: 500px;
+    }
 }
 
 #landingField{
     width: auto;
     background-image: url(/MainFolder/2_Aufgabe/img/chapel-4684650_640.jpg);
-    background-size:100%;
     text-align: center;
     color: white;
+    margin-bottom: 25px;
+    max-height: 600;
+    display: block;
 }
 
 nav{
@@ -38,19 +69,14 @@ li a{
     padding: 8px 16px;
     background-color: lightblue;
     border-radius: 3px;
-    width: 100px;
+    width: 120px;
     list-style-type: none;
     display: block;
     margin-left: 5px;
     margin-bottom: 5px;
 
-    border-style: solid;
-    border-width: 1px;
-    border-color: rgb(152, 213, 233);
-
-
     font-family: 'Zen Kurenaido', sans-serif;
-    font-size: 20px;
+    font-size: 20pt;
     font-weight: 600;
     text-align: center;
     text-decoration: none;
@@ -59,6 +85,7 @@ li a{
 nav li a:hover{
     background-color: rgb(13, 105, 96);
     border-color: rgb(13, 105, 96);
+    color: whitesmoke;
 
 }
 li{
@@ -104,7 +131,13 @@ li a:hover + #inNav{
     padding: 5px;
 }
 .flexItem{
-    width: 500px;
+    max-width: 500px;
+}
+.flexItem img{
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+
 }
 .flexItem-1{
     order: 1;
@@ -134,7 +167,7 @@ li a:hover + #inNav{
 
 .backTop a{
     font-family: 'Zen Kurenaido', sans-serif;
-    font-size: 24px;
+    font-size: 20pt;
     text-decoration: none;
     color: black;
     list-style-type: none;
