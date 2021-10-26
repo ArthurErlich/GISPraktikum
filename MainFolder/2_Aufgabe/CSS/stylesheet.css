@@ -51,7 +51,7 @@ body {
         height: 350px;
     }
     #landingField .landingText {
-        letter-spacing: 2px;
+        letter-spacing: 5px;
         padding-top: calc(350px/2);
     }
 }
@@ -72,6 +72,7 @@ body {
     margin-bottom: 25px;
     max-height: 600;
     display: block;
+    border-radius: 5px;
 }
 
 /*testing heropages
@@ -79,12 +80,12 @@ body {
 
 }
 */
-
 .landingText {
     margin-left: auto;
     margin-right: auto;
     max-width: 300px;
     opacity: 1;
+    font-size: 30pt;
 }
 
 nav {
@@ -95,7 +96,7 @@ nav {
 
 li a {
     padding: 8px 16px;
-    background-color: lightblue;
+    background-color: #b5179e;
     border-radius: 3px;
     width: 120px;
     list-style-type: none;
@@ -107,13 +108,12 @@ li a {
     font-weight: 600;
     text-align: center;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 nav li a:hover {
-    background-color: rgb(13, 105, 96);
-    border-color: rgb(13, 105, 96);
-    color: whitesmoke;
+    background-color: #f72585;
+    color: white;
 }
 
 li {
@@ -128,9 +128,9 @@ ul {
 }
 
 header {
-    background-color: cyan;
+    background-color: #4361EE;
     position: sticky;
-    top: 5px;
+    top: 0px;
 }
 
 #topNav {
@@ -152,7 +152,7 @@ li a:hover+#inNav {
 }
 
 #active {
-    background-color: rgb(21, 167, 152);
+    background-color: #4895ef;
 }
 
 .flexContainer {
@@ -160,9 +160,11 @@ li a:hover+#inNav {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px 25px;
-    background-color: wheat;
+    background-color: #4cc9f0;
     border-radius: 5px;
     padding: 5px;
+    color: black;
+    margin-bottom: 5px;
 }
 
 .flexItem {
@@ -191,13 +193,16 @@ li a:hover+#inNav {
     order: 3;
 }
 
-p::selection {
-    background-color: chartreuse;
-    color: red;
+p::selection , h1::selection, h2::selection, h3::selection, h4::selection, b::selection{
+    background-color: #560bad;
+    color: whitesmoke;
 }
 
+img{
+    border-radius: 5px;
+}
 .backTop {
-    background-color: khaki;
+    background-color: #b5179e;
     margin-right: auto;
     margin-top: 15px;
     width: 200px;
@@ -210,13 +215,15 @@ p::selection {
 .backTop a {
     font-family: 'Zen Kurenaido', sans-serif;
     font-size: 20pt;
+    font-weight: 600;
     text-decoration: none;
-    color: black;
+    color: white;
     list-style-type: none;
     text-decoration: none;
 }
 
 .eventTable {
-    background-color: tomato;
+    background-color: #B5179E;
     border-radius: 5px;
+    color: white;
 }
