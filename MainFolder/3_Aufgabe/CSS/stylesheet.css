@@ -3,14 +3,18 @@ width: 500px;
 height: 250px;
 margin-left: auto;
 margin-right: auto;
-margin-bottom: 150px;
-background-color: black;
+margin-bottom: 50px;
+
+background-color: rgb(29, 29, 29);
 color: white;
 overflow: scroll;
 overflow-x: hidden;
+
 padding-right: 5px;
 padding-left: 5px;
 font-size: 12pt;
+
+border-radius: 5px;
 }
 #mainContener{
 width: 500px;
@@ -20,4 +24,26 @@ font-size: 20pt;
 }
 body{
     background-color: lightgray;
+}
+#links {
+    width: 400px;
+    font-family: Arial, Helvetica, sans-serif;
+  
+}
+#links a {
+    width: 350px;
+    height: 40px;
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 15pt;
+    line-height: 2;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: rgb(32, 32, 32);
+    margin-top: 10px;
+    text-align: center;
+    border-radius: 8px;
+}
+#links a:hover {
+    background-color: rgba(66, 66, 66, 0.993);
 }
