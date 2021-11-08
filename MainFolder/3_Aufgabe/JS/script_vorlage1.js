@@ -51,7 +51,7 @@ var Aufgabe3_1;
     ];
     // -- HIER BITTE IHRE LÖSUNG ZUR AUFGABE 2 EINTRAGEN
     // Lösung a) ...
-    consolTEXT2.innerHTML += "Lösung a): <br>" + events.length + "<br><br>";
+    consolTEXT2.innerHTML += "Lösung a): <br>" + String(events.length) + "<br><br>";
     // Lösung b) ...
     consolTEXT2.innerHTML += "Lösung b): <br>";
     for (let x = 0; x < events.length; x++) {
@@ -63,9 +63,22 @@ var Aufgabe3_1;
     consolTEXT2.innerHTML += "<br> ";
     // Lösung c) ...
     consolTEXT2.innerHTML += "Lösung c): <br>";
-    function tickitPrice(events) {
+    consolTEXT2.innerHTML += tickitPrice(events) + "<br><br>";
+    function tickitPrice(localEvents) {
+        let maxPrice = [["Test", 1]];
+        for (let x = 0; x < localEvents.length; x++) {
+            for (let y = 0; y < localEvents[x].length; y++) {
+                if (parseFloat(localEvents[x][y]) > parseFloat(maxPrice[0][1])) {
+                    maxPrice[0][0] = localEvents[x][y - 1];
+                    maxPrice[0][1] = localEvents[x][y];
+                }
+            }
+        }
+        return maxPrice[0][0] + " " + maxPrice[0][1];
     }
     // Lösung d) ...
+    consolTEXT2.innerHTML += "Lösung d): <br>";
+    //convert to string upper or lowercase -->
     // Lösung e) ...
     // Lösung f) ...
     // Lösung g) ...
