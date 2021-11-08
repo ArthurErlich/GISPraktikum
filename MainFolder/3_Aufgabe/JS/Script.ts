@@ -6,4 +6,5 @@ namespace Aufgabe3{
     console.log(y);
     y = true;
     console.log(y);
+    console.log(x);
 }

@@ -1,0 +1,40 @@
+body {
+    background-color: darkgray;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.linksContainer {
+    margin-top: 200px;
+}
+
+#links {
+    margin: auto;
+    width: 400px;
+  
+}
+#links a {
+    width: 350px;
+    height: 40px;
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 15pt;
+    line-height: 2;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: black;
+    margin-top: 10px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+#links a:hover {
+    background-color: rgba(66, 66, 66, 0.993);
+}
+footer{
+position: absolute;
+bottom:  0px;
+height: 50px;
+margin: auto;
+width: 98%;
+text-align: right;
+}
