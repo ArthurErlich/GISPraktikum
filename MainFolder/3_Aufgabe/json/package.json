@@ -1,0 +1,8 @@
+{
+  "name": "gis_linter",
+  "version": "1.0.0",
+  "description": "linter for GIS on this Projekt",
+  "main": "Script.js",
+  "author": "",
+  "license": "ISC"
+}
