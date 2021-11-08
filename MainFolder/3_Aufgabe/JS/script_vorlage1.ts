@@ -1,3 +1,9 @@
+namespace Aufgabe3_1{
+
+//a vareble to edit my consol programm
+const consolTEXT = document.getElementById("consolTEXT");
+const consolTEXT2 = document.getElementById("consolTEXT2");
+
 // -- [Aufgabe 1]
 
 /**
@@ -17,16 +23,20 @@ function func1(age: number): number {
 let output: string = func2(firstName);
 
 function func3(meal?: string): string {
-  console.log(`Ich esse gerne ${meal || "Pizza"}.`);
+  //console.log(`Ich esse gerne ${meal || "Pizza"}.`);
+  consolTEXT.innerHTML += `Ich esse gerne ${meal || "Pizza"}.`+"<br>";
+  
   return func1(age) > 1995
     ? `Ich gehöre zur Generation Z`
     : `Ich gehöre zur Generation Y`;
 }
 
-console.log(output);
+//console.log(output);
+consolTEXT.innerHTML +=  output+"<br>";
 
 function func2(name: string): string {
-  console.log(`Ich heiße ${name}.`);
+  //console.log(`Ich heiße ${name}.`);
+  consolTEXT.innerHTML +=`Ich heiße ${name}.`+"<br>";
   return func3();
 }
 
@@ -68,3 +78,5 @@ let events: any[][] = [
 // Lösung g) ...
 
 // Lösung h) ...
+
+}
