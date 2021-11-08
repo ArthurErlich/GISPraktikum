@@ -1,7 +1,7 @@
 "use strict";
 var Aufgabe3_1;
 (function (Aufgabe3_1) {
-    //a vareble to edit my consol programm
+    //varebles to edit my consol programm
     const consolTEXT = document.getElementById("consolTEXT");
     const consolTEXT2 = document.getElementById("consolTEXT2");
     // -- [Aufgabe 1]
@@ -51,8 +51,20 @@ var Aufgabe3_1;
     ];
     // -- HIER BITTE IHRE LÖSUNG ZUR AUFGABE 2 EINTRAGEN
     // Lösung a) ...
+    consolTEXT2.innerHTML += "Lösung a): <br>" + events.length + "<br><br>";
     // Lösung b) ...
+    consolTEXT2.innerHTML += "Lösung b): <br>";
+    for (let x = 0; x < events.length; x++) {
+        for (let y = 0; y < events[x].length; y++) {
+            consolTEXT2.innerHTML += " " + events[x][y];
+        }
+        consolTEXT2.innerHTML += "<br> ";
+    }
+    consolTEXT2.innerHTML += "<br> ";
     // Lösung c) ...
+    consolTEXT2.innerHTML += "Lösung c): <br>";
+    function tickitPrice(events) {
+    }
     // Lösung d) ...
     // Lösung e) ...
     // Lösung f) ...
