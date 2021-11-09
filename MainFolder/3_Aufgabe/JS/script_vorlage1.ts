@@ -149,6 +149,7 @@ namespace Aufgabe3_1 {
   }
 
   // Lösung g) ...
+  outString += "<br> Lösung g): <br>";
   class ConcertEvent {
     interpret: string = "";
     price: number = 0;
@@ -161,9 +162,21 @@ namespace Aufgabe3_1 {
       outString += this.interpret + " " + this.price + "<br>";
     }
   }
-
+  	
+  outString += ` <p style="color: green;">class ConcertEvent { <br>
+    interpret: string = ""; <br>
+    price: number = 0; <br>
+    <br>
+    constructor(interpret: string, price: number) { <br>
+      this.interpret = interpret; <br>
+      this.price = price; <br>
+    } <br>
+    show() { <br>
+      outString += this.interpret + " " + this.price + "br"; <br>
+    }
+  }; <br> </p>`
   // Lösung h) ... 
-
+  
   let eventList: ConcertEvent[] = new Array(events.length);
 
 
@@ -172,7 +185,6 @@ namespace Aufgabe3_1 {
       eventList[x]= new ConcertEvent(events[x][y - 1],events[x][y]);
     }
   }
-
   eventList.forEach(element => {
     element.show();
   });
