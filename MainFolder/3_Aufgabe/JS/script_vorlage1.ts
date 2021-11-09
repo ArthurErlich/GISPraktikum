@@ -98,8 +98,11 @@ namespace Aufgabe3_1 {
   
   // Lösung d) ...
   consolTEXT2.innerHTML += "Lösung d): <br>";
+  consolTEXT2.innerHTML += searchName(events, "Pink Floyd");
   //convert to string upper or lowercase -->
-
+function searchName(events:any, name:string): string {
+  return "test"
+}
   // Lösung e) ...
 
   // Lösung f) ...
