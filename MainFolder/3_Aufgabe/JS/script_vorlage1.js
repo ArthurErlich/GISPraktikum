@@ -144,7 +144,7 @@ var Aufgabe3_1;
     }
   }; <br> </p> <br>`;
     // Lösung h) ... 
-    outString += "Lösung h: <br>";
+    outString += "Lösung h): <br>";
     let eventList = new Array(events.length);
     for (let x = 0; x < events.length; x++) {
         for (let y = 0; y < events[x].length; y++) {
