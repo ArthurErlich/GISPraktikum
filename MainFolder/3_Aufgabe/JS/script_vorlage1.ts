@@ -176,7 +176,7 @@ namespace Aufgabe3_1 {
     }
   }; <br> </p> <br>`
   // Lösung h) ... 
-  outString+= "Lösung h: <br>" ;
+  outString+= "Lösung h): <br>" ;
   let eventList: ConcertEvent[] = new Array(events.length);
 
 
