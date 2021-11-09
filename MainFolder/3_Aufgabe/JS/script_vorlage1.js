@@ -142,8 +142,9 @@ var Aufgabe3_1;
     show() { <br>
       outString += this.interpret + " " + this.price + "br"; <br>
     }
-  }; <br> </p>`;
+  }; <br> </p> <br>`;
     // Lösung h) ... 
+    outString += "Lösung h: <br>";
     let eventList = new Array(events.length);
     for (let x = 0; x < events.length; x++) {
         for (let y = 0; y < events[x].length; y++) {

@@ -174,9 +174,9 @@ namespace Aufgabe3_1 {
     show() { <br>
       outString += this.interpret + " " + this.price + "br"; <br>
     }
-  }; <br> </p>`
+  }; <br> </p> <br>`
   // Lösung h) ... 
-  
+  outString+= "Lösung h: <br>" ;
   let eventList: ConcertEvent[] = new Array(events.length);
 
 
