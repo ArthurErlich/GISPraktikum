@@ -95,14 +95,28 @@ namespace Aufgabe3_1 {
     }
     return maxPrice[0][0] + " " + maxPrice[0][1];
   }
-  
+
   // Lösung d) ...
-  consolTEXT2.innerHTML += "Lösung d): <br>";
-  consolTEXT2.innerHTML += searchName(events, "Pink Floyd");
-  //convert to string upper or lowercase -->
-function searchName(events:any, name:string): string {
-  return "test"
-}
+  let name: string = "Pink Floyd";
+  consolTEXT2.innerHTML += "Lösung d): <br>" + "eingabe war: " + name + "<br>";
+  consolTEXT2.innerHTML += searchName(events, name) + "<br><br>";
+
+  function searchName(localEvents: any[][], name: string): boolean {
+
+    let nameList: string[] = [];
+    name = name.toUpperCase();
+
+    for (let x: number = 0; x < localEvents.length; x++) {
+      nameList[x] = localEvents[x][0];
+      nameList[x] = nameList[x].toUpperCase();
+
+      if (name == nameList[x]) {
+        return true;
+      }
+    }
+
+    return false;
+  }
   // Lösung e) ...
 
   // Lösung f) ...
