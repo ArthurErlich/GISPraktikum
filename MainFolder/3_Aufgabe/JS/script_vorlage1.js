@@ -77,8 +77,21 @@ var Aufgabe3_1;
         return maxPrice[0][0] + " " + maxPrice[0][1];
     }
     // Lösung d) ...
-    consolTEXT2.innerHTML += "Lösung d): <br>";
-    //convert to string upper or lowercase -->
+    let name = "Pink Floyd";
+    consolTEXT2.innerHTML += "Lösung d): <br>" + "eingabe war: " + name + "<br>";
+    consolTEXT2.innerHTML += searchName(events, name) + "<br><br>";
+    function searchName(localEvents, name) {
+        let nameList = [];
+        name = name.toUpperCase();
+        for (let x = 0; x < localEvents.length; x++) {
+            nameList[x] = localEvents[x][0];
+            nameList[x] = nameList[x].toUpperCase();
+            if (name == nameList[x]) {
+                return true;
+            }
+        }
+        return false;
+    }
     // Lösung e) ...
     // Lösung f) ...
     // Lösung g) ...
