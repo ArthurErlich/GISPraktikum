@@ -3,6 +3,7 @@ namespace Aufgabe3_1 {
   //varebles to edit my consol programm
   const consolTEXT = document.getElementById("consolTEXT");
   const consolTEXT2 = document.getElementById("consolTEXT2");
+  let outString: string = ""
 
   // -- [Aufgabe 1]
 
@@ -64,21 +65,21 @@ namespace Aufgabe3_1 {
   // -- HIER BITTE IHRE LÖSUNG ZUR AUFGABE 2 EINTRAGEN
 
   // Lösung a) ...
-  consolTEXT2.innerHTML += "Lösung a): <br>" + String(events.length) + "<br><br>";
+  outString += "Lösung a): <br>" + String(events.length) + "<br><br>";
 
   // Lösung b) ...
-  consolTEXT2.innerHTML += "Lösung b): <br>";
+  outString += "Lösung b): <br>";
   for (let x: number = 0; x < events.length; x++) {
     for (let y: number = 0; y < events[x].length; y++) {
-      consolTEXT2.innerHTML += " " + events[x][y];
+      outString += " " + events[x][y];
     }
-    consolTEXT2.innerHTML += "<br> ";
+    outString += "<br> ";
   }
-  consolTEXT2.innerHTML += "<br> ";
+  outString += "<br> ";
 
   // Lösung c) ...
-  consolTEXT2.innerHTML += "Lösung c): <br>";
-  consolTEXT2.innerHTML += tickitPrice(events) + "<br><br>";
+  outString += "Lösung c): <br>";
+  outString += tickitPrice(events) + "<br><br>";
 
 
   function tickitPrice(localEvents: any[][]): string {
@@ -98,8 +99,8 @@ namespace Aufgabe3_1 {
 
   // Lösung d) ...
   let name: string = "Pink Floyd";
-  consolTEXT2.innerHTML += "Lösung d): <br>" + "eingabe war: " + name + "<br>";
-  consolTEXT2.innerHTML += searchName(events, name) + "<br><br>";
+  outString += "Lösung d): <br>" + "eingabe war: " + name + "<br>";
+  outString += searchName(events, name) + "<br><br>";
 
   function searchName(localEvents: any[][], name: string): boolean {
 
@@ -118,11 +119,64 @@ namespace Aufgabe3_1 {
     return false;
   }
   // Lösung e) ...
+  outString += "Lösung e): <br>"
+  factoial(4);
+  factoial(5);
+  factoial(10);
+  function factoial(n: number) {
+    let index: number = 1;
+    let iterate: number = n;
 
+    while (index < iterate) {
+      outString += index + " * ";
+
+      n = n * index;
+      index++;
+
+    }
+    outString += index + " = " + n + "<br>";
+  }
   // Lösung f) ...
+  outString += " <br> Lösung f): <br>This Numbers are tileable with 3 <br> "
+  for (let i: number = 1; i <= 100; i++) {
+
+    if (i % 3 == 0) {
+      outString += i + "\t \t";
+    }
+    if (i % 10 == 0) {
+      outString += "<br>";
+    }
+  }
 
   // Lösung g) ...
+  class ConcertEvent {
+    interpret: string = "";
+    price: number = 0;
 
-  // Lösung h) ...
+    constructor(interpret: string, price: number) {
+      this.interpret = interpret;
+      this.price = price;
+    }
+    show() {
+      outString += this.interpret + " " + this.price + "<br>";
+    }
+  }
 
+  // Lösung h) ... 
+
+  let eventList: ConcertEvent[] = new Array(events.length);
+
+
+  for (let x: number = 0; x < events.length; x++) {
+    for (let y: number = 0; y < events[x].length; y++) {
+      eventList[x]= new ConcertEvent(events[x][y - 1],events[x][y]);
+    }
+  }
+
+  eventList.forEach(element => {
+    element.show();
+  });
+
+  //Outupt zur konsole--> edit dom elemnt
+  consolTEXT2.innerHTML = outString;
 }
