@@ -119,6 +119,7 @@ var Aufgabe3_1;
         }
     }
     // Lösung g) ...
+    outString += "<br> Lösung g): <br>";
     class ConcertEvent {
         interpret = "";
         price = 0;
@@ -130,6 +131,18 @@ var Aufgabe3_1;
             outString += this.interpret + " " + this.price + "<br>";
         }
     }
+    outString += ` <p style="color: green;">class ConcertEvent { <br>
+    interpret: string = ""; <br>
+    price: number = 0; <br>
+    <br>
+    constructor(interpret: string, price: number) { <br>
+      this.interpret = interpret; <br>
+      this.price = price; <br>
+    } <br>
+    show() { <br>
+      outString += this.interpret + " " + this.price + "br"; <br>
+    }
+  }; <br> </p>`;
     // Lösung h) ... 
     let eventList = new Array(events.length);
     for (let x = 0; x < events.length; x++) {
