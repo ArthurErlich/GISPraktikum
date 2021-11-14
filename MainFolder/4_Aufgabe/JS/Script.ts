@@ -1,10 +1,11 @@
-namespace Aufgabe3{
-    let x: number = 0; // let varName: Datentyp = Value;
+namespace Aufgabe4{
+    class ToDoElement{
+        
+        remove(){
+            
+        }
+        add(){
 
-    // ohne sofortige Wertzuweisung
-    let y: boolean;
-    console.log(y);
-    y = true;
-    console.log(y);
-    console.log(x);
+        }
+    }
 }
