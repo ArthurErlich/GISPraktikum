@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 #mainContener {
     max-width: 800px;
     min-height: 25px;
@@ -35,11 +39,10 @@ html {
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
+ 
+    bottom: 10px;
     padding: 10px 10px 10px 10px;
-    width: 97%;
-    display: inline;
+    width: calc(100% - 20px);
 }
 
 footer #links {
@@ -57,6 +60,7 @@ footer #links a {
     border-radius: 8px;
     padding: 5px;
     box-shadow: 2px 2px 0px 0px rgb(58, 58, 58);
+    display: block;
 }
 
 footer #links a:hover {
@@ -93,7 +97,10 @@ h1 {
     outline: none;
     border: none;
     box-shadow: 2px 2px 0px 0px rgb(58, 58, 58);
-    min-width: 40px;
+    min-width: 100px;
+    margin: 0 auto;
+    margin-top:10px;
+    display: block;
 }
 
 #Button-Add:hover {
@@ -104,17 +111,21 @@ h1 {
 .field label {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12pt;
-    margin: 0px;
+}
+
+.toDoForm {
+    width: 100%;
 }
 
 .field {
-    margin: 5px;
+    padding: 5px;
+    margin: auto;
     width: 250px;
-    display: flexbox;
+    flex-basis: auto;
 }
 
 .field input {
-    width: 250px;
+    min-width: 250px;
     overflow: hidden;
     border-radius: 5px;
     border-style: none;
@@ -128,15 +139,67 @@ h1 {
 }
 
 .toDoOUT {
-    background-color: rgb(163, 163, 163);
     margin-left: auto;
     margin-right: auto;
-    min-height: 80px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 0px 0px rgb(58, 58, 58);
+    width: 100%;
 }
-.toDoElement{
+
+.toDoElement td {
     padding-top: 5px;
     padding-bottom: 5px;
+    background-color: white;
+    box-shadow: 2px 2px 0px 0px rgb(58, 58, 58);
+}
+tr{
+    height: 50px;
+}
+.toDoElement:first-child td:first-child {
+    border-top-left-radius: 5px;
+}
 
+.toDoElement:first-child td:last-child {
+    border-top-right-radius: 5px;
+}
+
+.toDoElement:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+}
+
+.toDoElement:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    font-size: 12pt;
+}
+
+.tnterpret_out{
+overflow: hidden;
+}
+.price_out{
+    width:15%;
+    overflow: hidden;
+}
+.datetime_out{
+    width:33%;
+    overflow: hidden;
+}
+
+.delet{
+    width: 80px;
+}
+.deletButton{
+    margin: auto;    
+    display: block;
+    background: transparent;
+    border: transparent;
+    padding: 10px;
+    width: 80%;
+    height: 80%;
+    border-radius: 5px
+}
+.deletButton:hover{
+    background-color: rgb(165, 28, 28);
 }
