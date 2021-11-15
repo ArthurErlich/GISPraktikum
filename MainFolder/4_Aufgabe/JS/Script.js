@@ -6,16 +6,15 @@ var Aufgabe4;
     //by clicking a button removing the appendet element --> by getting the : article.dataset.NAME --> data-NAME addEventListener use bubling
     //dont user innerhtml!!!
     let addButton = document.getElementById("Button-Add");
-    let interpret = null;
-    let price = null;
-    let date = null;
+    let interpret;
+    let price;
+    let date;
     addButton.addEventListener("click", addElement);
     function removeElement(event) {
         let target = event.currentTarget;
         target.parentElement.parentElement.parentElement.parentElement.remove();
     }
     function addElement() {
-        console.log(new Date(document.getElementById("datetime-local_input").value));
         try {
             interpret = document.getElementById("interpret_input").value;
             price = parseInt(document.getElementById("price_input").value);
@@ -34,7 +33,7 @@ var Aufgabe4;
             price_out.classList.add("price_out");
             price_out.innerText = String(price);
             datetime_out.classList.add("datetime_out");
-            datetime_out.innerText = date.getDay + "." + date.getMonth + "." + date.getFullYear + "." + date.getHours + date.getSeconds;
+            datetime_out.innerText = date.getDay() + "." + date.getMonth() + "." + date.getFullYear() + "." + date.getHours() + date.getSeconds();
             delet.classList.add("delet");
             deletButton.classList.add("deletButton");
             deletButton.setAttribute("type", "button");
