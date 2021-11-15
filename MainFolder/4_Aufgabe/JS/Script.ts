@@ -6,9 +6,9 @@ namespace Aufgabe4 {
     //dont user innerhtml!!!
     let addButton: HTMLElement = document.getElementById("Button-Add");
 
-    let interpret: string = null;
-    let price: number = null;
-    let date: Date= null;
+    let interpret: string;
+    let price: number;
+    let date: Date;
 
     addButton.addEventListener("click", addElement);
 
@@ -23,16 +23,11 @@ namespace Aufgabe4 {
 
 
     function addElement() {
-        console.log( new Date ((<HTMLInputElement>document.getElementById("datetime-local_input")).value));
-    
         try {
-
             interpret = (<HTMLInputElement>document.getElementById("interpret_input")).value;
             price = parseInt((<HTMLInputElement>document.getElementById("price_input")).value);
-            date = new Date ((<HTMLInputElement>document.getElementById("datetime-local_input")).value);
-      
-            
-            
+            date = new Date((<HTMLInputElement>document.getElementById("datetime-local_input")).value);
+
 
             let table: HTMLElement = document.createElement("table");
             let tbody: HTMLElement = document.createElement("tbody");
@@ -52,7 +47,7 @@ namespace Aufgabe4 {
             price_out.innerText = String(price);
 
             datetime_out.classList.add("datetime_out");
-            datetime_out.innerText = date.getDay +"."+ date.getMonth+"." + date.getFullYear+"." + date.getHours+date.getSeconds;
+            datetime_out.innerText = date.getDay() + "." + date.getMonth() + "." + date.getFullYear() + "." + date.getHours() + date.getSeconds();
             delet.classList.add("delet");
 
             deletButton.classList.add("deletButton");
@@ -71,9 +66,9 @@ namespace Aufgabe4 {
             table.appendChild(tbody);
 
 
-
             document.getElementById("toDoOUT").appendChild(table);
         }
+
         catch (error) {
             alert("Fehler bei der eingabe");
         }
