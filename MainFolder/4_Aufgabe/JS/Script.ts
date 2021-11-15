@@ -1,5 +1,9 @@
 namespace Aufgabe4{
 
+     //create html element --> creat a buldung stone (gif it an id // or save it on a array/list?)
+     //then apand it 
+     //by clicking a button removing the appendet element
+     //dont user innerhtml!!!
     class ToDoElement{       
          interpret:string;
          price:number;
@@ -12,7 +16,7 @@ namespace Aufgabe4{
        }
        
     }
-
+   
     function removeElement(params:any) {
         
     }
