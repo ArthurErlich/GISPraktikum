@@ -36,9 +36,10 @@ footer {
     bottom: 0;
     padding: 10px 10px 10px 10px;
     width: 97%;
-    display:inline;
+    display: inline;
 }
-footer #links{
+
+footer #links {
     width: 80px;
     float: left;
 }
@@ -53,11 +54,9 @@ footer #links a {
     border-radius: 8px;
     padding: 5px;
     box-shadow: 2px 2px 0px 0px rgb(58, 58, 58);
-
 }
 
 footer #links a:hover {
-
     color: white;
     background-color: rgb(165, 28, 28);
     box-shadow: 5px 5px 0px 0px rgb(58, 58, 58);
@@ -67,31 +66,50 @@ footer #links a:hover {
     float: right;
 }
 
-h1{
+h1 {
     text-align: center;
     margin-top: 0px;
     margin-bottom: 0px;
 }
 
-#mainContener{
-    padding-top: 25px;
-    padding-left: 5px;
-    padding-right: 5px;
+#mainContener {
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-bottom: 20px;
-    
 }
-.field label{
+
+#Button-Add{
+    color: black;
+    font-size: 10pt;
+    line-height: 1.5;
+    background-color: rgb(163, 163, 163);
+    text-align: center;
+    border-radius: 8px;
+    padding: 5px;
+    outline: none;
+    border: none;
+    box-shadow: 2px 2px 0px 0px rgb(58, 58, 58);
+    min-width: 40px;
+}
+#Button-Add:hover{
+    background-color: rgb(199, 199, 199);
+    box-shadow: 5px 5px 0px 0px rgb(58, 58, 58);
+}
+
+.field label {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12pt;
     margin: 0px;
-
 }
-.field{
+
+.field {
     margin: 5px;
     width: 250px;
     display: flexbox;
 }
-.field input{
+
+.field input {
     width: 250px;
     overflow: hidden;
     border-radius: 5px;
@@ -100,14 +118,16 @@ h1{
     padding-bottom: 5px;
     box-shadow: 2px 2px 0px 0px rgb(58, 58, 58);
 }
-.field input:focus{
+
+.field input:focus {
     outline: none
 }
 
-.toDoOUT{
+.toDoOUT {
     background-color: rgb(163, 163, 163);
-    width: 50px;
-    height: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 50px;
     border-radius: 5px;
     box-shadow: 2px 2px 0px 0px rgb(58, 58, 58);
 }
