@@ -11,49 +11,60 @@
     <!--JavaScript-->
     <script src="JS/Script.js" defer></script>
 </head>
-<header>
 
-</header>
 
 <body>
+    <header>
+
+    </header>
     <div id="mainContener">
-        <form action="">
-            
+        <form class="toDoForm">
+
             <div class="field">
-                <label for="interpret_input">Interpret</label>
+                <label for="interpret_input">Interpret</label> <br>
                 <input id="interpret_input" type="text" placeholder="Interpret">
             </div>
             <div class="field">
-                <label for="price_input">Price</label>
+                <label for="price_input">Price</label><br>
                 <input id="price_input" type="number" placeholder="Price">
             </div>
             <div class="field">
-                <label for="datetime-local_input">Date and Time</label>
+                <label for="datetime-local_input">Date and Time</label><br>
                 <input id="datetime-local_input" type="datetime-local">
             </div class="field">
-                <button id="Button-Add">Add</button>
+
+            <button type="button" id="Button-Add">Add</button>
             <div>
 
             </div>
-            <h1>Events Table</h1> <br>
-            <div class ="toDoOUT">
-                <!-- insert TS CODE HIERE with delete Button-->
-                <div id="toDoElement">test</div>
+            <h1>Events Table</h1>
+            <div id="toDoOUT">
+                <table>
+                    <tr class="toDoElement" >
+                        <td class="tnterpret_out"></td>
+                        <td class="price_out"></td>
+                        <td class="datetime_out"></td>
+                        <td class="delet"><button type="button" class="deletButton">X</button></td>
+                    </tr>
+                  
+                </table>
+                  <!-- Auto generate the table-->
+
                 
             </div>
         </form>
 
     </div>
+    <footer>
+        <div id="links">
+            <a href="../MainStartPage.html">Main Page</a>
+        </div>
+        <div id="author">
+            made by: Arthur Erlich
+        </div>
+    </footer>
 
 </body>
-<footer>
-    <div id="links">
-        <a href="../MainStartPage.html">Main Page</a>
-    </div>
-    <div id="author">
-        made by: Arthur Erlich
-    </div>
-</footer>
-</div>
+
 
 </html>
