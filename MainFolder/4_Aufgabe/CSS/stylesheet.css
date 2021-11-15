@@ -19,6 +19,9 @@ header {
         margin-left: 0;
         margin-right: 0;
     }
+    header {
+        height: 50px;
+    }
 }
 
 html {
@@ -79,7 +82,7 @@ h1 {
     padding-bottom: 20px;
 }
 
-#Button-Add{
+#Button-Add {
     color: black;
     font-size: 10pt;
     line-height: 1.5;
@@ -92,7 +95,8 @@ h1 {
     box-shadow: 2px 2px 0px 0px rgb(58, 58, 58);
     min-width: 40px;
 }
-#Button-Add:hover{
+
+#Button-Add:hover {
     background-color: rgb(199, 199, 199);
     box-shadow: 5px 5px 0px 0px rgb(58, 58, 58);
 }
@@ -127,7 +131,12 @@ h1 {
     background-color: rgb(163, 163, 163);
     margin-left: auto;
     margin-right: auto;
-    min-height: 50px;
+    min-height: 80px;
     border-radius: 5px;
     box-shadow: 2px 2px 0px 0px rgb(58, 58, 58);
+}
+.toDoElement{
+    padding-top: 5px;
+    padding-bottom: 5px;
+
 }
