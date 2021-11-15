@@ -202,4 +202,5 @@ overflow: hidden;
 }
 .deletButton:hover{
     background-color: rgb(165, 28, 28);
+    color: white;
 }
