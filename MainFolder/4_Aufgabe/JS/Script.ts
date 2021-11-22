@@ -52,23 +52,22 @@ namespace Aufgabe4 {
 
 
     function addElement() {
-        elementID++;
+        
         
         try {
             readForm();
         } catch (error) {
-            // alert(error);
+            alert(error);
             return;
         }
         
         createElement();
         fillFrom();
+        elementID++;
     } 
     function fillFrom() {
         //get elemnt byID in this TAG
         let toDoElement: HTMLElement = document.getElementById(elementID.toString());
-      
-
 
         let interpret_out = toDoElement.getElementsByClassName("interpret_out");
         let price_out = toDoElement.getElementsByClassName("price_out");
@@ -107,6 +106,8 @@ namespace Aufgabe4 {
         } catch (error) {
             throw new Error("Date is empty!");
         }
+
+
         console.log(interpret);
         console.log(price);
         console.log(date);
