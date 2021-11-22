@@ -43,16 +43,16 @@ var Aufgabe4;
         });
     }
     function addElement() {
-        elementID++;
         try {
             readForm();
         }
         catch (error) {
-            // alert(error);
+            alert(error);
             return;
         }
         createElement();
         fillFrom();
+        elementID++;
     }
     function fillFrom() {
         //get elemnt byID in this TAG
