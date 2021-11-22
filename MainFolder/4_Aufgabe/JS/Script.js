@@ -119,7 +119,7 @@ var Aufgabe4;
         datetime_out.classList.add("datetime_out");
         delet.classList.add("delet");
         deletButton.classList.add("deletButton");
-        deletButton.innerText = "X" + elementID;
+        deletButton.innerText = "X";
         deletButton.setAttribute("type", "button");
         deletButton.addEventListener("click", removeElement, false);
         toDoElement.appendChild(interpret_out);

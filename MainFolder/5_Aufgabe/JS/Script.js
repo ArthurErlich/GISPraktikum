@@ -15,10 +15,18 @@ var Aufgabe4;
         elements = [];
         addElement(element, index) {
             console.log(this.elements);
-            this.elements[index] = element;
+            this.elements[index] = JSON.stringify(element);
+            console.log(JSON.stringify(element));
         }
         readElement(index) {
-            return this.elements[index];
+            var element = this.elements[index];
+            JSON.parse(element);
+            return new ToDoElement((JSON.parse(element).interpret), parseInt(JSON.parse(element).price), new Date(JSON.parse(element).date));
+        }
+        editElment(index, element) {
+            console.log(this.elements[index]);
+            this.elements[index] = null;
+            this.elements[index] = JSON.stringify(element);
         }
     }
     //create html element --> creat a buldung stone (gif it an id // or save it on a array/list?) --Using timeAndDate for data-ToDoID
@@ -29,6 +37,18 @@ var Aufgabe4;
     let elementID = 0;
     addButton.addEventListener("click", addElement);
     let toDoElements = new ToDoElements();
+    //buttonFunctions
+    function editElement(event) {
+        let eventID = event.target.dataset.elementid;
+        try {
+            readFormEdit(parseInt(eventID));
+        }
+        catch (error) {
+            alert(error);
+            return;
+        }
+    }
+    //buttonFunctions
     function removeElement(event) {
         let eventID = event.target.dataset.elementid;
         let dataEvent = '[data-todu-elementid]';
@@ -61,10 +81,47 @@ var Aufgabe4;
         let price_out = toDoElement.getElementsByClassName("price_out");
         let datetime_out = toDoElement.getElementsByClassName("datetime_out");
         console.log(interpret_out.item(0));
-        //Not a god way -> is ther a nother way?
-        interpret_out.item(0).textContent = toDoElements.readElement(elementID).interpret;
+        interpret_out.item(0).textContent = (toDoElements.readElement(elementID).interpret).toString();
         price_out.item(0).textContent = (toDoElements.readElement(elementID).price).toString();
         datetime_out.item(0).textContent = (toDoElements.readElement(elementID).date).toTimeString();
+    }
+    function readFormEdit(index) {
+        let interpret = null;
+        let price = null;
+        let date = null;
+        try {
+            interpret = document.getElementById("interpret_input").value;
+            if (interpret === "") {
+                throw new Error;
+            }
+        }
+        catch (error) {
+            throw new Error("Interpret is empty!");
+        }
+        try {
+            price = parseInt(document.getElementById("price_input").value);
+            if (price.toString() === "NaN") {
+                throw new Error;
+            }
+        }
+        catch (error) {
+            throw new Error("Price is empty!");
+        }
+        try {
+            date = new Date(document.getElementById("datetime_local_input").value);
+            if (date.toString() === "Invalid Date") {
+                date = new Date();
+            }
+        }
+        catch (error) {
+            throw new Error("Date is empty!");
+        }
+        console.log(interpret);
+        console.log(price);
+        console.log(date);
+        let toDoElement = new ToDoElement(interpret, price, date);
+        toDoElements.editElment(index, toDoElement);
+        console.log("EDIT list " + toDoElements.readElement(elementID));
     }
     function readForm() {
         let interpret = null;
@@ -113,19 +170,25 @@ var Aufgabe4;
         let datetime_out = document.createElement("td");
         let delet = document.createElement("td");
         let deletButton = document.createElement("button");
+        let editButton = document.createElement("button");
         toDoElement.classList.add("toDoElement");
         interpret_out.classList.add("interpret_out");
         price_out.classList.add("price_out");
         datetime_out.classList.add("datetime_out");
         delet.classList.add("delet");
         deletButton.classList.add("deletButton");
-        deletButton.innerText = "X" + elementID;
+        deletButton.innerText = "X";
         deletButton.setAttribute("type", "button");
         deletButton.addEventListener("click", removeElement, false);
+        editButton.classList.add("editButton");
+        editButton.innerText = "EDIT";
+        editButton.setAttribute("type", "button");
+        editButton.addEventListener("click", editElement, false);
         toDoElement.appendChild(interpret_out);
         toDoElement.appendChild(price_out);
         toDoElement.appendChild(datetime_out);
         delet.appendChild(deletButton);
+        delet.appendChild(editButton);
         toDoElement.appendChild(delet);
         tbody.appendChild(toDoElement);
         table.appendChild(tbody);
@@ -133,6 +196,7 @@ var Aufgabe4;
         console.log("createt ToDo elemtn wit the ID: " + elementID);
         toDoOUT.setAttribute("data-todu-elementid", elementID + "");
         deletButton.setAttribute("data-elementid", elementID + "");
+        editButton.setAttribute("data-elementid", elementID + "");
         toDoOUT.id = elementID.toString();
     }
 })(Aufgabe4 || (Aufgabe4 = {}));

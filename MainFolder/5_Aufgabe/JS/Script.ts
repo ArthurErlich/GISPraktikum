@@ -10,17 +10,27 @@ namespace Aufgabe4 {
             this.price = price;
             this.date = date;
         }
-
     }
 
     class ToDoElements {
-        elements: ToDoElement[] = [];
+        elements: String[] = [];
         addElement(element: ToDoElement, index: number) {
             console.log(this.elements);
-            this.elements[index] = element;
+            this.elements[index] = JSON.stringify(element);
+            console.log(JSON.stringify(element));
+
         }
         readElement(index: number): ToDoElement {
-            return this.elements[index];
+            var element: string = <string>this.elements[index]
+            JSON.parse(element);
+            return new ToDoElement((JSON.parse(element).interpret), parseInt(JSON.parse(element).price), new Date(JSON.parse(element).date))
+        }
+        editElment(index: number, element: ToDoElement) {
+            console.log(this.elements[index]);
+            
+            this.elements[index] = null;
+            this.elements[index] = JSON.stringify(element);
+
         }
     }
 
@@ -33,6 +43,18 @@ namespace Aufgabe4 {
     addButton.addEventListener("click", addElement);
     let toDoElements = new ToDoElements();
 
+    //buttonFunctions
+    function editElement(event: Event) {
+        let eventID: string = (<HTMLElement>event.target).dataset.elementid;
+
+        try {
+            readFormEdit(parseInt(eventID));
+        } catch (error) {
+            alert(error);
+            return;
+        }
+    }
+    //buttonFunctions
     function removeElement(event: Event) {
         let eventID: string = (<HTMLElement>event.target).dataset.elementid;
         let dataEvent: string = '[data-todu-elementid]';
@@ -44,15 +66,12 @@ namespace Aufgabe4 {
             if (element.getAttribute("data-todu-elementid") == eventID) {
                 console.log(element + " with Tag: data-todu-elementid= " + eventID + " will be removed");
                 element.remove()
-
                 toDoElements.readElement(parseInt(eventID)) == null;
             }
         });
     }
 
-
     function addElement() {
-
         try {
             readForm();
         } catch (error) {
@@ -62,9 +81,8 @@ namespace Aufgabe4 {
         createElement();
         fillFrom();
         elementID++;
-
-
     }
+
     function fillFrom() {
         //get elemnt byID in this TAG
         let toDoElement: HTMLElement = document.getElementById(elementID.toString());
@@ -75,14 +93,54 @@ namespace Aufgabe4 {
 
         console.log(interpret_out.item(0));
 
-        //Not a god way -> is ther a nother way?
-        interpret_out.item(0).textContent = toDoElements.readElement(elementID).interpret;
+        interpret_out.item(0).textContent = (toDoElements.readElement(elementID).interpret).toString();
         price_out.item(0).textContent = (toDoElements.readElement(elementID).price).toString();
         datetime_out.item(0).textContent = (toDoElements.readElement(elementID).date).toTimeString();
-
-
     }
 
+    function readFormEdit(index: number) {
+
+        let interpret: string = null;
+        let price: number = null;
+        let date: Date = null;
+
+        try {
+            interpret = (<HTMLInputElement>document.getElementById("interpret_input")).value;
+            if (interpret === "") {
+                throw new Error;
+            }
+        } catch (error) {
+            throw new Error("Interpret is empty!");
+        }
+
+        try {
+            price = parseInt((<HTMLInputElement>document.getElementById("price_input")).value);
+            if (price.toString() === "NaN") {
+                throw new Error;
+            }
+        } catch (error) {
+            throw new Error("Price is empty!");
+        }
+
+        try {
+            date = new Date((<HTMLInputElement>document.getElementById("datetime_local_input")).value);
+            if (date.toString() === "Invalid Date") {
+                date = new Date();
+            }
+        } catch (error) {
+            throw new Error("Date is empty!");
+        }
+
+        console.log(interpret);
+        console.log(price);
+        console.log(date);
+
+        let toDoElement: ToDoElement = new ToDoElement(interpret, price, date);
+        toDoElements.editElment(index, toDoElement);
+
+        console.log("EDIT list " + toDoElements.readElement(elementID));
+
+    }
     function readForm() {
 
         let interpret: string = null;
@@ -116,17 +174,16 @@ namespace Aufgabe4 {
             throw new Error("Date is empty!");
         }
 
-
         console.log(interpret);
         console.log(price);
         console.log(date);
 
         let toDoElement: ToDoElement = new ToDoElement(interpret, price, date);
         toDoElements.addElement(toDoElement, elementID);
-
         console.log("Add to list " + toDoElements.readElement(elementID));
 
     }
+
     function createElement() {
         let table: HTMLElement = document.createElement("table");
         let tbody: HTMLElement = document.createElement("tbody");
@@ -136,22 +193,31 @@ namespace Aufgabe4 {
         let datetime_out: HTMLElement = document.createElement("td");
         let delet: HTMLElement = document.createElement("td");
         let deletButton: HTMLElement = document.createElement("button");
+        let editButton: HTMLElement = document.createElement("button");
 
         toDoElement.classList.add("toDoElement");
         interpret_out.classList.add("interpret_out");
         price_out.classList.add("price_out");
         datetime_out.classList.add("datetime_out");
         delet.classList.add("delet");
+
         deletButton.classList.add("deletButton");
-        deletButton.innerText = "X" + elementID;
+        deletButton.innerText = "X";
         deletButton.setAttribute("type", "button");
-        deletButton.addEventListener("click", removeElement, false)
+        deletButton.addEventListener("click", removeElement, false);
+
+        editButton.classList.add("editButton");
+        editButton.innerText = "EDIT";
+        editButton.setAttribute("type", "button");
+        editButton.addEventListener("click", editElement, false);
 
         toDoElement.appendChild(interpret_out);
         toDoElement.appendChild(price_out);
         toDoElement.appendChild(datetime_out);
 
         delet.appendChild(deletButton);
+        delet.appendChild(editButton);
+
         toDoElement.appendChild(delet);
 
         tbody.appendChild(toDoElement);
@@ -162,9 +228,10 @@ namespace Aufgabe4 {
 
         toDoOUT.setAttribute("data-todu-elementid", elementID + "");
         deletButton.setAttribute("data-elementid", elementID + "");
+        editButton.setAttribute("data-elementid", elementID + "");
+
         toDoOUT.id = elementID.toString();
-
     }
-
-
 }
+
+

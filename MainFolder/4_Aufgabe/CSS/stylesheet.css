@@ -149,6 +149,7 @@ h1 {
     padding-bottom: 5px;
     background-color: white;
     box-shadow: 2px 2px 0px 0px rgb(58, 58, 58);
+    text-align: center;
 }
 tr{
     height: 50px;
