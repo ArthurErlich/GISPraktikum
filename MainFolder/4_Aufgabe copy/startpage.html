@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startpage</title>
+    <!--Style-->
+    <link rel="stylesheet" href="CSS/stylesheet.css" />
+    <!--JavaScript-->
+    <script src="JS/Script.js" defer></script>
+</head>
+
+
+<body>
+    <header>
+
+    </header>
+    <div id="mainContener">
+        <form class="toDoForm">
+
+            <div class="field">
+                <label for="interpret_input">Interpret</label> <br>
+                <input id="interpret_input" type="text" placeholder="Interpret">
+            </div>
+            <div class="field">
+                <label for="price_input">Price</label><br>
+                <input id="price_input" type="number" placeholder="Price">
+            </div>
+            <div class="field">
+                <label for="datetime_local_input">Date and Time</label><br>
+                <input id="datetime_local_input" type="datetime-local">
+            </div class="field">
+
+            <button type="button" id="Button-Add">Add</button>
+            <div>
+
+            </div>
+            <h1>Events Table</h1>
+            <div id="toDoOUT">
+                <table>
+                    <tr class="toDoElement" >
+                        <td class="interpret_out"></td>
+                        <td class="price_out"></td>
+                        <td class="datetime_out"></td>
+                        <td class="delet"></td>
+                    </tr>
+                  
+                </table>
+                  <!-- Auto generate the table-->
+
+                
+            </div>
+        </form>
+
+    </div>
+    <footer>
+        <div id="links">
+            <a href="../MainStartPage.html">Main Page</a>
+        </div>
+        <div id="author">
+            made by: Arthur Erlich
+        </div>
+    </footer>
+
+</body>
+
+
+</html>
