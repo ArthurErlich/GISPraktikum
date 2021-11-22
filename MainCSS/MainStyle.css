@@ -12,8 +12,17 @@ body {
     width: 400px;
   
 }
-#links a {
+@media (max-width: 400px) {
+    #links a {
+    width: 200px;
+}
+}
+@media (min-width: 400px) {
+    #links a {
     width: 350px;
+}
+}
+#links a {
     height: 40px;
     text-decoration: none;
     color: whitesmoke;
