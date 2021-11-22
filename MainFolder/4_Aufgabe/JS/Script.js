@@ -67,23 +67,32 @@ var Aufgabe4;
         datetime_out.item(0).textContent = (toDoElements.readElement(elementID).date).toTimeString();
     }
     function readForm() {
-        let interpret;
-        let price;
-        let date;
+        let interpret = null;
+        let price = null;
+        let date = null;
         try {
             interpret = document.getElementById("interpret_input").value;
+            if (interpret === "") {
+                throw new Error;
+            }
         }
         catch (error) {
             throw new Error("Interpret is empty!");
         }
         try {
             price = parseInt(document.getElementById("price_input").value);
+            if (price.toString() === "NaN") {
+                throw new Error;
+            }
         }
         catch (error) {
             throw new Error("Price is empty!");
         }
         try {
             date = new Date(document.getElementById("datetime_local_input").value);
+            if (date.toString() === "Invalid Date") {
+                date = new Date();
+            }
         }
         catch (error) {
             throw new Error("Date is empty!");

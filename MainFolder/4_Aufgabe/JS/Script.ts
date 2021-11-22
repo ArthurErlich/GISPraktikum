@@ -52,19 +52,19 @@ namespace Aufgabe4 {
 
 
     function addElement() {
-        
-        
+
         try {
             readForm();
         } catch (error) {
             alert(error);
             return;
         }
-        
         createElement();
         fillFrom();
         elementID++;
-    } 
+
+
+    }
     function fillFrom() {
         //get elemnt byID in this TAG
         let toDoElement: HTMLElement = document.getElementById(elementID.toString());
@@ -72,9 +72,9 @@ namespace Aufgabe4 {
         let interpret_out = toDoElement.getElementsByClassName("interpret_out");
         let price_out = toDoElement.getElementsByClassName("price_out");
         let datetime_out = toDoElement.getElementsByClassName("datetime_out");
-      
+
         console.log(interpret_out.item(0));
-        
+
         //Not a god way -> is ther a nother way?
         interpret_out.item(0).textContent = toDoElements.readElement(elementID).interpret;
         price_out.item(0).textContent = (toDoElements.readElement(elementID).price).toString();
@@ -82,27 +82,36 @@ namespace Aufgabe4 {
 
 
     }
-   
+
     function readForm() {
 
-        let interpret: string;
-        let price: number;
-        let date: Date;
+        let interpret: string = null;
+        let price: number = null;
+        let date: Date = null;
 
         try {
             interpret = (<HTMLInputElement>document.getElementById("interpret_input")).value;
+            if (interpret === "") {
+                throw new Error;
+            }
         } catch (error) {
             throw new Error("Interpret is empty!");
         }
 
         try {
             price = parseInt((<HTMLInputElement>document.getElementById("price_input")).value);
+            if (price.toString() === "NaN") {
+                throw new Error;
+            }
         } catch (error) {
             throw new Error("Price is empty!");
         }
 
         try {
             date = new Date((<HTMLInputElement>document.getElementById("datetime_local_input")).value);
+            if (date.toString() === "Invalid Date") {
+                date = new Date();
+            }
         } catch (error) {
             throw new Error("Date is empty!");
         }
@@ -116,7 +125,6 @@ namespace Aufgabe4 {
         toDoElements.addElement(toDoElement, elementID);
 
         console.log("Add to list " + toDoElements.readElement(elementID));
-
 
     }
     function createElement() {
@@ -155,7 +163,7 @@ namespace Aufgabe4 {
         toDoOUT.setAttribute("data-todu-elementid", elementID + "");
         deletButton.setAttribute("data-elementid", elementID + "");
         toDoOUT.id = elementID.toString();
-        
+
     }
 
 
