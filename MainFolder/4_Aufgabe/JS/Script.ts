@@ -14,6 +14,7 @@ namespace Aufgabe4 {
 
 
 
+    // muss anderst gelöst werden
 
     function removeElement(event: Event) {
         let target = <HTMLElement>event.currentTarget;
@@ -24,6 +25,8 @@ namespace Aufgabe4 {
 
     function addElement() {
         try {
+
+            //Gibt es eine Möglichkeit dies als funktion zu erstellen(Kliener zu machen)
             interpret = (<HTMLInputElement>document.getElementById("interpret_input")).value;
             price = parseInt((<HTMLInputElement>document.getElementById("price_input")).value);
             date = new Date((<HTMLInputElement>document.getElementById("datetime-local_input")).value);
