@@ -12,12 +12,12 @@ body {
     width: 400px;
   
 }
-@media (max-width: 400px) {
+@media (max-width: 600px) {
     #links a {
     width: 200px;
 }
 }
-@media (min-width: 400px) {
+@media (min-width: 600px) {
     #links a {
     width: 350px;
 }
