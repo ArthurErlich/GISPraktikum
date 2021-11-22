@@ -6,6 +6,7 @@ namespace Aufgabe4 {
     //dont user innerhtml!!!
     let addButton: HTMLElement = document.getElementById("Button-Add");
 
+    //als Interface anlegen
     let interpret: string;
     let price: number;
     let date: Date;
