@@ -16,17 +16,26 @@ var Aufgabe4;
         addElement(element, index) {
             console.log(this.elements);
             this.elements[index] = JSON.stringify(element);
+            //safe to laocal sorage;
+            localStorage.setItem(index.toString(), this.elements[index]);
             console.log(JSON.stringify(element));
         }
         readElement(index) {
-            var element = this.elements[index];
-            JSON.parse(element);
-            return new ToDoElement((JSON.parse(element).interpret), parseInt(JSON.parse(element).price), new Date(JSON.parse(element).date));
+            var element;
+            var interpret;
+            var price;
+            var date;
+            element = this.elements[index];
+            interpret = (JSON.parse(element).interpret);
+            price = parseInt(JSON.parse(element).price);
+            date = new Date(JSON.parse(element).date);
+            return new ToDoElement(interpret, price, date);
         }
+        //ERROR: Unexpectet token u in JSON
         editElment(index, element) {
             console.log(this.elements[index]);
-            this.elements[index] = null;
-            this.elements[index] = JSON.stringify(element);
+            this.elements[index] = "";
+            this.elements[index] = JSON.stringify(element); //<-- element in this index is empty?;
         }
     }
     //create html element --> creat a buldung stone (gif it an id // or save it on a array/list?) --Using timeAndDate for data-ToDoID
@@ -37,9 +46,18 @@ var Aufgabe4;
     let elementID = 0;
     addButton.addEventListener("click", addElement);
     let toDoElements = new ToDoElements();
+    ///läd den local storage beim starten nach und füllt die toDo liste
+    if (localStorage.getItem(elementID.toString()) === null) {
+        /*
+        for(){
+
+        }
+        */
+    }
     //buttonFunctions
     function editElement(event) {
         let eventID = event.target.dataset.elementid;
+        console.log(eventID);
         try {
             readFormEdit(parseInt(eventID));
         }
@@ -59,6 +77,7 @@ var Aufgabe4;
                 console.log(element + " with Tag: data-todu-elementid= " + eventID + " will be removed");
                 element.remove();
                 toDoElements.readElement(parseInt(eventID)) == null;
+                localStorage.removeItem(eventID.toString());
             }
         });
     }

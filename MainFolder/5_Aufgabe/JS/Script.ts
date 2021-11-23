@@ -13,23 +13,37 @@ namespace Aufgabe4 {
     }
 
     class ToDoElements {
-        elements: String[] = [];
+        elements: string[] = [];
         addElement(element: ToDoElement, index: number) {
             console.log(this.elements);
             this.elements[index] = JSON.stringify(element);
+
+            //safe to laocal sorage;
+            localStorage.setItem(index.toString(), this.elements[index]);
+
             console.log(JSON.stringify(element));
 
         }
         readElement(index: number): ToDoElement {
-            var element: string = <string>this.elements[index]
-            JSON.parse(element);
-            return new ToDoElement((JSON.parse(element).interpret), parseInt(JSON.parse(element).price), new Date(JSON.parse(element).date))
+            var element: string;
+            var interpret: string;
+            var price: number;
+            var date: Date;
+            element = this.elements[index];
+            interpret = (JSON.parse(element).interpret);
+            price = parseInt(JSON.parse(element).price);
+            date = new Date(JSON.parse(element).date);
+
+            return new ToDoElement(interpret, price, date);
         }
+
+        //ERROR: Unexpectet token u in JSON
         editElment(index: number, element: ToDoElement) {
+
             console.log(this.elements[index]);
-            
-            this.elements[index] = null;
-            this.elements[index] = JSON.stringify(element);
+
+            this.elements[index] = "";
+            this.elements[index] = JSON.stringify(element)//<-- element in this index is empty?;
 
         }
     }
@@ -43,9 +57,21 @@ namespace Aufgabe4 {
     addButton.addEventListener("click", addElement);
     let toDoElements = new ToDoElements();
 
+    ///läd den local storage beim starten nach und füllt die toDo liste
+    if(localStorage.getItem(elementID.toString())===null){
+
+        /*
+        for(){
+
+        }
+        */
+    }
+
     //buttonFunctions
     function editElement(event: Event) {
         let eventID: string = (<HTMLElement>event.target).dataset.elementid;
+        console.log(eventID);
+        
 
         try {
             readFormEdit(parseInt(eventID));
@@ -67,6 +93,7 @@ namespace Aufgabe4 {
                 console.log(element + " with Tag: data-todu-elementid= " + eventID + " will be removed");
                 element.remove()
                 toDoElements.readElement(parseInt(eventID)) == null;
+                localStorage.removeItem(eventID.toString());
             }
         });
     }
