@@ -14,11 +14,11 @@ var Aufgabe4;
     class ToDoElements {
         elements = [];
         addElement(element, index) {
-            console.log(this.elements);
+            ////console.log(this.elements);
             this.elements[index] = JSON.stringify(element);
             //safe to laocal sorage;
             localStorage.setItem(index.toString(), this.elements[index]);
-            console.log(JSON.stringify(element));
+            ////console.log(JSON.stringify(element));
         }
         readElement(index) {
             var element;
@@ -33,9 +33,12 @@ var Aufgabe4;
         }
         //ERROR: Unexpectet token u in JSON
         editElment(index, element) {
-            console.log(this.elements[index]);
-            this.elements[index] = "";
-            this.elements[index] = JSON.stringify(element); //<-- element in this index is empty?;
+            //console.log(index);
+            //console.log(element);
+            //console.log(this.elements[index]);
+            localStorage.removeItem(this.elements[index]);
+            this.elements[index] = JSON.stringify(element).replace(this.elements[index], JSON.stringify(element));
+            localStorage.setItem(index.toString(), this.elements[index]);
         }
     }
     //create html element --> creat a buldung stone (gif it an id // or save it on a array/list?) --Using timeAndDate for data-ToDoID
@@ -47,17 +50,25 @@ var Aufgabe4;
     addButton.addEventListener("click", addElement);
     let toDoElements = new ToDoElements();
     ///läd den local storage beim starten nach und füllt die toDo liste
-    if (localStorage.getItem(elementID.toString()) === null) {
-        /*
-        for(){
-
+    if (localStorage.getItem(elementID.toString()) !== null) {
+        for (let i = 0; i < localStorage.length; i++) {
+            let element = localStorage.getItem(i.toString());
+            let interpret = (JSON.parse(element).interpret);
+            let price = parseInt(JSON.parse(element).price);
+            let date = new Date(JSON.parse(element).date);
+            let toDoElement = new ToDoElement(interpret, price, date);
+            toDoElements.addElement(toDoElement, i);
+            createElement();
+            fillFrom();
+            elementID++;
         }
-        */
     }
     //buttonFunctions
     function editElement(event) {
         let eventID = event.target.dataset.elementid;
-        console.log(eventID);
+        let dataEvent = '[data-todu-elementid]';
+        let toDoElement = document.querySelectorAll(dataEvent);
+        ////console.log(eventID);
         try {
             readFormEdit(parseInt(eventID));
         }
@@ -65,6 +76,20 @@ var Aufgabe4;
             alert(error);
             return;
         }
+        toDoElement.forEach(element => {
+            if (element.getAttribute("data-todu-elementid") == eventID) {
+                ////console.log(element + " with Tag: data-todu-elementid= " + eventID + " will be edited");
+                let eventNumber = parseInt(eventID);
+                let toDoElement = document.getElementById(eventNumber.toString());
+                let interpret_out = toDoElement.getElementsByClassName("interpret_out");
+                let price_out = toDoElement.getElementsByClassName("price_out");
+                let datetime_out = toDoElement.getElementsByClassName("datetime_out");
+                ////console.log(interpret_out.item(0));
+                interpret_out.item(0).textContent = (toDoElements.readElement(eventNumber).interpret).toString();
+                price_out.item(0).textContent = (toDoElements.readElement(eventNumber).price).toString();
+                datetime_out.item(0).textContent = (toDoElements.readElement(eventNumber).date).toTimeString();
+            }
+        });
     }
     //buttonFunctions
     function removeElement(event) {
@@ -74,7 +99,7 @@ var Aufgabe4;
         //iterates thorug all elements end check to what needs to be removed
         toDoElement.forEach(element => {
             if (element.getAttribute("data-todu-elementid") == eventID) {
-                console.log(element + " with Tag: data-todu-elementid= " + eventID + " will be removed");
+                ////console.log(element + " with Tag: data-todu-elementid= " + eventID + " will be removed");
                 element.remove();
                 toDoElements.readElement(parseInt(eventID)) == null;
                 localStorage.removeItem(eventID.toString());
@@ -99,7 +124,7 @@ var Aufgabe4;
         let interpret_out = toDoElement.getElementsByClassName("interpret_out");
         let price_out = toDoElement.getElementsByClassName("price_out");
         let datetime_out = toDoElement.getElementsByClassName("datetime_out");
-        console.log(interpret_out.item(0));
+        ////console.log(interpret_out.item(0));
         interpret_out.item(0).textContent = (toDoElements.readElement(elementID).interpret).toString();
         price_out.item(0).textContent = (toDoElements.readElement(elementID).price).toString();
         datetime_out.item(0).textContent = (toDoElements.readElement(elementID).date).toTimeString();
@@ -135,12 +160,12 @@ var Aufgabe4;
         catch (error) {
             throw new Error("Date is empty!");
         }
-        console.log(interpret);
-        console.log(price);
-        console.log(date);
+        ////console.log(interpret);
+        ////console.log(price);
+        ////console.log(date);
         let toDoElement = new ToDoElement(interpret, price, date);
         toDoElements.editElment(index, toDoElement);
-        console.log("EDIT list " + toDoElements.readElement(elementID));
+        ////console.log("EDIT list " + toDoElements.readElement(elementID));
     }
     function readForm() {
         let interpret = null;
@@ -173,12 +198,12 @@ var Aufgabe4;
         catch (error) {
             throw new Error("Date is empty!");
         }
-        console.log(interpret);
-        console.log(price);
-        console.log(date);
+        ////console.log(interpret);
+        ////console.log(price);
+        ////console.log(date);
         let toDoElement = new ToDoElement(interpret, price, date);
         toDoElements.addElement(toDoElement, elementID);
-        console.log("Add to list " + toDoElements.readElement(elementID));
+        ////console.log("Add to list " + toDoElements.readElement(elementID));
     }
     function createElement() {
         let table = document.createElement("table");
@@ -212,7 +237,7 @@ var Aufgabe4;
         tbody.appendChild(toDoElement);
         table.appendChild(tbody);
         let toDoOUT = document.getElementById("toDoOUT").appendChild(table);
-        console.log("createt ToDo elemtn wit the ID: " + elementID);
+        ////console.log("createt ToDo elemtn wit the ID: " + elementID);
         toDoOUT.setAttribute("data-todu-elementid", elementID + "");
         deletButton.setAttribute("data-elementid", elementID + "");
         editButton.setAttribute("data-elementid", elementID + "");
