@@ -1,0 +1,96 @@
+body {
+    background-color: rgb(53, 14, 58);
+    font-family: 'Encode Sans', sans-serif;
+}
+
+footer {
+
+    bottom: 10px;
+    padding: 10px 10px 10px 10px;
+    width: calc(100% - 20px);
+}
+
+main {
+    width: 80%;
+    background-color: rgb(199, 158, 96);
+    margin: auto;
+    margin-top: 250px;
+    margin-bottom: 15px;
+    box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
+    border-radius: 8px;
+    align-content: center;
+    text-align: center;
+}
+
+#clock {
+    padding-top: 25px;
+    padding-bottom: 15px;
+    font-size: 32pt;
+    transition: all 0.2s;
+}
+
+#controllPanel {
+    padding-bottom: 25px;
+    font-size: 25px;
+    align-content:center;
+    justify-content: center;
+    display: flex;
+    
+}
+#play, #pause, #reset{
+    justify-items: center;
+    width: 80px;
+    height: 25px;
+    padding: 5px;
+    margin: 5px;
+    background-color: rgb(199, 158, 96);
+    transition: all 0.2s;
+    border-radius: 8px;
+    line-height: 1;
+ 
+}
+#play:hover, #pause:hover, #reset:hover{
+    background-color: rgb(255, 216, 158);
+    transition: all 0.2s;
+    box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
+}
+
+footer #links {
+    width: 120px;
+    float: left;
+}
+
+footer #links a {
+    text-decoration: none;
+    color: black;
+    font-size: 12pt;
+    line-height: 1.5;
+    background-color: rgb(199, 158, 96);
+    text-align: center;
+    border-radius: 8px;
+    padding: 5px;
+    box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
+    display: block;
+    transition: all 0.2s;
+}
+
+footer #links a:hover {
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 216, 158);
+    box-shadow: 7px 7px 0px 0px rgb(156, 109, 37);
+    transition: all 0.2s;
+}
+
+#author {
+    float: right;
+    color: black;
+    font-size: 12pt;
+    line-height: 1.5;
+    padding: 5px;
+    border-radius: 8px;
+    background-color: rgb(199, 158, 96);
+    box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
+    display: block;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@300&display=swap');
