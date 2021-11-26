@@ -15,7 +15,7 @@ main {
     background-color: rgb(199, 158, 96);
     margin: auto;
     margin-top: 250px;
-    margin-bottom: 15px;
+    margin-bottom: 250px;
     box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
     border-radius: 8px;
     align-content: center;
@@ -37,7 +37,7 @@ main {
     display: flex;
     
 }
-#play, #pause, #reset{
+#start, #pause, #reset{
     justify-items: center;
     width: 80px;
     height: 25px;
@@ -49,7 +49,7 @@ main {
     line-height: 1;
  
 }
-#play:hover, #pause:hover, #reset:hover{
+#start:hover, #pause:hover, #reset:hover{
     background-color: rgb(255, 216, 158);
     transition: all 0.2s;
     box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
