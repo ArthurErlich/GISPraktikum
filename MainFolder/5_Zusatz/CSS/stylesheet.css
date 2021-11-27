@@ -10,12 +10,23 @@ footer {
     width: calc(100% - 20px);
 }
 
+@media (min-width: 1000px) {
+    main {
+        width: 800px;
+    }
+}
+@media (max-width: 1000px) {
+    main {
+        width: 80%;
+    }
+}
+
 main {
-    width: 80%;
+
     background-color: rgb(199, 158, 96);
     margin: auto;
     margin-top: 250px;
-    margin-bottom: 250px;
+    margin-bottom: 200px;
     box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
     border-radius: 8px;
     align-content: center;
@@ -32,12 +43,13 @@ main {
 #controllPanel {
     padding-bottom: 25px;
     font-size: 25px;
-    align-content:center;
+    align-content: center;
     justify-content: center;
     display: flex;
-    
+
 }
-#start, #pause, #reset{
+
+#start, #pause, #reset {
     justify-items: center;
     width: 80px;
     height: 25px;
@@ -48,17 +60,27 @@ main {
     border-radius: 8px;
     line-height: 1;
     cursor: pointer;
-    user-select: none; 
- 
+    user-select: none;
+
 }
-#start:hover, #pause:hover, #reset:hover{
+
+#start:hover, #pause:hover, #reset:hover {
     background-color: rgb(255, 216, 158);
     transition: all 0.2s;
     box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
 }
 
+footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 80%;
+    margin: auto;
+}
+
 footer #links {
-    width: 120px;
+    
     float: left;
 }
 
@@ -71,6 +93,8 @@ footer #links a {
     text-align: center;
     border-radius: 8px;
     padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
     display: block;
     transition: all 0.2s;
@@ -89,6 +113,8 @@ footer #links a:hover {
     font-size: 12pt;
     line-height: 1.5;
     padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     border-radius: 8px;
     background-color: rgb(199, 158, 96);
     box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
