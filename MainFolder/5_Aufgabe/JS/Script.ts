@@ -209,32 +209,6 @@ namespace Aufgabe4 {
         let price: number = null;
         let date: Date = null;
 
-        try {
-            interpret = (<HTMLInputElement>document.getElementById("interpret_input")).value;
-            if (interpret === "") {
-                throw new Error;
-            }
-        } catch (error) {
-            throw new Error("Interpret is empty!");
-        }
-
-        try {
-            price = parseInt((<HTMLInputElement>document.getElementById("price_input")).value);
-            if (price.toString() === "NaN") {
-                throw new Error;
-            }
-        } catch (error) {
-            throw new Error("Price is empty!");
-        }
-
-        try {
-            date = new Date((<HTMLInputElement>document.getElementById("datetime_local_input")).value);
-            if (date.toString() === "Invalid Date") {
-                date = new Date();
-            }
-        } catch (error) {
-            throw new Error("Date is empty!");
-        }
 
         ////console.log(interpret);
         ////console.log(price);
