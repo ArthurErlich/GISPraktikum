@@ -10,18 +10,21 @@ body {
 #links {
     margin: auto;
     width: 400px;
-  
+
 }
+
 @media (max-width: 600px) {
     #links a {
-    width: 200px;
+        width: 200px;
+    }
 }
-}
+
 @media (min-width: 600px) {
     #links a {
-    width: 350px;
+        width: 350px;
+    }
 }
-}
+
 #links a {
     height: 40px;
     text-decoration: none;
@@ -30,7 +33,7 @@ body {
     line-height: 2;
     display: inline-block;
     vertical-align: middle;
-    background-color: black;
+    background-color: rgb(15, 15, 15);
     margin-top: 10px;
     text-align: center;
     border-radius: 8px;
@@ -38,13 +41,17 @@ body {
 
 #links a:hover {
     background-color: rgba(66, 66, 66, 0.993);
+    cursor: pointer;
+    user-select: none;
 }
-footer{
-/*position: absolute;*/
-bottom:  0px;
-height: 50px;
-margin: auto;
-width: 100%;
-float: right;
-text-align: right;
+
+footer {
+    /*position: absolute;*/
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    height: 50px;
+    margin: auto;
+    float: right;
+    text-align: right;
 }
