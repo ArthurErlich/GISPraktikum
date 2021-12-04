@@ -61,20 +61,21 @@ namespace Aufgabe4 {
 
     ///läd den local storage beim starten nach und füllt die toDo liste
 
+    //Chekcs local storage
     if (localStorage.length > 0) {
+        //ID for the old key
         let index: number = 0;
-
-
+        // i is the number of elemnts
         for (let i: number = 0; i < localStorage.length; i++) {
+            //the ELement
             let element: string;
             console.log("THERE IS SOMETHING");
 
+            //search vor the key number
             while (localStorage.getItem(index.toString()) === null) {
                 index++;
             }
-
-            console.log(index);
-
+            //get the item
             element = localStorage.getItem((index).toString());
             console.log(element);
 
@@ -88,6 +89,7 @@ namespace Aufgabe4 {
             localStorage.removeItem(index.toString());
             localStorage.setItem(i.toString(), JSON.parse(element));
             toDoElements.addElement(toDoElement, i);
+            //next key for next item
             index++;
             createElement();
             fillFrom();
