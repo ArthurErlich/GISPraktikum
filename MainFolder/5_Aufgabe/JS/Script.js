@@ -14,11 +14,11 @@ var Aufgabe4;
     class ToDoElements {
         elements = [];
         addElement(element, index) {
-            ////console.log(this.elements);
+            console.log(this.elements);
             this.elements[index] = JSON.stringify(element);
             //safe to laocal sorage;
             localStorage.setItem(index.toString(), this.elements[index]);
-            ////console.log(JSON.stringify(element));
+            console.log(JSON.stringify(element));
         }
         readElement(index) {
             var element;
@@ -31,11 +31,10 @@ var Aufgabe4;
             date = new Date(JSON.parse(element).date);
             return new ToDoElement(interpret, price, date);
         }
-        //ERROR: Unexpectet token u in JSON
         editElment(index, element) {
-            //console.log(index);
-            //console.log(element);
-            //console.log(this.elements[index]);
+            console.log(index);
+            console.log(element);
+            console.log(this.elements[index]);
             localStorage.removeItem(this.elements[index]);
             this.elements[index] = JSON.stringify(element).replace(this.elements[index], JSON.stringify(element));
             localStorage.setItem(index.toString(), this.elements[index]);
@@ -50,17 +49,27 @@ var Aufgabe4;
     addButton.addEventListener("click", addElement);
     let toDoElements = new ToDoElements();
     ///läd den local storage beim starten nach und füllt die toDo liste
-    if (localStorage.getItem(elementID.toString()) !== null) {
+    if (localStorage.length > 0) {
+        let index = 0;
         for (let i = 0; i < localStorage.length; i++) {
-            let element = localStorage.getItem(i.toString());
+            let element;
+            console.log("THERE IS SOMETHING");
+            while (localStorage.getItem(index.toString()) === null) {
+                index++;
+            }
+            console.log(index);
+            element = localStorage.getItem((index).toString());
+            console.log(element);
             let interpret = (JSON.parse(element).interpret);
             let price = parseInt(JSON.parse(element).price);
             let date = new Date(JSON.parse(element).date);
             let toDoElement = new ToDoElement(interpret, price, date);
+            localStorage.removeItem(index.toString());
+            localStorage.setItem(i.toString(), JSON.parse(element));
             toDoElements.addElement(toDoElement, i);
+            index++;
             createElement();
             fillFrom();
-            elementID++;
         }
     }
     //buttonFunctions
@@ -116,7 +125,6 @@ var Aufgabe4;
         }
         createElement();
         fillFrom();
-        elementID++;
     }
     function fillFrom() {
         //get elemnt byID in this TAG
@@ -128,6 +136,7 @@ var Aufgabe4;
         interpret_out.item(0).textContent = (toDoElements.readElement(elementID).interpret).toString();
         price_out.item(0).textContent = (toDoElements.readElement(elementID).price).toString();
         datetime_out.item(0).textContent = (toDoElements.readElement(elementID).date).toTimeString();
+        elementID++;
     }
     function readFormEdit(index) {
         let interpret = null;
