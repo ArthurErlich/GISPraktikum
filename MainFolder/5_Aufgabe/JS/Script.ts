@@ -15,13 +15,13 @@ namespace Aufgabe4 {
     class ToDoElements {
         elements: string[] = [];
         addElement(element: ToDoElement, index: number) {
-            ////console.log(this.elements);
+            console.log(this.elements);
             this.elements[index] = JSON.stringify(element);
 
             //safe to laocal sorage;
             localStorage.setItem(index.toString(), this.elements[index]);
 
-            ////console.log(JSON.stringify(element));
+            console.log(JSON.stringify(element));
 
         }
         readElement(index: number): ToDoElement {
@@ -38,11 +38,10 @@ namespace Aufgabe4 {
             return new ToDoElement(interpret, price, date);
         }
 
-        //ERROR: Unexpectet token u in JSON
         editElment(index: number, element: ToDoElement) {
-            //console.log(index);
-            //console.log(element);
-            //console.log(this.elements[index]);
+            console.log(index);
+            console.log(element);
+            console.log(this.elements[index]);
             localStorage.removeItem(this.elements[index]);
 
             this.elements[index] = JSON.stringify(element).replace(this.elements[index], JSON.stringify(element))
@@ -61,22 +60,38 @@ namespace Aufgabe4 {
     let toDoElements = new ToDoElements();
 
     ///läd den local storage beim starten nach und füllt die toDo liste
-    if (localStorage.getItem(elementID.toString()) !== null) {
+
+    if (localStorage.length > 0) {
+        let index: number = 0;
+
 
         for (let i: number = 0; i < localStorage.length; i++) {
-            let element: string = localStorage.getItem(i.toString());
+            let element: string;
+            console.log("THERE IS SOMETHING");
+
+            while (localStorage.getItem(index.toString()) === null) {
+                index++;
+            }
+
+            console.log(index);
+
+            element = localStorage.getItem((index).toString());
+            console.log(element);
+
 
             let interpret: string = (JSON.parse(element).interpret);
             let price: number = parseInt(JSON.parse(element).price);
             let date: Date = new Date(JSON.parse(element).date);
 
+
             let toDoElement: ToDoElement = new ToDoElement(interpret, price, date);
+            localStorage.removeItem(index.toString());
+            localStorage.setItem(i.toString(), JSON.parse(element));
             toDoElements.addElement(toDoElement, i);
+            index++;
             createElement();
             fillFrom();
-            elementID++;
         }
-
     }
 
     //buttonFunctions
@@ -142,7 +157,7 @@ namespace Aufgabe4 {
         }
         createElement();
         fillFrom();
-        elementID++;
+
     }
 
     function fillFrom() {
@@ -158,6 +173,7 @@ namespace Aufgabe4 {
         interpret_out.item(0).textContent = (toDoElements.readElement(elementID).interpret).toString();
         price_out.item(0).textContent = (toDoElements.readElement(elementID).price).toString();
         datetime_out.item(0).textContent = (toDoElements.readElement(elementID).date).toTimeString();
+        elementID++;
     }
 
     function readFormEdit(index: number) {
@@ -209,7 +225,32 @@ namespace Aufgabe4 {
         let price: number = null;
         let date: Date = null;
 
+        try {
+            interpret = (<HTMLInputElement>document.getElementById("interpret_input")).value;
+            if (interpret === "") {
+                throw new Error;
+            }
+        } catch (error) {
+            throw new Error("Interpret is empty!");
+        }
 
+        try {
+            price = parseInt((<HTMLInputElement>document.getElementById("price_input")).value);
+            if (price.toString() === "NaN") {
+                throw new Error;
+            }
+        } catch (error) {
+            throw new Error("Price is empty!");
+        }
+
+        try {
+            date = new Date((<HTMLInputElement>document.getElementById("datetime_local_input")).value);
+            if (date.toString() === "Invalid Date") {
+                date = new Date();
+            }
+        } catch (error) {
+            throw new Error("Date is empty!");
+        }
         ////console.log(interpret);
         ////console.log(price);
         ////console.log(date);
