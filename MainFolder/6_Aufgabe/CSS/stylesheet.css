@@ -32,6 +32,7 @@ main {
     border-radius: 8px;
     align-content: center;
     text-align: center;
+    min-height: 100px;
 }
 
 footer {
@@ -83,6 +84,26 @@ footer #links a:hover {
     background-color: rgb(199, 158, 96);
     box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
     display: block;
+}
+
+button {
+    justify-items: center;
+    width: 80px;
+    height: 25px;
+    padding: 5px;
+    margin: 5px;
+    background-color: rgb(199, 158, 96);
+    transition: all 0.2s;
+    border-radius: 8px;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
+}
+
+button:hover {
+    background-color: rgb(255, 216, 158);
+    transition: all 0.2s;
+    box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@300&display=swap');
