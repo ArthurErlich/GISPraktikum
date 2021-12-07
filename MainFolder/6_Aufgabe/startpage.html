@@ -19,9 +19,22 @@
     <header>
     </header>
     <main>
-        <button id="sendRequest">Send Request</button>
-        <button id="sendDate">Send Date</button>
-        <div id="answer" />
+        <form>
+            <div class="field">
+                <label for="datetime_local_input">Date</label><br>
+                <input id="date_local_input" type="date">
+            </div>
+
+            <div class="fieldButton">
+                <button type="button" id="sendRequest">Server?</button>
+                <button type="button" id="sendDate">Datum</button>
+            </div>
+
+            <div class="text">
+                <p id="answer"></p>
+            </div>
+
+        </form>
     </main>
     <footer>
         <div id="links">
