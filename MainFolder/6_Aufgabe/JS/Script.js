@@ -34,24 +34,4 @@ var Aufgabe6;
         answer.appendChild(text);
     }
 })(Aufgabe6 || (Aufgabe6 = {}));
-/*
-async function requestTextWithGET(url: RequestInfo): Promise<string> {
-  let response: Response = await fetch(url);
-  let text: string = await response.text();
-  return text;
-}
-
-let answer: HTMLElement = document.getElementById("answer");
-let button: HTMLElement = document.getElementById("button");
-button.addEventListener("click", getAndAttachText);
-let searchItem: HTMLElement = document.getElementById("searchItem");
-
-async function getAndAttachText(event: Event): void {
-  let text: HTMLElement = document.createElement("p");
-  text.textContent = await requestTextWithGET(
-    `http://localhost:3000/search?item=${searchItem.value}`
-  );
-  answer.appendChild(text);
-}
-*/ 
 //# sourceMappingURL=Script.js.map
