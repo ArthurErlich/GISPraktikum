@@ -17,11 +17,11 @@ namespace Aufgabe5_Zusatz {
     let pause: HTMLElement;
     let reset: HTMLElement;
 
-    let timer: number;
+    let timer: any;
     let time = new Time();
 
     if (localStorage.getItem("0") !== null) {
-        time.micro = JSON.parse(localStorage.getItem("0")).micro -1;
+        time.micro = JSON.parse(localStorage.getItem("0")).micro - 1;
         time.sec = JSON.parse(localStorage.getItem("0")).sec;
         time.min = JSON.parse(localStorage.getItem("0")).min;
     }
@@ -102,8 +102,8 @@ namespace Aufgabe5_Zusatz {
         }
 
     }
-   function saveContent(){
-        localStorage.setItem("0",JSON.stringify(time));
+    function saveContent() {
+        localStorage.setItem("0", JSON.stringify(time));
     }
 }
 

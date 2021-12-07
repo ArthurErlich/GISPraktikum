@@ -23,14 +23,15 @@ footer {
 }
 
 main {
-
+    display: flex;
     background-color: rgb(199, 158, 96);
     margin: auto;
     margin-top: 250px;
     margin-bottom: 200px;
     box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
     border-radius: 8px;
-    align-content: center;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     min-height: 100px;
 }
@@ -90,7 +91,7 @@ button {
     border: none;
     justify-items: center;
     width: 80px;
-    height: 25px;
+    min-height: 25px;
     padding: 5px;
     margin: 5px;
     background-color: rgb(199, 158, 96);
@@ -99,7 +100,20 @@ button {
     line-height: 1;
     cursor: pointer;
     user-select: none;
+
     font-family: 'Encode Sans', sans-serif;
+    font-size: 12pt;
+}
+
+#answer {
+    background-color: rgb(255, 216, 158);
+    min-width: 100px;
+    min-height: 50px;
+    padding: 5px;
+    margin: 5px;
+    transition: all 0.2s;
+    box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
+    border-radius: 8px;
 }
 
 button:hover {
