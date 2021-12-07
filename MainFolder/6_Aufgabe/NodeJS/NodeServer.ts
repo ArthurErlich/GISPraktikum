@@ -17,14 +17,23 @@ const server: http.Server = http.createServer(
 
         } else if (url.pathname === "/convertDate") {
             let input = "";
+            let date: Date;
+            let output = "";
             request.on("data", (data) => {
                 input += data;
             })
+
             request.on("end", () => {
-                console.log(JSON.parse(input));
+                date = new Date(JSON.parse(input));
+                console.log(date);
+                output += "Day: " + date.getDay() + ",";
+                output += "Month: " + date.getMonth() + ",";
+                output += "Year: " + date.getFullYear();
+                console.log(output);
             })
-            let output: string = new Date().getDay().toString();
-            response.write("bm ,nbm" + output);
+            //TODO: make it WOKR!
+            console.log("TEST");
+            response.write(output);
 
         } else {
             response.statusCode = 404;
