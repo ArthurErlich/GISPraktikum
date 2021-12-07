@@ -4,13 +4,13 @@ namespace Aufgabe6 {
         let text: string = await response.text();
         return text;
     }
-    async function requestPost(url: RequestInfo, data: string): Promise<string> {
+    async function requestPost(url: RequestInfo, data: Date): Promise<string> {
         let response: Response = await fetch(url,
             {
                 method: "post",
                 body: JSON.stringify(data),
             });
-        let text: string = await response.json();
+        let text: string = await response.text();
 
         return text;
     }
@@ -22,21 +22,21 @@ namespace Aufgabe6 {
     sendRequest.addEventListener("click", getText);
     sendDate.addEventListener("click", getDate);
 
-    async function getText(event: Event): Promise<void> {
-        console.log(event + " Request sent!");
-        let text: HTMLElement = document.createElement("p");
+    async function getText(): Promise<void> {
+        console.log(await request("http://localhost:3000/"));
 
-        text.textContent = await request("http://localhost:3000/");
-        answer.appendChild(text);
     }
     async function getDate(event: Event): Promise<void> {
         console.log(event + " Request sent!");
-        let text: HTMLElement = document.createElement("p");
 
-        let sendText: string = "dies ist ein DATE";
-        text.textContent = await requestPost("http://localhost:3000/convertDate", sendText);
+
+        let text: HTMLElement = document.createElement("p");
+        text.id = "fDate";
+
+        text.textContent = await requestPost("http://localhost:3000/convertDate", new Date());
         console.log("request received");
         answer.appendChild(text);
+
     }
 }
 
