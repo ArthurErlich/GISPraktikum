@@ -11,7 +11,7 @@ var Aufgabe6;
             method: "post",
             body: JSON.stringify(data),
         });
-        let text = await response.json();
+        let text = await response.text();
         return text;
     }
     let answer = document.getElementById("answer");
@@ -19,17 +19,14 @@ var Aufgabe6;
     let sendDate = document.getElementById("sendDate");
     sendRequest.addEventListener("click", getText);
     sendDate.addEventListener("click", getDate);
-    async function getText(event) {
-        console.log(event + " Request sent!");
-        let text = document.createElement("p");
-        text.textContent = await request("http://localhost:3000/");
-        answer.appendChild(text);
+    async function getText() {
+        console.log(await request("http://localhost:3000/"));
     }
     async function getDate(event) {
         console.log(event + " Request sent!");
         let text = document.createElement("p");
-        let sendText = "dies ist ein DATE";
-        text.textContent = await requestPost("http://localhost:3000/convertDate", sendText);
+        text.id = "fDate";
+        text.textContent = await requestPost("http://localhost:3000/convertDate", new Date());
         console.log("request received");
         answer.appendChild(text);
     }
