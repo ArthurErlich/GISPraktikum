@@ -1,4 +1,14 @@
 namespace Aufgabe6 {
+
+    let answer: HTMLElement = document.getElementById("answer");
+    let sendRequest: HTMLElement = document.getElementById("sendRequest");
+    let sendDate: HTMLElement = document.getElementById("sendDate");
+    let dateElment: HTMLInputElement = <HTMLInputElement>document.getElementById("date_local_input");
+
+
+    sendRequest.addEventListener("click", getStatus);
+    sendDate.addEventListener("click", getDate);
+
     async function request(url: RequestInfo): Promise<string> {
         let response: Response = await fetch(url);
         let text: string = await response.text();
@@ -15,29 +25,17 @@ namespace Aufgabe6 {
         return text;
     }
 
-    let answer: HTMLElement = document.getElementById("answer");
-    let sendRequest: HTMLElement = document.getElementById("sendRequest");
-    let sendDate: HTMLElement = document.getElementById("sendDate");
+    async function getStatus(): Promise<void> {
+        answer.textContent = await request("http://localhost:3000/");
+    }
+    async function getDate(): Promise<void> {
+        let text: string = await requestPost("http://localhost:3000/convertDate", new Date(dateElment.value));
+        answer.textContent = text;
+        console.log(text);
 
-    sendRequest.addEventListener("click", getText);
-    sendDate.addEventListener("click", getDate);
-
-    async function getText(): Promise<void> {
-        console.log(await request("http://localhost:3000/"));
 
     }
-    async function getDate(event: Event): Promise<void> {
-        console.log(event + " Request sent!");
 
-
-        let text: HTMLElement = document.createElement("p");
-        text.id = "fDate";
-
-        text.textContent = await requestPost("http://localhost:3000/convertDate", new Date());
-        console.log("request received");
-        answer.appendChild(text);
-
-    }
 }
 
 
