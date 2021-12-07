@@ -87,6 +87,7 @@ footer #links a:hover {
 }
 
 button {
+    border: none;
     justify-items: center;
     width: 80px;
     height: 25px;
@@ -98,6 +99,7 @@ button {
     line-height: 1;
     cursor: pointer;
     user-select: none;
+    font-family: 'Encode Sans', sans-serif;
 }
 
 button:hover {
