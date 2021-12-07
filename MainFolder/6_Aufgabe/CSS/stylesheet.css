@@ -39,6 +39,26 @@ main {
     min-height: 100px;
 }
 
+form {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.field {
+    border-radius: 8px;
+    box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
+    background-color: rgb(199, 158, 96);
+    padding: 5px;
+    margin: 5px;
+}
+
+#date_local_input {
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(255, 216, 158);
+    padding: 2px;
+}
+
 footer {
     position: absolute;
     bottom: 0;
@@ -117,6 +137,8 @@ button {
     transition: all 0.2s;
     box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
     border-radius: 8px;
+    text-align: center;
+    line-height: 3;
 }
 
 button:hover {
