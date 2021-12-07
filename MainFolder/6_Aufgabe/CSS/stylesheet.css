@@ -1,5 +1,8 @@
 body {
-    background-color: rgb(53, 14, 58);
+
+    background-image: linear-gradient(to bottom, rgb(53, 14, 58)50%, rgb(96, 29, 105)100%);
+    background-color: rgb(96, 29, 105);
+    background-repeat: no-repeat;
     font-family: 'Encode Sans', sans-serif;
 }
 
@@ -107,7 +110,7 @@ button {
 
 #answer {
     background-color: rgb(255, 216, 158);
-    min-width: 100px;
+    min-width: 180px;
     min-height: 50px;
     padding: 5px;
     margin: 5px;
