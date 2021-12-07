@@ -5,24 +5,22 @@ const hostname = 'localhost';
 const port = 3000;
 const server = http.createServer((request, response) => {
     response.statusCode = 200;
-    response.setHeader("Content-Type", "text/plain");
     response.setHeader("Access-Control-Allow-Origin", "*"); // CORS Fehler
+    response.setHeader("Content-Type", "application/json");
     let url = new URL(request.url || "", `http://${request.headers.host}`); //<-- Wichtig!!
     if (url.pathname === "/") {
         response.write("Server erreichbar");
     }
-    else if (request.method === "POST" && url.pathname === "/convertDate") {
-        //TODO: HOW is the JSON handled here? I get a JSON then it is not really a JSON?
+    else if (url.pathname === "/convertDate") {
         let input = "";
         request.on("data", (data) => {
             input += data;
         });
         request.on("end", () => {
-            console.log(input);
+            console.log(JSON.parse(input));
         });
-        input = JSON.parse(input);
-        //JSON ends unexpectet...
-        response.write(JSON.stringify(input));
+        let output = new Date().getDay().toString();
+        response.write("bm ,nbm" + output);
     }
     else {
         response.statusCode = 404;
