@@ -1,7 +1,7 @@
 import * as http from "http";
 
 const hostname: string = 'localhost';
-const port: number = 3000;
+const port: number = 3050;
 
 const server: http.Server = http.createServer(
     (request: http.IncomingMessage, response: http.ServerResponse) => {
@@ -15,7 +15,7 @@ const server: http.Server = http.createServer(
         if (url.pathname === "/") {
             response.write("Server erreichbar");
 
-        } else if (url.pathname === "/convertDate") {
+        } else if (request.method === "POST") {
             let input = "";
             let date: Date;
             let output = "";
@@ -31,11 +31,23 @@ const server: http.Server = http.createServer(
                 output += "Year: " + date.getFullYear();
                 console.log(output);
             })
-            //TODO: make it WOKR!
+            //TODO: make it WOKR! -->is faster then reqest.on("end")
             console.log("TEST");
             response.write(output);
 
-        } else {
+        } else if (request.method === "GET") {
+            let dateS: string = JSON.parse(url.searchParams.get("a"));
+            let date: Date = new Date(dateS);
+
+            let output = "";
+            output += "Day: " + date.getDay() + ",";
+            output += "Month: " + date.getMonth() + ",";
+            output += "Year: " + date.getFullYear();
+            console.log(output);
+            response.write(output);
+
+        }
+        else {
             response.statusCode = 404;
         }
         response.end();
@@ -43,5 +55,5 @@ const server: http.Server = http.createServer(
 );
 
 server.listen(port, hostname); () => {
-    console.log('Server running at http://${hostnem}:${port}/');
+    console.log(`Server running at http://${hostname}:${port}/`);
 };
