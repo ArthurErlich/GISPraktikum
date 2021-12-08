@@ -4,7 +4,7 @@ const hostname: string = 'localhost';
 const port: number = 3050;
 
 const server: http.Server = http.createServer(
-    (request: http.IncomingMessage, response: http.ServerResponse) => {
+    async (request: http.IncomingMessage, response: http.ServerResponse) => {
 
         response.statusCode = 200;
         response.setHeader("Access-Control-Allow-Origin", "*"); // CORS Fehler
@@ -26,7 +26,7 @@ const server: http.Server = http.createServer(
             request.on("end", () => {
                 date = new Date(JSON.parse(input));
                 console.log(date);
-                output += "Day: " + date.getDay() + ",";
+                output = "Day: " + date.getDay() + ",";
                 output += "Month: " + date.getMonth() + ",";
                 output += "Year: " + date.getFullYear();
                 console.log(output);
@@ -36,13 +36,8 @@ const server: http.Server = http.createServer(
             response.write(output);
 
         } else if (request.method === "GET") {
-            let dateS: string = JSON.parse(url.searchParams.get("a"));
-            let date: Date = new Date(dateS);
 
-            let output = "";
-            output += "Day: " + date.getDay() + ",";
-            output += "Month: " + date.getMonth() + ",";
-            output += "Year: " + date.getFullYear();
+            let output: string = await convertDate(JSON.parse(url.searchParams.get("a")));
             console.log(output);
             response.write(output);
 
@@ -53,7 +48,18 @@ const server: http.Server = http.createServer(
         response.end();
     }
 );
+async function convertDate(dateS: string): Promise<string> {
 
+
+    let date: Date = new Date(dateS);
+
+    let output = "";
+    output += "Day: " + date.getDay() + ",";
+    output += "Month: " + date.getMonth() + ",";
+    output += "Year: " + date.getFullYear();
+
+    return output;
+}
 server.listen(port, hostname); () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 };
