@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const http = require("http");
 const hostname = 'localhost';
-const port = 3000;
+const port = 3050;
 const server = http.createServer((request, response) => {
     response.statusCode = 200;
     response.setHeader("Access-Control-Allow-Origin", "*"); // CORS Fehler
@@ -11,7 +11,7 @@ const server = http.createServer((request, response) => {
     if (url.pathname === "/") {
         response.write("Server erreichbar");
     }
-    else if (url.pathname === "/convertDate") {
+    else if (request.method === "POST") {
         let input = "";
         let date;
         let output = "";
@@ -26,8 +26,18 @@ const server = http.createServer((request, response) => {
             output += "Year: " + date.getFullYear();
             console.log(output);
         });
-        //TODO: make it WOKR!
+        //TODO: make it WOKR! -->is faster then reqest.on("end")
         console.log("TEST");
+        response.write(output);
+    }
+    else if (request.method === "GET") {
+        let dateS = JSON.parse(url.searchParams.get("a"));
+        let date = new Date(dateS);
+        let output = "";
+        output += "Day: " + date.getDay() + ",";
+        output += "Month: " + date.getMonth() + ",";
+        output += "Year: " + date.getFullYear();
+        console.log(output);
         response.write(output);
     }
     else {
@@ -37,6 +47,6 @@ const server = http.createServer((request, response) => {
 });
 server.listen(port, hostname);
 () => {
-    console.log('Server running at http://${hostnem}:${port}/');
+    console.log(`Server running at http://${hostname}:${port}/`);
 };
 //# sourceMappingURL=NodeServer.js.map
