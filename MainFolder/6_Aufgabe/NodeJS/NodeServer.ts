@@ -60,6 +60,7 @@ async function convertDate(dateS: string): Promise<string> {
 
     return output;
 }
-server.listen(port, hostname); () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-};
+//Fixed-->
+server.listen(port, hostname, (): void => {
+    console.log("Server running at http://" + hostname + ":" + port + "/");
+});

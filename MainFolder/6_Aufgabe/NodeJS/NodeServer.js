@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const http = require("http");
 const hostname = 'localhost';
 const port = 3050;
-const server = http.createServer((request, response) => {
+const server = http.createServer(async (request, response) => {
     response.statusCode = 200;
     response.setHeader("Access-Control-Allow-Origin", "*"); // CORS Fehler
     response.setHeader("Content-Type", "application/json");
@@ -21,7 +21,7 @@ const server = http.createServer((request, response) => {
         request.on("end", () => {
             date = new Date(JSON.parse(input));
             console.log(date);
-            output += "Day: " + date.getDay() + ",";
+            output = "Day: " + date.getDay() + ",";
             output += "Month: " + date.getMonth() + ",";
             output += "Year: " + date.getFullYear();
             console.log(output);
@@ -31,12 +31,7 @@ const server = http.createServer((request, response) => {
         response.write(output);
     }
     else if (request.method === "GET") {
-        let dateS = JSON.parse(url.searchParams.get("a"));
-        let date = new Date(dateS);
-        let output = "";
-        output += "Day: " + date.getDay() + ",";
-        output += "Month: " + date.getMonth() + ",";
-        output += "Year: " + date.getFullYear();
+        let output = await convertDate(JSON.parse(url.searchParams.get("a")));
         console.log(output);
         response.write(output);
     }
@@ -45,8 +40,15 @@ const server = http.createServer((request, response) => {
     }
     response.end();
 });
-server.listen(port, hostname);
-() => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-};
+async function convertDate(dateS) {
+    let date = new Date(dateS);
+    let output = "";
+    output += "Day: " + date.getDay() + ",";
+    output += "Month: " + date.getMonth() + ",";
+    output += "Year: " + date.getFullYear();
+    return output;
+}
+server.listen(port, hostname, () => {
+    console.log("Server running at http://" + hostname + ":" + port + "/");
+});
 //# sourceMappingURL=NodeServer.js.map
