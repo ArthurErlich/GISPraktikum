@@ -156,5 +156,7 @@ var Aufgabe3_1;
     });
     //Outupt zur konsole--> edit dom elemnt
     consolTEXT2.innerHTML = outString;
+
+
 })(Aufgabe3_1 || (Aufgabe3_1 = {}));
 //# sourceMappingURL=script_vorlage1.js.map
