@@ -20,19 +20,22 @@ const server: http.Server = http.createServer(
 
         let url: URL = new URL(request.url || "", `http://${request.headers.host}`);
         switch (url.pathname) {
-            case "/string": {
+            case "/todo": {
                 await mongoClient.connect();
                 switch (request.method) {
                     case "GET":
+                        console.log("TODO-GET");
                         break;
                     case "POST":
+                        console.log("TODO-POST");
                         break;
                 }
             }
-            case "/stringS": {
+            case "/todoS": {
                 await mongoClient.connect();
                 switch (request.method) {
                     case "GET":
+                        console.log("TodoS-GET");
                         break;
                 }
             }
@@ -58,8 +61,6 @@ async function dbFind(
     response.setHeader("Content-Type", "application/json");
     response.write(JSON.stringify(result));
 }
-
-
 
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
