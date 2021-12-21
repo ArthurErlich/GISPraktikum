@@ -34,8 +34,11 @@ main {
 }
 
 form {
+    display: flex;
     margin-top: 50px;
     margin-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .fieldWrapper {
@@ -44,15 +47,107 @@ form {
     background-color: rgb(199, 158, 96);
     padding: 5px;
     margin: 5px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
-.field {}
-
-#date_local_input {
+.field {
     border: none;
     border-radius: 8px;
     background-color: rgb(255, 216, 158);
-    padding: 2px;
+    text-align: left;
+    padding: 5px;
+    margin: 5px;
+}
+
+.field input:focus, .field input {
+    outline: none;
+    border: none;
+    margin: 5px;
+}
+
+.toDoOUT {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+.toDoElement td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: rgb(255, 216, 158);
+    text-align: center;
+}
+
+tr {
+    height: 50px;
+}
+
+.toDoElement:first-child td:first-child {
+    border-top-left-radius: 5px;
+}
+
+.toDoElement:first-child td:last-child {
+    border-top-right-radius: 5px;
+}
+
+.toDoElement:last-child td:first-child {
+    border-bottom-left-radius: 5px;
+}
+
+.toDoElement:last-child td:last-child {
+    border-bottom-right-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    font-size: 12pt;
+    margin-bottom: 5px;
+}
+
+.interpret_out {
+    overflow: hidden;
+}
+
+.price_out {
+    width: 15%;
+    overflow: hidden;
+}
+
+.datetime_out {
+    width: 33%;
+    overflow: hidden;
+}
+
+.delet {
+    width: 80px;
+}
+
+.deletButton, .editButton {
+    margin: auto;
+    display: block;
+    background: transparent;
+    border: transparent;
+    padding: 10px;
+    width: 80%;
+    height: 80%;
+    border-radius: 5px
+}
+
+.deletButton:hover {
+    background-color: rgb(165, 28, 28);
+    color: white;
+}
+
+.editButton:hover {
+    background-color: rgb(28, 165, 39);
+    color: white;
+}
+
+#interpret_input, #price_input, #datetime_local_input {
+    width: 150px;
+    font-size: 10pt;
 }
 
 footer {
@@ -63,7 +158,6 @@ footer {
     width: 80%;
     margin: auto;
     padding-bottom: 5px;
-    /*löksfajgöklfasjgölfksdj*/
 }
 
 footer #links {
@@ -126,18 +220,6 @@ button {
     font-size: 12pt;
 }
 
-#answer {
-    background-color: rgb(255, 216, 158);
-    min-width: 180px;
-    min-height: 50px;
-    padding: 5px;
-    margin: 5px;
-    transition: all 0.2s;
-    box-shadow: 5px 5px 0px 0px rgb(156, 109, 37);
-    border-radius: 8px;
-    text-align: center;
-    line-height: 3;
-}
 
 button:hover {
     background-color: rgb(255, 216, 158);
