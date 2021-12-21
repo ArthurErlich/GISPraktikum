@@ -18,7 +18,7 @@ const server = http.createServer(async (request, response) => {
         request.on("data", (data) => {
             input += data;
         });
-        request.on("end", () => {
+        request.on("end", async () => {
             date = new Date(JSON.parse(input));
             console.log(date);
             output = "Day: " + date.getDay() + ",";
