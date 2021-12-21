@@ -19,23 +19,42 @@
     <header>
     </header>
     <main>
-        <form>
-            <div class="field">
-                <label for="datetime_local_input">Date</label><br>
-                <input id="date_local_input" type="date">
-            </div>
+        <form class="toDoForm">
+            <div class="fieldWrapper">
+                <div class="field">
+                    <label for="interpret_input">Interpret</label> <br>
+                    <input id="interpret_input" type="text" placeholder="Interpret">
+                </div>
+                <div class="field">
+                    <label for="price_input">Price</label><br>
+                    <input id="price_input" type="number" placeholder="Price">
+                </div>
+                <div class="field">
+                    <label for="datetime_local_input">Date and Time</label><br>
+                    <input id="datetime_local_input" type="datetime-local">
+                </div class="field">
 
-            <div class="fieldButton">
-                <button type="button" id="sendRequest">Server?</button>
-                <button type="button" id="getDate">getDate</button>
-                <button type="button" id="postDate">postDate</button>
-            </div>
+                <button type="button" id="Button-Add">Add</button>
+                <div>
 
-            <div class="text">
-                <p id="answer"></p>
-            </div>
+                </div>
+                <h1>Events Table</h1>
+                <div id="toDoOUT">
+                    <table>
+                        <tr class="toDoElement">
+                            <td class="interpret_out">Interpret</td>
+                            <td class="price_out">Price</td>
+                            <td class="datetime_out">Date and Time</td>
+                            <td class="delet"></td>
+                        </tr>
 
+                    </table>
+                    <!-- Auto generate the table-->
+
+                </div>
+            </div>
         </form>
+
     </main>
     <footer>
         <div id="links">
