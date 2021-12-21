@@ -1,0 +1,26 @@
+{
+  "name": "gispraktikum",
+  "version": "1.0.0",
+  "description": "Art of creating GIS Webapps",
+  "main": "index.js",
+  "dependencies": {
+    "mongodb": "^4.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "testGIS"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArthurErlich/GISPraktikum.git"
+  },
+  "keywords": [
+    "GIS"
+  ],
+  "author": "Arthur Erlich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArthurErlich/GISPraktikum/issues"
+  },
+  "homepage": "https://github.com/ArthurErlich/GISPraktikum#readme"
+}
