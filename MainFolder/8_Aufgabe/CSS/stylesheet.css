@@ -6,14 +6,13 @@ body {
     font-family: 'Encode Sans', sans-serif;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1300px) {
     main {
-        width: 800px;
 
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1300px) {
     main {
         width: 80%;
     }
@@ -30,7 +29,7 @@ main {
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 100px;
+    min-height: 100px
 }
 
 form {
@@ -39,6 +38,7 @@ form {
     margin-bottom: 50px;
     margin-left: 50px;
     margin-right: 50px;
+    
 }
 
 .fieldWrapper {
@@ -49,6 +49,8 @@ form {
     margin: 5px;
     padding-left: 50px;
     padding-right: 50px;
+    border: solid black;
+
 }
 
 .field {
@@ -81,6 +83,9 @@ form {
 
 tr {
     height: 50px;
+}
+td{
+    min-width: 50px;
 }
 
 .toDoElement:first-child td:first-child {
