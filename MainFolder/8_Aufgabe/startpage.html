@@ -19,26 +19,26 @@
     <header>
     </header>
     <main>
-        <form class="toDoForm">
+        <form id="eventsFrom">
             <div class="fieldWrapper">
                 <div class="field">
                     <label for="id_input">ID</label> <br>
-                    <input id="id_input" type="text" placeholder="ID">
+                    <input id="id_input" name="id_input" type="number" placeholder="ID" disabled>
                 </div>
                 <div class="field">
                     <label for="interpret_input">Interpret</label> <br>
-                    <input id="interpret_input" type="text" placeholder="Interpret">
+                    <input id="interpret_input" name="interpret_input" type="text" placeholder="Interpret">
                 </div>
                 <div class="field">
                     <label for="price_input">Price</label><br>
-                    <input id="price_input" type="number" placeholder="Price">
+                    <input id="price_input" name="price_input"  type="number" placeholder="Price">
                 </div>
                 <div class="field">
                     <label for="datetime_local_input">Date and Time</label><br>
-                    <input id="datetime_local_input" type="datetime-local">
+                    <input id="datetime_local_input" name="datetime_local_input" type="datetime-local">
                 </div class="field">
 
-                <button type="button" id="Button-Add">Add</button>
+                <button type="submit" id="Button-Add">Add</button>
                 <div>
 
                 </div>

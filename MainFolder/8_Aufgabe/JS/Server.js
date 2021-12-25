@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const http = require("http");
 const mongo = require("mongodb");
 const hostname = "127.0.0.1"; // localhost
-const port = 3000;
+const port = 3500;
 const mongoUrl = "mongodb://localhost:27017"; // locale MongoDB
 let mongoClient = new mongo.MongoClient(mongoUrl); //mognoClinent
 const server = http.createServer(async (request, response) => {
@@ -12,32 +12,27 @@ const server = http.createServer(async (request, response) => {
     response.setHeader("Access-Control-Allow-Origin", "*");
     let url = new URL(request.url || "", `http://${request.headers.host}`);
     switch (url.pathname) {
-        case "/string": {
+        case "/todo": {
             await mongoClient.connect();
             switch (request.method) {
                 case "GET":
+                    console.log("TODO-GET");
                     break;
                 case "POST":
+                    console.log("TODO-POST");
                     break;
             }
         }
-        case "/stringS": {
+        case "/todoS": {
             await mongoClient.connect();
             switch (request.method) {
                 case "GET":
+                    console.log("TodoS-GET");
                     break;
             }
         }
-    }
-    async function dbFind(db, collection, requestObject, response) {
-        let result = await mongoClient
-            .db(db)
-            .collection(collection)
-            .find(requestObject)
-            .toArray();
-        // console.log(result, requestObject); // bei Fehlern zum Testen
-        response.setHeader("Content-Type", "application/json");
-        response.write(JSON.stringify(result));
+        default:
+            response.statusCode = 404;
     }
 });
 //search for DB-Content
