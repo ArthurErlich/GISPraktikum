@@ -5,35 +5,32 @@ const http = require("http");
 const mongo = require("mongodb");
 const hostname = "127.0.0.1"; // localhost
 const port = 3500;
+const pfad = "/concertEvents";
 const mongoUrl = "mongodb://localhost:27017"; // locale MongoDB
 let mongoClient = new mongo.MongoClient(mongoUrl); //mognoClinent
 const server = http.createServer(async (request, response) => {
     response.statusCode = 200;
     response.setHeader("Access-Control-Allow-Origin", "*");
     let url = new URL(request.url || "", `http://${request.headers.host}`);
+    console.log(url.pathname);
     switch (url.pathname) {
-        case "/todo": {
-            await mongoClient.connect();
+        case pfad: {
+            // await mongoClient.connect();
+            console.log("this is the request: " + request.method);
             switch (request.method) {
                 case "GET":
                     console.log("TODO-GET");
+                    //gett the 
                     break;
                 case "POST":
                     console.log("TODO-POST");
                     break;
             }
         }
-        case "/todoS": {
-            await mongoClient.connect();
-            switch (request.method) {
-                case "GET":
-                    console.log("TodoS-GET");
-                    break;
-            }
-        }
         default:
             response.statusCode = 404;
     }
+    // mongoClient.close();
 });
 //search for DB-Content
 async function dbFind(db, collection, requestObject, response) {
@@ -47,6 +44,7 @@ async function dbFind(db, collection, requestObject, response) {
     response.write(JSON.stringify(result));
 }
 server.listen(port, hostname, () => {
+    console.clear();
     console.log(`Server running at http://${hostname}:${port}/`);
 });
 //# sourceMappingURL=Server.js.map

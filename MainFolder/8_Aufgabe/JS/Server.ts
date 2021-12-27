@@ -7,7 +7,7 @@ import * as mongo from "mongodb";
 const hostname: string = "127.0.0.1"; // localhost
 const port: number = 3500;
 
-
+const pfad: string = "/concertEvents";
 
 
 const mongoUrl: string = "mongodb://localhost:27017"; // locale MongoDB
@@ -19,29 +19,26 @@ const server: http.Server = http.createServer(
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         let url: URL = new URL(request.url || "", `http://${request.headers.host}`);
+        console.log(url.pathname);
         switch (url.pathname) {
-            case "/todo": {
-                await mongoClient.connect();
+            case pfad: {
+               // await mongoClient.connect();
+               console.log("this is the request: "+ request.method);
+               
                 switch (request.method) {
                     case "GET":
                         console.log("TODO-GET");
+                        //gett the 
                         break;
                     case "POST":
                         console.log("TODO-POST");
                         break;
                 }
             }
-            case "/todoS": {
-                await mongoClient.connect();
-                switch (request.method) {
-                    case "GET":
-                        console.log("TodoS-GET");
-                        break;
-                }
-            }
             default:
                 response.statusCode = 404;
         }
+       // mongoClient.close();
 
     });
 
@@ -63,5 +60,6 @@ async function dbFind(
 }
 
 server.listen(port, hostname, () => {
+    console.clear();
     console.log(`Server running at http://${hostname}:${port}/`);
 });
