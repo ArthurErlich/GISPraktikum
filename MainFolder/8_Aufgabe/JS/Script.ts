@@ -184,11 +184,9 @@ namespace Aufgabe8 {
     }
     function removeEventElement(id: number){
         let  todoElements: HTMLCollection = document.getElementsByClassName("toDoElement")
-        console.log(todoElements);
-        
+
         for(let element of todoElements){
             let elemntData: string =((<HTMLElement>element).dataset.id) + "";
-            console.log(elemntData+"");
             
             if( elemntData === ""+id){
                 element.remove();
@@ -206,4 +204,5 @@ namespace Aufgabe8 {
 
         console.log(idList);
     };
+    document.getElementById("TESTDIV").hidden = true;
 }

@@ -137,12 +137,9 @@ var Aufgabe8;
     }
     function removeEventElement(id) {
         let todoElements = document.getElementsByClassName("toDoElement");
-        console.log(todoElements);
         for (let element of todoElements) {
             let elemntData = (element.dataset.id) + "";
-            console.log(elemntData + "");
-            if (elemntData === ""
-                + id) {
+            if (elemntData === "" + id) {
                 element.remove();
                 console.log("removed Event " + id + " wiht dataset of" + elemntData);
             }
@@ -156,5 +153,6 @@ var Aufgabe8;
         console.log(idList);
     }
     ;
+    document.getElementById("TESTDIV").hidden = true;
 })(Aufgabe8 || (Aufgabe8 = {}));
 //# sourceMappingURL=Script.js.map

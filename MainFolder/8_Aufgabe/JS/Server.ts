@@ -8,6 +8,7 @@ const hostname: string = "127.0.0.1"; // localhost
 const port: number = 3500;
 
 const pfad: string = "/concertEvents";
+const pfadDelet: string = pfad + "/delet";
 const mongoUrl: string = "mongodb://localhost:27017"; // locale MongoDB
 
 let mongoClient: mongo.MongoClient = new mongo.MongoClient(mongoUrl); //mongo Client 
@@ -18,26 +19,36 @@ const server: http.Server = http.createServer(
         response.setHeader("Access-Control-Allow-Origin", "*");
 
         let url: URL = new URL(request.url || "", `http://${request.headers.host}`);
-        console.log(url.pathname);
+        console.log("\x1b[33m","the rquest path: "+url.pathname);
         switch (url.pathname) {
             case pfad: {
-                // await mongoClient.connect();
+                // just pleas dont crash the server!
+                try {
+                  await mongoClient.connect();
+                } catch (error) {
+                    console.error("\x1b[31m","connection time out wiht DB");
+                    console.log("\x1b[0m");
+                    return;
+                }
+              
                 console.log("this is the request: " + request.method);
-
                 switch (request.method) {
                     case "GET":
-                        console.log("TODO-GET");
-                        //gett the 
+                       
                         break;
                     case "POST":
-                        console.log("TODO-POST");
+                       
                         break;
                 }
+                break;
             }
+            case pfadDelet:
+                console.log("\x1b[33m","request to delet an elment ID:" )
+                break;
             default:
                 response.statusCode = 404;
         }
-        // mongoClient.close();
+         mongoClient.close();
 
     });
 
@@ -61,5 +72,13 @@ async function dbFind(
 */
 server.listen(port, hostname, () => {
     console.clear();
-    console.log(`Server running at http://${hostname}:${port}/`);
+    console.log("\x1b[32m",`Server running at http://${hostname}:${port}/`);
 });
+
+/*
+Coler code
+"\x1b[31m" red
+"\x1b[32m" green
+"\x1b[33m" yellow
+
+*/

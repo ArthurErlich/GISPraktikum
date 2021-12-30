@@ -6,31 +6,43 @@ const mongo = require("mongodb");
 const hostname = "127.0.0.1"; // localhost
 const port = 3500;
 const pfad = "/concertEvents";
+const pfadDelet = pfad + "/delet";
 const mongoUrl = "mongodb://localhost:27017"; // locale MongoDB
 let mongoClient = new mongo.MongoClient(mongoUrl); //mongo Client 
 const server = http.createServer(async (request, response) => {
     response.statusCode = 200;
     response.setHeader("Access-Control-Allow-Origin", "*");
     let url = new URL(request.url || "", `http://${request.headers.host}`);
-    console.log(url.pathname);
+    console.log("\x1b[33m", "the rqeust path: " + url.pathname);
+    console.log("\x1b[0m");
     switch (url.pathname) {
         case pfad: {
-            // await mongoClient.connect();
+            // just pleas dont crash the server!
+            try {
+                await mongoClient.connect();
+            }
+            catch (error) {
+                console.error("\x1b[31m", "connection time out wiht DB");
+                console.log("\x1b[0m");
+                return;
+            }
             console.log("this is the request: " + request.method);
             switch (request.method) {
                 case "GET":
-                    console.log("TODO-GET");
-                    //gett the 
                     break;
                 case "POST":
-                    console.log("TODO-POST");
                     break;
             }
+            break;
         }
+        case pfadDelet:
+            console.log("\x1b[33m", "request to delet an elment ID:");
+            console.log("\x1b[0m");
+            break;
         default:
             response.statusCode = 404;
     }
-    // mongoClient.close();
+    mongoClient.close();
 });
 //search for DB-Content
 /*
@@ -52,6 +64,13 @@ async function dbFind(
 */
 server.listen(port, hostname, () => {
     console.clear();
-    console.log(`Server running at http://${hostname}:${port}/`);
+    console.log("\x1b[32m", `Server running at http://${hostname}:${port}/`);
 });
+/*
+Coler code
+"\x1b[31m" red
+"\x1b[32m" green
+"\x1b[33m" yellow
+
+*/ 
 //# sourceMappingURL=Server.js.map
