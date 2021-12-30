@@ -28,6 +28,7 @@ const server: http.Server = http.createServer(
                 } catch (error) {
                     console.error("\x1b[31m","connection time out wiht DB");
                     console.log("\x1b[0m");
+                    response.statusCode = 404;
                     return;
                 }
               
