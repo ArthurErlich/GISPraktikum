@@ -6,14 +6,13 @@ namespace Aufgabe8 {
         price: number;
         date: Date;
     }
+
     const pfad: string = "/concertEvents";
     const url: string ="http://localhost:3500"
 
     //load end check if something is in the database
 
     let todoFrom: HTMLFormElement = <HTMLFormElement>(document.getElementById("eventsFrom"));
-    let lastID:number;
-
     todoFrom.addEventListener("submit", onSubmint);
 
 
@@ -48,7 +47,9 @@ namespace Aufgabe8 {
         let id: number = Math.floor((Math.random() * 100)); //-> chek if id is there        
         return id;
     }
+
     function checkInput(formData: FormData, id: number): TodoElement {
+        //chekcs if the input value is empty 
         return null;
     }
     //fetsh post and get -> create new if id is empty if not edit current
@@ -69,6 +70,7 @@ namespace Aufgabe8 {
 
         return event;
     }
+
     function createElement(event: TodoElement){
         let tableWrapper: HTMLElement = document.getElementById("toDoOUT");
         console.log("found tableWrapper"+tableWrapper);
@@ -93,11 +95,13 @@ namespace Aufgabe8 {
         console.log("insertet cell" + cell);
 
     }
+
     function addRow(): HTMLTableRowElement{
         let row :HTMLTableRowElement = <HTMLTableRowElement>document.createElement("tr");
         row.className = "toDoElement";
         return row;
     }
+
     function addCell(event: TodoElement) :HTMLTableCellElement[]{
         let cell: HTMLTableCellElement[] = new Array<HTMLTableCellElement>(5);
         
@@ -112,14 +116,15 @@ namespace Aufgabe8 {
         cell[3].className = "datetime_out";
         cell[4].className = "delet";
 
-        cell[0].textContent =  event.id + "TEST";
-        cell[1].textContent =  event.interpret + "TEST";
-        cell[2].textContent =  event.price + "TEST";
-        cell[3].textContent =  event.date + "TEST";
+        cell[0].textContent =  event.id + "";
+        cell[1].textContent =  event.interpret + "";
+        cell[2].textContent =  event.price + "";
+        cell[3].textContent =  dateConverter(event.date);
         cell[4].append(addDeletButton(event.id))
         
         return cell;
     }
+
     function addDeletButton(id:number): HTMLElement{
         let delet: HTMLElement = document.createElement("button");
         delet.dataset.id = id + "";
@@ -129,5 +134,9 @@ namespace Aufgabe8 {
         delet.addEventListener("click",function deletElement() {console.log("DeletTableEvent: ["+id+"]");
         })
         return delet;
+    }
+
+    function dateConverter(date:Date): string{
+        return date.getDay() + "." + date.getMonth() +"."+ date.getFullYear() + " " + date.getHours()+ ":" + date.getMinutes();
     }
 }

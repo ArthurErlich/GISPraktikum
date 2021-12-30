@@ -8,7 +8,7 @@ body {
 
 @media (min-width: 1300px) {
     main {
-
+        width: 1300px;
     }
 }
 
@@ -151,7 +151,7 @@ table {
 }
 
 #interpret_input, #price_input, #datetime_local_input {
-    width: 150px;
+    width: 200px;
     font-size: 10pt;
 }
 

@@ -5,7 +5,6 @@ var Aufgabe8;
     const url = "http://localhost:3500";
     //load end check if something is in the database
     let todoFrom = (document.getElementById("eventsFrom"));
-    let lastID;
     todoFrom.addEventListener("submit", onSubmint);
     async function onSubmint(buttonEvent) {
         buttonEvent.preventDefault();
@@ -30,6 +29,7 @@ var Aufgabe8;
         return id;
     }
     function checkInput(formData, id) {
+        //chekcs if the input value is empty 
         return null;
     }
     //fetsh post and get -> create new if id is empty if not edit current
@@ -79,10 +79,10 @@ var Aufgabe8;
         cell[2].className = "price_out";
         cell[3].className = "datetime_out";
         cell[4].className = "delet";
-        cell[0].textContent = event.id + "TEST";
-        cell[1].textContent = event.interpret + "TEST";
-        cell[2].textContent = event.price + "TEST";
-        cell[3].textContent = event.date + "TEST";
+        cell[0].textContent = event.id + "";
+        cell[1].textContent = event.interpret + "";
+        cell[2].textContent = event.price + "";
+        cell[3].textContent = dateConverter(event.date);
         cell[4].append(addDeletButton(event.id));
         return cell;
     }
@@ -96,6 +96,9 @@ var Aufgabe8;
             console.log("DeletTableEvent: [" + id + "]");
         });
         return delet;
+    }
+    function dateConverter(date) {
+        return date.getDay() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
     }
 })(Aufgabe8 || (Aufgabe8 = {}));
 //# sourceMappingURL=Script.js.map
