@@ -22,9 +22,9 @@ const server: http.Server = http.createServer(
         console.log(url.pathname);
         switch (url.pathname) {
             case pfad: {
-               // await mongoClient.connect();
-               console.log("this is the request: "+ request.method);
-               
+                // await mongoClient.connect();
+                console.log("this is the request: " + request.method);
+
                 switch (request.method) {
                     case "GET":
                         console.log("TODO-GET");
@@ -38,11 +38,12 @@ const server: http.Server = http.createServer(
             default:
                 response.statusCode = 404;
         }
-       // mongoClient.close();
+        // mongoClient.close();
 
     });
 
 //search for DB-Content
+/*
 async function dbFind(
     db: string,
     collection: string,
@@ -58,7 +59,7 @@ async function dbFind(
     response.setHeader("Content-Type", "application/json");
     response.write(JSON.stringify(result));
 }
-
+*/
 server.listen(port, hostname, () => {
     console.clear();
     console.log(`Server running at http://${hostname}:${port}/`);
