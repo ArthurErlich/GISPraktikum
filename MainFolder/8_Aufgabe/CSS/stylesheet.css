@@ -6,16 +6,23 @@ body {
     font-family: 'Encode Sans', sans-serif;
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 1200px) {
     main {
-        width: 1300px;
+        width: 1200px;
+    }
+    .fieldWrapper{
+        min-width: 500px;
     }
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
     main {
-        width: 80%;
+        width: 90%;
     }
+    .fieldWrapper{
+        min-width: 80%;
+    }
+   
 }
 
 main {
@@ -127,7 +134,7 @@ table {
 }
 
 .delet {
-    width: 80px;
+    width: 50px;
 }
 
 .deletButton, .editButton {

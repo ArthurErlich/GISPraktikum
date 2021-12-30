@@ -8,10 +8,9 @@ const hostname: string = "127.0.0.1"; // localhost
 const port: number = 3500;
 
 const pfad: string = "/concertEvents";
-
-
 const mongoUrl: string = "mongodb://localhost:27017"; // locale MongoDB
-let mongoClient: mongo.MongoClient = new mongo.MongoClient(mongoUrl); //mognoClinent
+
+let mongoClient: mongo.MongoClient = new mongo.MongoClient(mongoUrl); //mongo Client 
 
 const server: http.Server = http.createServer(
     async (request: http.IncomingMessage, response: http.ServerResponse) => {

@@ -14,7 +14,7 @@ var Aufgabe8;
         buttonEvent.preventDefault();
         let id;
         let formData = new FormData(buttonEvent.currentTarget);
-        console.log(buttonEvent.currentTarget);
+        //console.log(buttonEvent.currentTarget);
         let interpret = formData.get("interpret_input");
         let price = parseInt((formData.get("price_input")));
         let date = new Date(formData.get("datetime_local_input"));
@@ -23,13 +23,13 @@ var Aufgabe8;
             //set inteperet red
             return;
         }
-        if (price === NaN) {
-            console.error("price  is empty");
+        if (isNaN(price) || price === null) {
+            console.error("price is empty");
             //set inteperet red
             return;
         }
-        if (!date) {
-            console.error("price  is empty");
+        if (isNaN(Date.parse(date.toString()))) {
+            console.error("date is empty");
             //set inteperet red
             return;
         }
@@ -41,6 +41,7 @@ var Aufgabe8;
             date
         };
         postForm(event);
+        createElement(event);
     }
     function creatID() {
         let id; //-> chek if id is there   
@@ -52,17 +53,10 @@ var Aufgabe8;
     }
     //fetsh post and get -> create new if id is empty if not edit current
     async function postForm(event) {
-        let post = await fetch(url + pfad, {
+        await fetch(url + pfad, {
             method: "post",
             body: JSON.stringify(event),
         });
-        //when server is offline post.ok wont happpend
-        if (!post.ok) {
-            console.error("Faild to connect");
-        }
-        else {
-            createElement(event);
-        }
     }
     async function getForm() {
         let event;
@@ -73,8 +67,6 @@ var Aufgabe8;
         if (!response.ok) {
             console.error("Faild to connect");
         }
-        else {
-        }
         return event;
     }
     function createElement(event) {
@@ -84,6 +76,7 @@ var Aufgabe8;
         let tbody = document.createElement("tbody");
         let row = addRow();
         let cell = addCell(event);
+        table.className = "toDoElement";
         table.dataset.id = event.id + "";
         cell.forEach(element => {
             row.appendChild(element);
@@ -123,7 +116,10 @@ var Aufgabe8;
         delet.className = "deletButton";
         delet.setAttribute("type", "button");
         delet.addEventListener("click", function deletElement() {
+            //add functionality
             console.log("DeletTableEvent: [" + id + "]");
+            removeEventElement(id);
+            idList.delete(id);
         });
         return delet;
     }
@@ -138,6 +134,19 @@ var Aufgabe8;
             createElement(event);
             idList.add(event.id);
         });
+    }
+    function removeEventElement(id) {
+        let todoElements = document.getElementsByClassName("toDoElement");
+        console.log(todoElements);
+        for (let element of todoElements) {
+            let elemntData = (element.dataset.id) + "";
+            console.log(elemntData + "");
+            if (elemntData === ""
+                + id) {
+                element.remove();
+                console.log("removed Event " + id + " wiht dataset of" + elemntData);
+            }
+        }
     }
     function test() {
         idList.add(creatID());

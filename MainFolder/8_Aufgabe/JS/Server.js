@@ -7,7 +7,7 @@ const hostname = "127.0.0.1"; // localhost
 const port = 3500;
 const pfad = "/concertEvents";
 const mongoUrl = "mongodb://localhost:27017"; // locale MongoDB
-let mongoClient = new mongo.MongoClient(mongoUrl); //mognoClinent
+let mongoClient = new mongo.MongoClient(mongoUrl); //mongo Client 
 const server = http.createServer(async (request, response) => {
     response.statusCode = 200;
     response.setHeader("Access-Control-Allow-Origin", "*");
@@ -33,7 +33,13 @@ const server = http.createServer(async (request, response) => {
     // mongoClient.close();
 });
 //search for DB-Content
-async function dbFind(db, collection, requestObject, response) {
+/*
+async function dbFind(
+    db: string,
+    collection: string,
+    requestObject: any,
+    response: http.ServerResponse
+) {
     let result = await mongoClient
         .db(db)
         .collection(collection)
@@ -43,6 +49,7 @@ async function dbFind(db, collection, requestObject, response) {
     response.setHeader("Content-Type", "application/json");
     response.write(JSON.stringify(result));
 }
+*/
 server.listen(port, hostname, () => {
     console.clear();
     console.log(`Server running at http://${hostname}:${port}/`);

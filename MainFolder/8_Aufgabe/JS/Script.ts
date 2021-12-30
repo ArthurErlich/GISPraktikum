@@ -30,7 +30,7 @@ namespace Aufgabe8 {
         let id: number;
         let formData: FormData = new FormData(<HTMLFormElement>buttonEvent.currentTarget);
 
-        console.log(buttonEvent.currentTarget);
+        //console.log(buttonEvent.currentTarget);
 
         let interpret: string = <string>formData.get("interpret_input");
         let price: number = parseInt(<string>(formData.get("price_input")));
@@ -41,17 +41,17 @@ namespace Aufgabe8 {
             //set inteperet red
             return;
         }
-        if (price === NaN) {
-            console.error("price  is empty");
+        if (isNaN(price)|| price === null) {
+            console.error("price is empty");
             //set inteperet red
             return;
         }
-        if (!date) {
-            console.error("price  is empty");
+        if (isNaN(Date.parse(date.toString()))) {
+            console.error("date is empty");
             //set inteperet red
             return;
         }
-
+     
         id = creatID(); //chekc wiht databes if id is used?
 
         let event: EventElement = {
@@ -61,6 +61,7 @@ namespace Aufgabe8 {
             date
         };
         postForm(event);
+        createElement(event);
     }
 
     function creatID(): number {
@@ -77,19 +78,10 @@ namespace Aufgabe8 {
 
     async function postForm(event: EventElement) {
 
-        let post = await fetch(url + pfad, {
+        await fetch(url + pfad, {
             method: "post",
             body: JSON.stringify(event),
         });
-
-        //when server is offline post.ok wont happpend
-        if (!post.ok) {
-            console.error("Faild to connect");
-        } else {
-            createElement(event);
-        }
-        
-
     }
 
     async function getForm(): Promise<EventElement[]> {
@@ -99,12 +91,11 @@ namespace Aufgabe8 {
         response = await fetch(url + pfad, {
             method: "get",
         });
-        
+
         if (!response.ok) {
             console.error("Faild to connect");
-        } else {
-
         }
+
         return event;
     }
     function createElement(event: EventElement) {
@@ -117,6 +108,7 @@ namespace Aufgabe8 {
         let row: HTMLTableRowElement = addRow();
         let cell: HTMLTableCellElement[] = addCell(event);
 
+        table.className = "toDoElement"; 
         table.dataset.id = event.id + "";
 
         cell.forEach(element => {
@@ -169,7 +161,10 @@ namespace Aufgabe8 {
         delet.className = "deletButton";
         delet.setAttribute("type", "button");
         delet.addEventListener("click", function deletElement() {
+            //add functionality
             console.log("DeletTableEvent: [" + id + "]");
+            removeEventElement(id);
+            idList.delete(id);
         })
         return delet;
     }
@@ -177,15 +172,30 @@ namespace Aufgabe8 {
     function dateConverter(date: Date): string {
         return date.getDay() + "." + date.getMonth() + "." + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
     }
+
     async function load() {
         let events: EventElement[] = new Array<EventElement>();
         events = await getForm();
-
         // ony create new events in HTML if ther is something in the DB
         events.forEach(event => {
             createElement(event);
             idList.add(event.id);
         });
+    }
+    function removeEventElement(id: number){
+        let  todoElements: HTMLCollection = document.getElementsByClassName("toDoElement")
+        console.log(todoElements);
+        
+        for(let element of todoElements){
+            let elemntData: string =((<HTMLElement>element).dataset.id) + "";
+            console.log(elemntData+"");
+            
+            if( elemntData === ""+id){
+                element.remove();
+                console.log("removed Event "+ id +" wiht dataset of" +elemntData);
+                
+            }
+        }
     }
 
     function test(): void {
@@ -195,6 +205,5 @@ namespace Aufgabe8 {
         idList.add(creatID());
 
         console.log(idList);
-
     };
 }
