@@ -2,3 +2,4 @@
 **/WiredTigerPreplog.*
 MainFolder/8_Aufgabe/MongoDB/Aufgabe8DB/data/db/journal/WiredTigerLog.0000000001
 *.lock
+*.lock
