@@ -54,23 +54,20 @@ var Aufgabe8;
     }
     //fetsh post and get -> create new if id is empty if not edit current
     async function postForm(event) {
+        console.log(JSON.stringify(event));
         await fetch(url + pfad, {
             method: "post",
             body: JSON.stringify(event),
         });
     }
     async function getForm() {
+        console.log("getting the Response");
         let events;
-        let response;
-        try {
-            response = await fetch(url + pfad, {
-                method: "get",
-            });
-            events = JSON.parse(await response.text());
-        }
-        catch (err) {
-            console.error(err);
-        }
+        let response = await fetch(url + pfad, { method: "get" });
+        console.log(response);
+        console.log(await response.text());
+        events = JSON.parse(await response.text());
+        console.log("ENDE?");
         return events;
     }
     async function deletGet(id) {
@@ -128,6 +125,7 @@ var Aufgabe8;
             console.log("DeletTableEvent: [" + id + "]");
             removeEventElement(id);
             idList.delete(id);
+            deletGet(id);
         });
         return delet;
     }

@@ -9,7 +9,7 @@ namespace Aufgabe8 {
 
     const pfad: string = "/concertEvents";
     const url: string = "http://localhost:3500"
-    const deletPfad: string ="/delet";
+    const deletPfad: string = "/delet";
 
     let idList = new Set();
 
@@ -42,7 +42,7 @@ namespace Aufgabe8 {
             //set inteperet red
             return;
         }
-        if (isNaN(price)|| price === null) {
+        if (isNaN(price) || price === null) {
             console.error("price is empty");
             //set inteperet red
             return;
@@ -52,7 +52,7 @@ namespace Aufgabe8 {
             //set inteperet red
             return;
         }
-     
+
         id = creatID(); //chekc wiht databes if id is used?
 
         let event: EventElement = {
@@ -78,6 +78,8 @@ namespace Aufgabe8 {
     //fetsh post and get -> create new if id is empty if not edit current
 
     async function postForm(event: EventElement) {
+        console.log(JSON.stringify(event));
+
 
         await fetch(url + pfad, {
             method: "post",
@@ -86,22 +88,22 @@ namespace Aufgabe8 {
     }
 
     async function getForm(): Promise<EventElement[]> {
-        let events: EventElement[];
-        let response: Response;
+        console.log("getting the Response");
 
-        try{
-            response = await fetch(url + pfad, {
-                method: "get",
-            });
-            events = JSON.parse( await response.text());
-        }catch(err){
-            console.error(err);
-            
-        }
+        let events: EventElement[];
+        let response: Response = await fetch(url + pfad, {method: "get"});
+        
+        console.log(response);
+        console.log(await response.text());
+        events = JSON.parse(await response.text());
+        
+        console.log("ENDE?");
+        
+
         return events;
     }
-    async function deletGet(id : number) {
-        let searchPara: string = "?EventID="+id;
+    async function deletGet(id: number) {
+        let searchPara: string = "?EventID=" + id;
         await fetch(url + deletPfad + searchPara, {
             method: "get",
         });
@@ -116,7 +118,7 @@ namespace Aufgabe8 {
         let row: HTMLTableRowElement = addRow();
         let cell: HTMLTableCellElement[] = addCell(event);
 
-        table.className = "toDoElement"; 
+        table.className = "toDoElement";
         table.dataset.id = event.id + "";
 
         cell.forEach(element => {
@@ -181,27 +183,27 @@ namespace Aufgabe8 {
     async function load() {
         let events: EventElement[] = new Array<EventElement>();
         try {
-        events = await getForm();
-            
+            events = await getForm();
+
         } catch (error) {
-           events = null; 
-           return;
+            events = null;
+            return;
         }
         // ony create new events in HTML if ther is something in the DB
-       events.forEach(event => {
+        events.forEach(event => {
             createElement(event);
             idList.add(event.id);
         });
     }
-    function removeEventElement(id: number){
-        let  todoElements: HTMLCollection = document.getElementsByClassName("toDoElement")
+    function removeEventElement(id: number) {
+        let todoElements: HTMLCollection = document.getElementsByClassName("toDoElement")
 
-        for(let element of todoElements){
-            let elemntData: string =((<HTMLElement>element).dataset.id) + "";
-            
-            if( elemntData === ""+id){
+        for (let element of todoElements) {
+            let elemntData: string = ((<HTMLElement>element).dataset.id) + "";
+
+            if (elemntData === "" + id) {
                 element.remove();
-                console.log("removed Event "+ id +" wiht dataset of" +elemntData);
+                console.log("removed Event " + id + " wiht dataset of" + elemntData);
             }
 
         }

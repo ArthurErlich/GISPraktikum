@@ -48,8 +48,9 @@ const server: http.Server = http.createServer(
                         try {
                             console.log("\x1b[33m", "fetshing the DatabaseCollection...");
                             await mongoClient.connect();
-                            await dbGet(response);
-                            console.log("\x1b[32m", "got the data");
+                            let result = await dbGet();
+                            response.setHeader("Content-Type", "application/json");
+                            response.write(result);
                         } catch (error) {
                             console.error("\x1b[31m", error);
                         } finally {
@@ -63,8 +64,15 @@ const server: http.Server = http.createServer(
                             input += data;
                         })
                         try {
-                            await mongoClient.connect();
-                            request.on("end", async () => { await dbSet(input); console.log("\x1b[32m", "sending Data..."); });
+                            request.on("end", async () => {
+                                input = input.replace("undefined","");// the Stringfy has an undifnied in front?
+                                console.log("\x1b[33m", "Data: " + input);
+                                console.log("\x1b[33m", "sending Data...");
+                                await mongoClient.connect();
+                                await dbSet(input);
+
+                            });
+
                         } catch (error) {
                             console.error("\x1b[31m", error);
                         } finally {
@@ -103,20 +111,20 @@ async function dbFind(
 }
 */
 
-async function dbGet(
-    response: http.ServerResponse
-) {
+async function dbGet () :Promise<string> {
     let result = await mongoClient
         .db(db)
         .collection(dbCollection)
         .find()
         .toArray();
-    response.setHeader("Content-Type", "application/json");
-    response.write(JSON.stringify(result));
+        console.log("\x1b[32m", "got the data");
+        console.log("\x1b[32m", result);
+    return JSON.stringify(result);
 }
+
 async function dbSet(event: string) {
     console.log("\x1b[33m", "send Data:" + JSON.parse(event) + +" " + (JSON.parse(event).id));
-    await mongoClient.db(db).collection(dbCollection).insertOne(JSON.parse(event), (JSON.parse(event).id));
+    mongoClient.db(db).collection(dbCollection).insertOne(JSON.parse(event));
     console.log("\x1b[32m", "Data recived");
 }
 
