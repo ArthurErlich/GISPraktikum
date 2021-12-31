@@ -169,6 +169,7 @@ namespace Aufgabe8 {
             console.log("DeletTableEvent: [" + id + "]");
             removeEventElement(id);
             idList.delete(id);
+            deletGet(id);
         })
         return delet;
     }
