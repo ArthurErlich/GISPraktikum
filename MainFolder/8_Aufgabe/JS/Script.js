@@ -3,6 +3,7 @@ var Aufgabe8;
 (function (Aufgabe8) {
     const pfad = "/concertEvents";
     const url = "http://localhost:3500";
+    const deletPfad = "/delet";
     let idList = new Set();
     //load end check if something is in the database
     load();
@@ -59,15 +60,24 @@ var Aufgabe8;
         });
     }
     async function getForm() {
-        let event;
+        let events;
         let response;
-        response = await fetch(url + pfad, {
+        try {
+            response = await fetch(url + pfad, {
+                method: "get",
+            });
+            events = JSON.parse(await response.text());
+        }
+        catch (err) {
+            console.error(err);
+        }
+        return events;
+    }
+    async function deletGet(id) {
+        let searchPara = "?EventID=" + id;
+        await fetch(url + deletPfad + searchPara, {
             method: "get",
         });
-        if (!response.ok) {
-            console.error("Faild to connect");
-        }
-        return event;
     }
     function createElement(event) {
         let tableWrapper = document.getElementById("toDoOUT");
@@ -84,8 +94,6 @@ var Aufgabe8;
         tbody.append(row);
         table.append(tbody);
         tableWrapper.append(table);
-        console.log("insertert row" + row);
-        console.log("insertet cell" + cell);
     }
     function addRow() {
         let row = document.createElement("tr");
@@ -128,7 +136,13 @@ var Aufgabe8;
     }
     async function load() {
         let events = new Array();
-        events = await getForm();
+        try {
+            events = await getForm();
+        }
+        catch (error) {
+            events = null;
+            return;
+        }
         // ony create new events in HTML if ther is something in the DB
         events.forEach(event => {
             createElement(event);

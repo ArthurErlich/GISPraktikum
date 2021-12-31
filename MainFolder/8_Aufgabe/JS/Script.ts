@@ -9,6 +9,7 @@ namespace Aufgabe8 {
 
     const pfad: string = "/concertEvents";
     const url: string = "http://localhost:3500"
+    const deletPfad: string ="/delet";
 
     let idList = new Set();
 
@@ -85,18 +86,25 @@ namespace Aufgabe8 {
     }
 
     async function getForm(): Promise<EventElement[]> {
-        let event: EventElement[];
+        let events: EventElement[];
         let response: Response;
 
-        response = await fetch(url + pfad, {
+        try{
+            response = await fetch(url + pfad, {
+                method: "get",
+            });
+            events = JSON.parse( await response.text());
+        }catch(err){
+            console.error(err);
+            
+        }
+        return events;
+    }
+    async function deletGet(id : number) {
+        let searchPara: string = "?EventID="+id;
+        await fetch(url + deletPfad + searchPara, {
             method: "get",
         });
-
-        if (!response.ok) {
-            console.error("Faild to connect");
-        }
-
-        return event;
     }
     function createElement(event: EventElement) {
         let tableWrapper: HTMLElement = document.getElementById("toDoOUT");
@@ -118,10 +126,6 @@ namespace Aufgabe8 {
         tbody.append(row);
         table.append(tbody);
         tableWrapper.append(table);
-
-
-        console.log("insertert row" + row);
-        console.log("insertet cell" + cell);
 
     }
 
@@ -175,9 +179,15 @@ namespace Aufgabe8 {
 
     async function load() {
         let events: EventElement[] = new Array<EventElement>();
+        try {
         events = await getForm();
+            
+        } catch (error) {
+           events = null; 
+           return;
+        }
         // ony create new events in HTML if ther is something in the DB
-        events.forEach(event => {
+       events.forEach(event => {
             createElement(event);
             idList.add(event.id);
         });
@@ -191,8 +201,8 @@ namespace Aufgabe8 {
             if( elemntData === ""+id){
                 element.remove();
                 console.log("removed Event "+ id +" wiht dataset of" +elemntData);
-                
             }
+
         }
     }
 
