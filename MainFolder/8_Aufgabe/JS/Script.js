@@ -61,12 +61,19 @@ var Aufgabe8;
         });
     }
     async function getForm() {
-        console.log("getting the Response");
+        console.log("getting the Response vor get Form");
         let events;
-        let response = await fetch(url + pfad, { method: "get" });
-        console.log(response);
-        console.log(await response.text());
-        events = JSON.parse(await response.text());
+        let response;
+        try {
+            response = await fetch(url + pfad, { method: "get" });
+            console.log(response);
+            console.log(await response.text());
+            events = JSON.parse(await response.text());
+        }
+        catch (error) {
+            console.log(error);
+            throw new Error(error);
+        }
         console.log("ENDE?");
         return events;
     }
@@ -138,7 +145,7 @@ var Aufgabe8;
             events = await getForm();
         }
         catch (error) {
-            events = null;
+            console.log("no events found");
             return;
         }
         // ony create new events in HTML if ther is something in the DB
@@ -146,6 +153,7 @@ var Aufgabe8;
             createElement(event);
             idList.add(event.id);
         });
+        console.log("loadin finished");
     }
     function removeEventElement(id) {
         let todoElements = document.getElementsByClassName("toDoElement");

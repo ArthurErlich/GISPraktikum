@@ -48,9 +48,11 @@ const server: http.Server = http.createServer(
                         try {
                             console.log("\x1b[33m", "fetshing the DatabaseCollection...");
                             await mongoClient.connect();
-                            let result = await dbGet();
+                            let text = await dbGet()
                             response.setHeader("Content-Type", "application/json");
-                            response.write(result);
+                            response.write(text);
+                            console.log("\x1b[33m", "sending to client: " + text);
+
                         } catch (error) {
                             console.error("\x1b[31m", error);
                         } finally {
@@ -65,7 +67,7 @@ const server: http.Server = http.createServer(
                         })
                         try {
                             request.on("end", async () => {
-                                input = input.replace("undefined","");// the Stringfy has an undifnied in front?
+                                input = input.replace("undefined", "");// the Stringfy has an undifnied in front?
                                 console.log("\x1b[33m", "Data: " + input);
                                 console.log("\x1b[33m", "sending Data...");
                                 await mongoClient.connect();
@@ -111,14 +113,14 @@ async function dbFind(
 }
 */
 
-async function dbGet () :Promise<string> {
+async function dbGet(): Promise<string> {
     let result = await mongoClient
         .db(db)
         .collection(dbCollection)
         .find()
         .toArray();
-        console.log("\x1b[32m", "got the data");
-        console.log("\x1b[32m", result);
+    console.log("\x1b[32m", "got the data");
+    console.log("\x1b[32m", result);
     return JSON.stringify(result);
 }
 

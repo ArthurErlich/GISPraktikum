@@ -88,18 +88,22 @@ namespace Aufgabe8 {
     }
 
     async function getForm(): Promise<EventElement[]> {
-        console.log("getting the Response");
+        console.log("getting the Response vor get Form");
 
         let events: EventElement[];
-        let response: Response = await fetch(url + pfad, {method: "get"});
-        
-        console.log(response);
-        console.log(await response.text());
-        events = JSON.parse(await response.text());
-        
-        console.log("ENDE?");
-        
+        let response: Response;
+        try {
+            response = await fetch(url + pfad, { method: "get" });
+            console.log(response);
+            console.log(await response.text());
+            events = JSON.parse(await response.text());
 
+        } catch (error) {
+            console.log(error);
+            throw new Error(error);
+        }
+
+        console.log("ENDE?");
         return events;
     }
     async function deletGet(id: number) {
@@ -186,7 +190,7 @@ namespace Aufgabe8 {
             events = await getForm();
 
         } catch (error) {
-            events = null;
+            console.log("no events found");
             return;
         }
         // ony create new events in HTML if ther is something in the DB
@@ -194,7 +198,10 @@ namespace Aufgabe8 {
             createElement(event);
             idList.add(event.id);
         });
+        console.log("loadin finished");
+
     }
+
     function removeEventElement(id: number) {
         let todoElements: HTMLCollection = document.getElementsByClassName("toDoElement")
 

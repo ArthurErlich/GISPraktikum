@@ -42,9 +42,10 @@ const server = http.createServer(async (request, response) => {
                     try {
                         console.log("\x1b[33m", "fetshing the DatabaseCollection...");
                         await mongoClient.connect();
-                        let result = await dbGet();
+                        let text = await dbGet();
                         response.setHeader("Content-Type", "application/json");
-                        response.write(result);
+                        response.write(text);
+                        console.log("\x1b[33m", "sending to client: " + text);
                     }
                     catch (error) {
                         console.error("\x1b[31m", error);
