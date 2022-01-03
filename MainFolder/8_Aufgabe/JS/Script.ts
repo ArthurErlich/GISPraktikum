@@ -15,14 +15,12 @@ namespace Aufgabe8 {
 
     //load end check if something is in the database
     load();
-
     let testF = document.getElementById("TEST");
     testF.addEventListener("click", test);
 
 
     let todoFrom: HTMLFormElement = <HTMLFormElement>(document.getElementById("eventsFrom"));
     todoFrom.addEventListener("submit", onSubmint);
-
 
 
     async function onSubmint(buttonEvent: Event) {
@@ -191,7 +189,6 @@ namespace Aufgabe8 {
             idList.add(event._id);
         });
         console.log("loading finished");
-
     }
 
     function removeEventElement(_id: number) {

@@ -3,7 +3,6 @@
 import * as http from "http";
 import * as mongo from "mongodb";
 
-
 const hostname: string = "127.0.0.1"; // localhost
 const port: number = 3500;
 
@@ -139,9 +138,14 @@ async function dbSet(event: string): Promise<void> {
     console.log("\x1b[32m", "Data recived");
 }
 async function dbRemove(eventID: string): Promise<void> {
+    //There something wint BISON format--> I think it is tha Dataformat Number, if I save the _id as string, there wont be such an Error.
     console.log("\x1b[33m", "removing elment with ID: " + eventID);
-    await mongoClient.db(db).collection(dbCollection).deleteOne({ _id: new mongo.ObjectId(eventID) });
-    console.log("\x1b[32m", "Data removed");
+    try {
+        await mongoClient.db(db).collection(dbCollection).deleteOne({ _id: new mongo.ObjectId(eventID) });
+        console.log("\x1b[32m", "Data removed");
+    } catch (error) {
+        console.log("\x1b[32m", error);
+    }
 }
 
 server.listen(port, hostname, () => {
