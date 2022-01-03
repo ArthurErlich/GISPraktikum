@@ -13,7 +13,7 @@ var Aufgabe8;
     todoFrom.addEventListener("submit", onSubmint);
     async function onSubmint(buttonEvent) {
         buttonEvent.preventDefault();
-        let id;
+        let _id;
         let formData = new FormData(buttonEvent.currentTarget);
         //console.log(buttonEvent.currentTarget);
         let interpret = formData.get("interpret_input");
@@ -34,9 +34,9 @@ var Aufgabe8;
             //set inteperet red
             return;
         }
-        id = creatID(); //chekc wiht databes if id is used?
+        _id = creatID(); //chekc wiht databes if _id is used?
         let event = {
-            id,
+            _id,
             interpret,
             price,
             date
@@ -45,14 +45,14 @@ var Aufgabe8;
         createElement(event);
     }
     function creatID() {
-        let id; //-> chek if id is there   
-        id = Math.floor((Math.random() * 1000));
-        while (idList.has(id)) {
-            id = Math.floor((Math.random() * 1000));
+        let _id; //-> chek if _id is there   
+        _id = Math.floor((Math.random() * 1000));
+        while (idList.has(_id)) {
+            _id = Math.floor((Math.random() * 1000));
         }
-        return id;
+        return _id;
     }
-    //fetsh post and get -> create new if id is empty if not edit current
+    //fetsh post and get -> create new if _id is empty if not edit current
     async function postForm(event) {
         console.log(JSON.stringify(event));
         await fetch(url + pfad, {
@@ -61,37 +61,34 @@ var Aufgabe8;
         });
     }
     async function getForm() {
-        console.log("getting the Response vor get Form");
+        console.log("getting the Response for get Form");
         let events;
-        let response;
         try {
-            response = await fetch(url + pfad, { method: "get" });
-            console.log(response);
-            console.log(await response.text());
-            events = JSON.parse(await response.text());
+            let response = await fetch(url + pfad, { method: "get" });
+            let text = await response.text();
+            events = JSON.parse(text);
         }
         catch (error) {
+            console.error("server Offline");
             console.log(error);
             throw new Error(error);
         }
-        console.log("ENDE?");
         return events;
     }
-    async function deletGet(id) {
-        let searchPara = "?EventID=" + id;
+    async function deletGet(_id) {
+        let searchPara = "?EventID=" + _id;
         await fetch(url + deletPfad + searchPara, {
             method: "get",
         });
     }
     function createElement(event) {
         let tableWrapper = document.getElementById("toDoOUT");
-        console.log("found tableWrapper" + tableWrapper);
         let table = document.createElement("table");
         let tbody = document.createElement("tbody");
         let row = addRow();
         let cell = addCell(event);
         table.className = "toDoElement";
-        table.dataset.id = event.id + "";
+        table.dataset._id = event._id + "";
         cell.forEach(element => {
             row.appendChild(element);
         });
@@ -114,25 +111,25 @@ var Aufgabe8;
         cell[2].className = "price_out";
         cell[3].className = "datetime_out";
         cell[4].className = "delet";
-        cell[0].textContent = event.id + "";
+        cell[0].textContent = event._id + "";
         cell[1].textContent = event.interpret + "";
         cell[2].textContent = event.price + "";
-        cell[3].textContent = dateConverter(event.date);
-        cell[4].append(addDeletButton(event.id));
+        cell[3].textContent = dateConverter(new Date(event.date));
+        cell[4].append(addDeletButton(event._id));
         return cell;
     }
-    function addDeletButton(id) {
+    function addDeletButton(_id) {
         let delet = document.createElement("button");
-        delet.dataset.id = id + "";
+        delet.dataset._id = _id + "";
         delet.textContent = "X";
         delet.className = "deletButton";
         delet.setAttribute("type", "button");
         delet.addEventListener("click", function deletElement() {
             //add functionality
-            console.log("DeletTableEvent: [" + id + "]");
-            removeEventElement(id);
-            idList.delete(id);
-            deletGet(id);
+            console.log("DeletTableEvent: [" + _id + "]");
+            removeEventElement(_id);
+            idList.delete(_id);
+            deletGet(_id);
         });
         return delet;
     }
@@ -143,6 +140,7 @@ var Aufgabe8;
         let events = new Array();
         try {
             events = await getForm();
+            console.log("events found: " + events);
         }
         catch (error) {
             console.log("no events found");
@@ -151,17 +149,17 @@ var Aufgabe8;
         // ony create new events in HTML if ther is something in the DB
         events.forEach(event => {
             createElement(event);
-            idList.add(event.id);
+            idList.add(event._id);
         });
-        console.log("loadin finished");
+        console.log("loading finished");
     }
-    function removeEventElement(id) {
+    function removeEventElement(_id) {
         let todoElements = document.getElementsByClassName("toDoElement");
         for (let element of todoElements) {
-            let elemntData = (element.dataset.id) + "";
-            if (elemntData === "" + id) {
+            let elemntData = (element.dataset._id) + "";
+            if (elemntData === "" + _id) {
                 element.remove();
-                console.log("removed Event " + id + " wiht dataset of" + elemntData);
+                console.log("removed Event " + _id + " wiht dataset of" + elemntData);
             }
         }
     }

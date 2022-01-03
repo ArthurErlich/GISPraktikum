@@ -1,12 +1,12 @@
 "use strict";
-//namespace Aufgabe8{} <-- nor in namespace to have one node_modulesFolder
+//namespace Aufgabe8{} <-- or in namespace to have one node_modulesFolder
 Object.defineProperty(exports, "__esModule", { value: true });
 const http = require("http");
 const mongo = require("mongodb");
 const hostname = "127.0.0.1"; // localhost
 const port = 3500;
 const pfad = "/concertEvents";
-const pfadDelet = pfad + "/delet";
+const pfadDelet = "/delet";
 const mongoUrl = "mongodb://localhost:27017"; // locale MongoDB
 const dbCollection = "eventNode";
 const db = "Events";
@@ -43,8 +43,9 @@ const server = http.createServer(async (request, response) => {
                         console.log("\x1b[33m", "fetshing the DatabaseCollection...");
                         await mongoClient.connect();
                         let text = await dbGet();
+                        //response.setHeader("Content-Type", "text/plain");
                         response.setHeader("Content-Type", "application/json");
-                        response.write(text);
+                        response.end(text);
                         console.log("\x1b[33m", "sending to client: " + text);
                     }
                     catch (error) {
@@ -79,8 +80,19 @@ const server = http.createServer(async (request, response) => {
             break;
         }
         case pfadDelet:
-            let eventID = Number(url.searchParams.get("eventID"));
+            let eventID = url.searchParams.get("EventID");
             console.log("\x1b[33m", "request to delet an elment ID: " + eventID);
+            //TODOO: Add delet functionality
+            try {
+                await mongoClient.connect();
+                await dbRemove(eventID);
+            }
+            catch (error) {
+                console.error("\x1b[31m", error);
+            }
+            finally {
+                mongoClient.close();
+            }
             break;
         default:
             response.statusCode = 404;
@@ -114,8 +126,13 @@ async function dbGet() {
 }
 async function dbSet(event) {
     console.log("\x1b[33m", "send Data:" + JSON.parse(event) + +" " + (JSON.parse(event).id));
-    mongoClient.db(db).collection(dbCollection).insertOne(JSON.parse(event));
+    await mongoClient.db(db).collection(dbCollection).insertOne(JSON.parse(event));
     console.log("\x1b[32m", "Data recived");
+}
+async function dbRemove(eventID) {
+    console.log("\x1b[33m", "removing elment with ID: " + eventID);
+    await mongoClient.db(db).collection(dbCollection).deleteOne({ _id: new mongo.ObjectId(eventID) });
+    console.log("\x1b[32m", "Data removed");
 }
 server.listen(port, hostname, () => {
     console.clear();
