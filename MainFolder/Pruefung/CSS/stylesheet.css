@@ -1,0 +1,109 @@
+body {
+  /*TEST*/
+  font-family: "Courier New", Courier, monospace;
+  font-weight: 1000;
+  /*TEST*/
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  background-color: aqua;
+  height: 50px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+main {
+  background-color: blue;
+  height: 800px;
+  /*TEST*/
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: blueviolet;
+}
+
+#backLink {
+  position: block;
+  float: left;
+}
+
+#author {
+  position: block;
+  float: right;
+}
+
+#author,
+#backLink {
+  background-color: aliceblue;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 2px;
+  /* change all borders to 2px*/
+}
+
+#backLink a:hover,
+#backLink:hover {
+  background-color: green;
+}
+
+#backLink a:active,
+#backLink:active {
+  background-color: red;
+}
+
+button {
+  background-color: aliceblue;
+  border-radius: 2px;
+}
+
+button:hover {
+  background-color: green;
+}
+
+button:active {
+  background-color: red;
+}
+
+.hCenter {
+  display: block;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+
+.flexContener {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-color: darkblue;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.flexChild {
+  background-color: coral;
+  margin: 5px;
+  border-radius: 2px;
+  /*TEST*/
+  width: 150px;
+  height: 150px;
+  /*TEST*/
+}
+
+/*LINKSTUFF*/
+a {
+  text-decoration: none;
+  color: black;
+}
+/*# sourceMappingURL=stylesheet.css.map */
