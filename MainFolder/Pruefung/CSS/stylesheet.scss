@@ -1,0 +1,115 @@
+$borderRadius: 2px;
+$font: 'Courier New',
+Courier,
+monospace;
+
+$colorPrime:Black;
+$colorSecond:White;
+$colorThird: Green;
+
+body {
+
+    /*TEST*/
+    font-family: $font;
+    font-weight: 1000;
+    /*TEST*/
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-color: aqua;
+    height: 50px;
+    position: sticky;
+    top: 0;
+}
+
+nav {}
+
+main {
+    background-color: blue;
+    height: 800px;
+    /*TEST*/
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: blueviolet;
+}
+
+#backLink {
+    position: block;
+    float: left;
+
+}
+
+#author {
+    position: block;
+    float: right;
+
+}
+
+#author,
+#backLink {
+    background-color: aliceblue;
+    padding: 5px;
+    margin: 5px;
+    border-radius: $borderRadius;
+    /* change all borders to 2px*/
+}
+
+#backLink a:hover,
+#backLink:hover {
+    background-color: green;
+}
+
+#backLink a:active,
+#backLink:active {
+    background-color: red;
+}
+
+button {
+    background-color: aliceblue;
+    border-radius: $borderRadius;
+}
+
+button:hover {
+    background-color: green;
+}
+
+button:active {
+    background-color: red;
+}
+
+.hCenter {
+    display: block;
+    width: fit-content;
+    margin: auto;
+}
+
+.flexContener {
+    display: flex;
+    background-color: darkblue;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.flexChild {
+    background-color: coral;
+    margin: 5px;
+    border-radius: $borderRadius;
+
+    /*TEST*/
+    width: 150px;
+    height: 150px;
+    /*TEST*/
+}
+
+/*LINKSTUFF*/
+a {
+    text-decoration: none;
+    color: black;
+}
