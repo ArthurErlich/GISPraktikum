@@ -2,6 +2,11 @@ $borderRadius: 2px;
 $font: 'Courier New',
 Courier,
 monospace;
+$colorBackground: #dcf3ff;
+$colorBackgroundDark:#baf2ef;
+$colorHeadFooter: #a2d2df;
+
+$colodElemnts: #257ca3;
 
 $colorPrime:Black;
 $colorSecond:White;
@@ -15,10 +20,13 @@ body {
     /*TEST*/
     padding: 0;
     margin: 0;
+    background-image: radial-gradient($colorBackgroundDark, $colorBackground);
+    background-color: $colorBackground;
 }
 
 header {
-    background-color: aqua;
+    background-image: linear-gradient($colorHeadFooter 90%, $colorBackground);
+    background-color: $colorHeadFooter;
     height: 50px;
     position: sticky;
     top: 0;
@@ -27,7 +35,7 @@ header {
 nav {}
 
 main {
-    background-color: blue;
+
     height: 800px;
     /*TEST*/
 }
@@ -37,7 +45,9 @@ footer {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: blueviolet;
+    background-image: linear-gradient($colorBackground, $colorHeadFooter 10%);
+    background-color: $colorHeadFooter;
+    padding-top: 10px;
 }
 
 #backLink {
@@ -90,21 +100,20 @@ button:active {
     margin: auto;
 }
 
-.flexContener {
+.flexContainer {
     display: flex;
-    background-color: darkblue;
     flex-wrap: wrap;
     justify-content: center;
 }
 
 .flexChild {
-    background-color: coral;
     margin: 5px;
     border-radius: $borderRadius;
 
     /*TEST*/
-    width: 150px;
-    height: 150px;
+    min-width: 150px;
+    min-height: 150px;
+
     /*TEST*/
 }
 
@@ -112,4 +121,27 @@ button:active {
 a {
     text-decoration: none;
     color: black;
+}
+
+/*mein flexConteiner*/
+.heroWrapper {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25px;
+    max-width: 1000px;
+    background-color: white;
+}
+
+.heroWrapper h1 {
+    $hight: 100px;
+
+    text-align: center;
+    min-height: $hight;
+    padding-top: ($hight/2);
+    line-height: 1.5;
+}
+
+.item {
+    background-color: $colodElemnts;
+    text-align: center;
 }

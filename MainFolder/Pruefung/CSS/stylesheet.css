@@ -5,10 +5,14 @@ body {
   /*TEST*/
   padding: 0;
   margin: 0;
+  background-image: radial-gradient(#baf2ef, #dcf3ff);
+  background-color: #dcf3ff;
 }
 
 header {
-  background-color: aqua;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(90%, #a2d2df), to(#dcf3ff));
+  background-image: linear-gradient(#a2d2df 90%, #dcf3ff);
+  background-color: #a2d2df;
   height: 50px;
   position: -webkit-sticky;
   position: sticky;
@@ -16,7 +20,6 @@ header {
 }
 
 main {
-  background-color: blue;
   height: 800px;
   /*TEST*/
 }
@@ -26,7 +29,10 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: blueviolet;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#dcf3ff), color-stop(10%, #a2d2df));
+  background-image: linear-gradient(#dcf3ff, #a2d2df 10%);
+  background-color: #a2d2df;
+  padding-top: 10px;
 }
 
 #backLink {
@@ -79,11 +85,10 @@ button:active {
   margin: auto;
 }
 
-.flexContener {
+.flexContainer {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  background-color: darkblue;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-pack: center;
@@ -92,12 +97,11 @@ button:active {
 }
 
 .flexChild {
-  background-color: coral;
   margin: 5px;
   border-radius: 2px;
   /*TEST*/
-  width: 150px;
-  height: 150px;
+  min-width: 150px;
+  min-height: 150px;
   /*TEST*/
 }
 
@@ -105,5 +109,26 @@ button:active {
 a {
   text-decoration: none;
   color: black;
+}
+
+/*mein flexConteiner*/
+.heroWrapper {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+  max-width: 1000px;
+  background-color: white;
+}
+
+.heroWrapper h1 {
+  text-align: center;
+  min-height: 100px;
+  padding-top: 50px;
+  line-height: 1.5;
+}
+
+.item {
+  background-color: #257ca3;
+  text-align: center;
 }
 /*# sourceMappingURL=stylesheet.css.map */
