@@ -130,5 +130,12 @@ a {
 .item {
   background-color: #257ca3;
   text-align: center;
+  padding: 5px;
+}
+
+.item a {
+  display: block;
+  height: 100%;
+  width: 100%;
 }
 /*# sourceMappingURL=stylesheet.css.map */

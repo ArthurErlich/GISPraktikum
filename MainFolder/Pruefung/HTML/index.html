@@ -4,18 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="Gefrierschrank" content="width=device-width, initial-scale=1.0">
+    <meta id="pageName" data-pageName="mainPage" name="Gefrierschrank" content="width=device-width, initial-scale=1.0">
     <!--Style-->
     <link rel="stylesheet" href="..//CSS/stylesheet.css" />
     <!--JavaScript-->
     <script src="..//JS/scirpt.js" defer></script>
+    <script src="..//JS/index.js" defer></script>
+
     <Access-Control-Allow-Origin>
 </head>
 
 <body>
     <header>
         <nav id="navbar">
-            MeinNavBar
+
         </nav>
     </header>
 
@@ -23,15 +25,18 @@
         <div class="heroWrapper">
             <h1>Gefrierschrank</h1>
         </div>
+
         <div class="flexContainer" id="items">
             <!--ITEMS FROM NODE.JS<-DB-->
-            <div class="item flexChild">
-                <div>BILD</div>
-                <div>INHALT</div>
-                <div>ABLAUF</div>
+            <div class="item flexChild" data-id="1">
+                <!--EDITLINK -> node server with get and serchpara-->
+                <a class="itme_link" href="../HTML/details.html?id=1">
+                    <div class="item_pic">BILD</div>
+                    <div class="item_name">INHALT</div>
+                    <div class="item_spoilDate">ABLAUF</div>
+                </a>
             </div>
         </div>
-
     </main>
 
     <footer id="footer">

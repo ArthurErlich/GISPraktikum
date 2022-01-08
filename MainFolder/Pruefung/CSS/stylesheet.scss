@@ -144,4 +144,11 @@ a {
 .item {
     background-color: $colodElemnts;
     text-align: center;
+    padding: 5px;
+}
+
+.item a {
+    display: block;
+    height: 100%;
+    width: 100%;
 }
