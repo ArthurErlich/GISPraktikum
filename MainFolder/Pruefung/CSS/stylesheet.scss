@@ -6,7 +6,8 @@ $colorBackground: #dcf3ff;
 $colorBackgroundDark:#baf2ef;
 $colorHeadFooter: #a2d2df;
 
-$colodElemnts: #257ca3;
+$colorElemnts: #257ca3;
+$colorShadow:#396d7c;
 
 $colorPrime:Black;
 $colorSecond:White;
@@ -27,12 +28,43 @@ body {
 header {
     background-image: linear-gradient($colorHeadFooter 90%, $colorBackground);
     background-color: $colorHeadFooter;
-    height: 50px;
+    min-height: 50px;
+    padding-top: 15px;
     position: sticky;
     top: 0;
 }
 
 nav {}
+
+.navbarButton {
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.navbarButton .navLink {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    background-color: $colorBackground;
+    border-radius: $borderRadius;
+    transition: background-color 0.2s;
+
+}
+
+.navbarButton.active,
+.navLink.active {
+    background-color: $colorElemnts;
+    transition: background-color 0.5s;
+    color: white;
+}
+
+.navbarButton:hover,
+.navLink:hover {
+    background-color: $colorShadow;
+    color: white;
+}
 
 main {
 
@@ -142,13 +174,19 @@ a {
 }
 
 .item {
-    background-color: $colodElemnts;
+    background-color: $colorElemnts;
     text-align: center;
     padding: 5px;
+    transition: background-color 0.2s;
 }
 
-.item a {
+.item .itemLink {
     display: block;
     height: 100%;
     width: 100%;
+}
+
+.item:hover {
+    background-color: $colorHeadFooter;
+    transition: background-color 0.5s;
 }

@@ -17,10 +17,15 @@ namespace Pruefung {
         const pageName = document.getElementById("pageName").dataset.pagename;
         switch (pageName) {
             case "mainPage":
-                navbar.textContent = "Hauptseite";
+                navbar.appendChild(navButton("Hauptseite", true));
                 break;
             case "details":
-                navbar.textContent = "Details";
+                navbar.appendChild(navButton("Hauptseite", false));
+                navbar.appendChild(navButton("Details", true));
+                break;
+            case "additem":
+                navbar.appendChild(navButton("Hauptseite", false));
+                navbar.appendChild(navButton("Gefriegut", true));
                 break;
             default:
                 navbar.textContent = "404 - Pagename not found"
@@ -42,6 +47,24 @@ namespace Pruefung {
 
         footer.appendChild(a);
         footer.appendChild(author);
+    }
+
+    function navButton(name: string, isActive: boolean): HTMLElement {
+        const navElement: HTMLElement = document.createElement("div");
+        const navLink: HTMLElement = document.createElement("a");
+
+        navLink.textContent = name;
+        if (isActive) {
+            navElement.className = "navbarButton active";
+            navLink.className = "navLink active";
+            navLink.setAttribute("href", "#");
+        } else {
+            navElement.className = "navbarButton";
+            navLink.className = "navLink";
+            navLink.setAttribute("href", "../HTML/index.html");
+        }
+        navElement.appendChild(navLink);
+        return navElement;
     }
 
 }

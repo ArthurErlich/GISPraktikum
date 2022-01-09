@@ -1,20 +1,40 @@
 "use strict";
 var Pruefung;
 (function (Pruefung) {
-    createItem();
-    function createItem() {
+    //TEST
+    let testgfgu = {
+        _id: "10",
+        name: "WasserTest",
+        spoilDate: new Date(),
+        addDate: new Date(),
+        note: "Text bla bla",
+        tag: "huhn"
+    };
+    //for each?
+    createItem(testgfgu);
+    function createItem(gefrieGut) {
         let items = document.getElementById("items");
         //server anfragen und liste der Items holen
-        items.appendChild(createBox("test")); //GefrieGut interface übergeben
+        items.appendChild(createBox(gefrieGut)); //GefrieGut interface übergeben
     }
-    function createBox(_id) {
+    function createBox(gefrieGut) {
         const itemBox = document.createElement("div");
         itemBox.className = "item flexChild";
-        itemBox.dataset.id = _id;
-        itemBox.appendChild(creatLink(_id));
+        itemBox.dataset.id = gefrieGut._id;
+        itemBox.appendChild(creatLink(gefrieGut));
         return itemBox;
     }
-    function createItemAtributes() {
+    function creatLink(gefrieGut) {
+        const link = document.createElement("a");
+        link.className = "itemLink";
+        link.setAttribute("href", "../HTML/details.html?id=" + gefrieGut._id);
+        let itmeInner = createItemAtributes(gefrieGut);
+        itmeInner.forEach(element => {
+            link.appendChild(element);
+        });
+        return link;
+    }
+    function createItemAtributes(gefrieGut) {
         let item_atirbutes = new Array(3);
         for (let i = 0; i < item_atirbutes.length; i++) {
             item_atirbutes[i] = document.createElement("div");
@@ -22,20 +42,27 @@ var Pruefung;
         item_atirbutes[0].className = "item_pic";
         item_atirbutes[1].className = "item_name";
         item_atirbutes[2].className = "item_spoilDate";
-        item_atirbutes[0].textContent = "item_pic";
-        item_atirbutes[1].textContent = "item_name";
-        item_atirbutes[2].textContent = "item_spoilDate";
+        item_atirbutes[0].textContent = gefrieGut.tag;
+        item_atirbutes[1].textContent = gefrieGut.name;
+        item_atirbutes[2].textContent = dateConverter(new Date());
         return item_atirbutes;
     }
-    function creatLink(_id) {
-        const link = document.createElement("a");
-        link.className = "itme_link";
-        link.setAttribute("href", "../HTML/details.html?id=" + _id);
-        let itmeInner = createItemAtributes();
-        itmeInner.forEach(element => {
-            link.appendChild(element);
-        });
-        return link;
+    //From aufgabe8
+    function dateConverter(date) {
+        //W3Scool Array https://www.w3schools.com/jsref/jsref_getmonth.asp
+        const month = ["01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "10",
+            "11",
+            "12"];
+        return date.getUTCDate() + "." + month[date.getMonth()] + "." + date.getFullYear();
     }
 })(Pruefung || (Pruefung = {}));
 //# sourceMappingURL=index.js.map

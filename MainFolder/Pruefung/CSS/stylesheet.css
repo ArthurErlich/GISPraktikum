@@ -13,10 +13,42 @@ header {
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(90%, #a2d2df), to(#dcf3ff));
   background-image: linear-gradient(#a2d2df 90%, #dcf3ff);
   background-color: #a2d2df;
-  height: 50px;
+  min-height: 50px;
+  padding-top: 15px;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+}
+
+.navbarButton {
+  float: left;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.navbarButton .navLink {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  padding: 8px;
+  background-color: #dcf3ff;
+  border-radius: 2px;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+}
+
+.navbarButton.active,
+.navLink.active {
+  background-color: #257ca3;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
+  color: white;
+}
+
+.navbarButton:hover,
+.navLink:hover {
+  background-color: #396d7c;
+  color: white;
 }
 
 main {
@@ -131,11 +163,19 @@ a {
   background-color: #257ca3;
   text-align: center;
   padding: 5px;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
 }
 
-.item a {
+.item .itemLink {
   display: block;
   height: 100%;
   width: 100%;
+}
+
+.item:hover {
+  background-color: #a2d2df;
+  -webkit-transition: background-color 0.5s;
+  transition: background-color 0.5s;
 }
 /*# sourceMappingURL=stylesheet.css.map */
