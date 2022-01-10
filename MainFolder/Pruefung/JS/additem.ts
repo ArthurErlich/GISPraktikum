@@ -11,11 +11,19 @@ namespace Pruefung {
         note: string,
         tag: string // used for pic
     }
+
     class Tags {
-        tags: string[] = ["chicken", "pig", "beef", "veal", "lamb", "venison"]
+
+        tags: string[] = ["chicken",
+            "pig",
+            "beef",
+            "veal",
+            "lamb",
+            "venison"]
         getLength(): number {
             return this.tags.length;
         }
+
         getTag(id: number) {
             return this.tags[id];
         }
@@ -23,16 +31,16 @@ namespace Pruefung {
 
     const tags: Tags = new Tags();
     const form: HTMLFormElement = <HTMLFormElement>document.getElementById("importForm");
-    const addButton: HTMLElement = document.getElementById("formButton");
-    let idList = new Set();
+    const addButton: HTMLElement = document.getElementById("formButtonAdd");
+
+    loadItems();
+    addButton.addEventListener("click", addItem);
+
 
     //loads all the stuff
     function loadItems() {
         creatSelectionList();
     }
-
-    loadItems();
-    addButton.addEventListener("click", addItem);
 
     function addItem(event: Event) {
         event.preventDefault();
@@ -41,6 +49,7 @@ namespace Pruefung {
     function creatSelectionList() {
         const selectList: HTMLElement = document.getElementById("selection");
         let selectElement: HTMLElement[] = new Array(tags.getLength());
+
         for (let i: number = 0; i < tags.getLength(); i++) {
             selectElement[i] = document.createElement("option");
             selectElement[i].textContent = tags.getTag(i);

@@ -6,7 +6,12 @@ import { Tags } from "./files";
 var Pruefung;
 (function (Pruefung) {
     class Tags {
-        tags = ["chicken", "pig", "beef", "veal", "lamb", "venison"];
+        tags = ["chicken",
+            "pig",
+            "beef",
+            "veal",
+            "lamb",
+            "venison"];
         getLength() {
             return this.tags.length;
         }
@@ -16,14 +21,13 @@ var Pruefung;
     }
     const tags = new Tags();
     const form = document.getElementById("importForm");
-    const addButton = document.getElementById("formButton");
-    let idList = new Set();
+    const addButton = document.getElementById("formButtonAdd");
+    loadItems();
+    addButton.addEventListener("click", addItem);
     //loads all the stuff
     function loadItems() {
         creatSelectionList();
     }
-    loadItems();
-    addButton.addEventListener("click", addItem);
     function addItem(event) {
         event.preventDefault();
     }

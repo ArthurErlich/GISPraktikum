@@ -9,7 +9,7 @@ $colorHeadFooter: #a2d2df;
 $colorElemnts: #257ca3;
 $colorShadow:#396d7c;
 
-$colorPrime:Black;
+$colorPrime:rgb(46, 46, 46);
 $colorSecond:White;
 $colorThird: Green;
 
@@ -35,6 +35,18 @@ header {
 }
 
 //nav {}
+input {
+    border: none;
+    border-radius: $borderRadius;
+    width: 150px;
+}
+
+input:focus,
+input:active {
+    border: none;
+    outline: none;
+    background-color: rgb(241, 241, 241);
+}
 
 .navbarButton {
     float: left;
@@ -100,30 +112,57 @@ footer {
     padding: 5px;
     margin: 5px;
     border-radius: $borderRadius;
+    transition: bacground-color, 0.5s;
     /* change all borders to 2px*/
 }
 
 #backLink a:hover,
 #backLink:hover {
-    background-color: green;
+    background-color: $colorElemnts;
+    transition: bacground-color, 0.2s;
 }
 
 #backLink a:active,
 #backLink:active {
-    background-color: red;
+    background-color: $colorShadow;
 }
 
 button {
     background-color: aliceblue;
+    font-family: $font;
     border-radius: $borderRadius;
+    border: none;
+    transition: bacground-color, 0.2s;
 }
 
 button:hover {
-    background-color: green;
+    background-color: $colorElemnts;
+    color: white;
+    transition: bacground-color, 0.5s;
 }
 
 button:active {
-    background-color: red;
+    transition: bacground-color, 0.1s;
+    background-image: $colorShadow;
+}
+
+select {
+    font-family: $font;
+    border-radius: $borderRadius;
+    border: none;
+    width: 150px;
+
+}
+
+label {
+    font-family: $font;
+    margin-right: 5px;
+}
+
+option:focus,
+input:focus,
+input:active {
+    border: none;
 }
 
 .hCenter {
@@ -149,7 +188,7 @@ a {
     color: black;
 }
 
-/*mein flexConteiner*/
+/*mein conteiner fuer index*/
 .heroWrapper {
     margin-left: auto;
     margin-right: auto;
@@ -171,9 +210,9 @@ a {
     background-color: $colorElemnts;
     text-align: center;
     padding: 5px;
-    transition: background-color 0.2s;
     min-width: 150px;
     min-height: 150px;
+    transition: background-color 0.2s;
 }
 
 .item .itemLink {
@@ -185,4 +224,14 @@ a {
 .item:hover {
     background-color: $colorHeadFooter;
     transition: background-color 0.5s;
+}
+
+/*hinzufüg Seite*/
+.inputwrapper {
+    margin-top: 25px;
+    max-width: 500px;
+}
+
+#formButtonAdd {
+    padding: 5px;
 }

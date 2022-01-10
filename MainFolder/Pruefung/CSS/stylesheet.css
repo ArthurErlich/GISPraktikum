@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   /*TEST*/
   font-family: "Courier New", Courier, monospace;
@@ -18,6 +19,19 @@ header {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+}
+
+input {
+  border: none;
+  border-radius: 2px;
+  width: 150px;
+}
+
+input:focus,
+input:active {
+  border: none;
+  outline: none;
+  background-color: #f1f1f1;
 }
 
 .navbarButton {
@@ -83,30 +97,61 @@ footer {
   padding: 5px;
   margin: 5px;
   border-radius: 2px;
+  -webkit-transition: bacground-color, 0.5s;
+  transition: bacground-color, 0.5s;
   /* change all borders to 2px*/
 }
 
 #backLink a:hover,
 #backLink:hover {
-  background-color: green;
+  background-color: #257ca3;
+  -webkit-transition: bacground-color, 0.2s;
+  transition: bacground-color, 0.2s;
 }
 
 #backLink a:active,
 #backLink:active {
-  background-color: red;
+  background-color: #396d7c;
 }
 
 button {
   background-color: aliceblue;
+  font-family: "Courier New", Courier, monospace;
   border-radius: 2px;
+  border: none;
+  -webkit-transition: bacground-color, 0.2s;
+  transition: bacground-color, 0.2s;
 }
 
 button:hover {
-  background-color: green;
+  background-color: #257ca3;
+  color: white;
+  -webkit-transition: bacground-color, 0.5s;
+  transition: bacground-color, 0.5s;
 }
 
 button:active {
-  background-color: red;
+  -webkit-transition: bacground-color, 0.1s;
+  transition: bacground-color, 0.1s;
+  background-image: #396d7c;
+}
+
+select {
+  font-family: "Courier New", Courier, monospace;
+  border-radius: 2px;
+  border: none;
+  width: 150px;
+}
+
+label {
+  font-family: "Courier New", Courier, monospace;
+  margin-right: 5px;
+}
+
+option:focus,
+input:focus,
+input:active {
+  border: none;
 }
 
 .hCenter {
@@ -139,7 +184,7 @@ a {
   color: black;
 }
 
-/*mein flexConteiner*/
+/*mein conteiner fuer index*/
 .heroWrapper {
   margin-left: auto;
   margin-right: auto;
@@ -159,10 +204,10 @@ a {
   background-color: #257ca3;
   text-align: center;
   padding: 5px;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
   min-width: 150px;
   min-height: 150px;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
 }
 
 .item .itemLink {
@@ -175,5 +220,15 @@ a {
   background-color: #a2d2df;
   -webkit-transition: background-color 0.5s;
   transition: background-color 0.5s;
+}
+
+/*hinzufüg Seite*/
+.inputwrapper {
+  margin-top: 25px;
+  max-width: 500px;
+}
+
+#formButtonAdd {
+  padding: 5px;
 }
 /*# sourceMappingURL=stylesheet.css.map */

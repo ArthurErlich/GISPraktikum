@@ -96,6 +96,7 @@ const server = http.createServer(async (request, response) => {
             break;
         default:
             response.statusCode = 404;
+            break;
     }
 });
 //search for DB-Content

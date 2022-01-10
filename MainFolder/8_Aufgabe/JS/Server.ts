@@ -8,12 +8,15 @@ const port: number = 3500;
 
 const pfad: string = "/concertEvents";
 const pfadDelet: string = "/delet";
+
 const mongoUrl: string = "mongodb://localhost:27017"; // locale MongoDB
 
 const dbCollection: string = "eventNode";
 const db: string = "Events"
 
 let mongoClient: mongo.MongoClient = new mongo.MongoClient(mongoUrl); //mongo Client 
+
+
 
 const server: http.Server = http.createServer(
     async (request: http.IncomingMessage, response: http.ServerResponse) => {
@@ -99,6 +102,7 @@ const server: http.Server = http.createServer(
                 break;
             default:
                 response.statusCode = 404;
+                break;
         }
 
 

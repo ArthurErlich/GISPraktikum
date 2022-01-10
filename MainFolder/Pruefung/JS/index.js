@@ -85,11 +85,11 @@ var Pruefung;
             });
             let text = await response.text();
             items = JSON.parse(text);
+            console.log(items);
         }
         catch (error) {
             console.error("server is Offline");
             console.log(error);
-            throw new Error(error);
         }
         return items;
     }
