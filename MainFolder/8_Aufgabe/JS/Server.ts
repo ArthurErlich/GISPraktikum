@@ -140,8 +140,9 @@ async function dbSet(event: string): Promise<void> {
 async function dbRemove(eventID: string): Promise<void> {
     //There something wint BISON format--> I think it is tha Dataformat Number, if I save the _id as string, there wont be such an Error.
     console.log("\x1b[33m", "removing elment with ID: " + eventID);
+
     try {
-        await mongoClient.db(db).collection(dbCollection).deleteOne({ _id: new mongo.ObjectId(eventID) });//new mongo.ObjectId(eventID)
+        await mongoClient.db(db).collection(dbCollection).deleteOne({ _id: new mongo.ObjectId(eventID) });//new mongo.ObjectId(eventID) //TODO: evnetID to Number
         console.log("\x1b[32m", "Data removed");
     } catch (error) {
         console.log("\x1b[32m", error);
