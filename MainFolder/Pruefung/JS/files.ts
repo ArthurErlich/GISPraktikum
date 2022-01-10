@@ -1,4 +1,4 @@
-
+/*
 export interface GefrieGut {
     _id: string,
     name: string,
@@ -7,11 +7,16 @@ export interface GefrieGut {
     note: string,
     tag: string // used for pic
 }
-export enum Tags {
-    "chicken" = 0,
-    "pig" = 1,
-    "beef",
-    "veal",// kalb;
-    "lamb",
-    "venison" //wildbert
+
+//changet enums to clas
+export class Tags {
+    tags: string[] = ["chicken", "pig", "beef", "veal", "lamb", "venison"]
+
+    getLength(): number {
+        return this.tags.length;
+    }
+    getTag(id: number) {
+        return this.tags[id];
+    }
 }
+*/

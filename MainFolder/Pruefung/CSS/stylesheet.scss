@@ -141,12 +141,6 @@ button:active {
 .flexChild {
     margin: 5px;
     border-radius: $borderRadius;
-
-    /*TEST*/
-    min-width: 150px;
-    min-height: 150px;
-
-    /*TEST*/
 }
 
 /*LINKSTUFF*/
@@ -178,6 +172,8 @@ a {
     text-align: center;
     padding: 5px;
     transition: background-color 0.2s;
+    min-width: 150px;
+    min-height: 150px;
 }
 
 .item .itemLink {

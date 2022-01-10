@@ -1,13 +1,24 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Tags = void 0;
-var Tags;
-(function (Tags) {
-    Tags[Tags["chicken"] = 0] = "chicken";
-    Tags[Tags["pig"] = 1] = "pig";
-    Tags[Tags["beef"] = 2] = "beef";
-    Tags[Tags["veal"] = 3] = "veal";
-    Tags[Tags["lamb"] = 4] = "lamb";
-    Tags[Tags["venison"] = 5] = "venison"; //wildbert
-})(Tags = exports.Tags || (exports.Tags = {}));
+/*
+export interface GefrieGut {
+    _id: string,
+    name: string,
+    spoilDate: Date,
+    addDate: Date,
+    note: string,
+    tag: string // used for pic
+}
+
+//changet enums to clas
+export class Tags {
+    tags: string[] = ["chicken", "pig", "beef", "veal", "lamb", "venison"]
+
+    getLength(): number {
+        return this.tags.length;
+    }
+    getTag(id: number) {
+        return this.tags[id];
+    }
+}
+*/ 
 //# sourceMappingURL=files.js.map

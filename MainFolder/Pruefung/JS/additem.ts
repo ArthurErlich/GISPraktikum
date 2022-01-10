@@ -1,50 +1,52 @@
+/*
 import { GefrieGut } from "./files";
 import { Tags } from "./files";
-
-
-
-
-const form: HTMLFormElement = <HTMLFormElement>document.getElementById("importForm");
-const addButton: HTMLElement = document.getElementById("formButton");
-let idList = new Set();
-
-load();
-addButton.addEventListener("click", addItem);
-
-
-function addItem(event: Event) {
-    event.preventDefault();
-
-}
-function load() {
-    creatSelectionList();
-}
-//copy from Aufgabe8
-function creatID(): number {
-    let _id: number; //-> chek if _id is there   
-    _id = Math.floor((Math.random() * 1000));
-
-    while (idList.has(_id)) {
-        _id = Math.floor((Math.random() * 1000));
+*/
+namespace Pruefung {
+    interface GefrieGut {
+        _id?: string,
+        name: string,
+        spoilDate: Date,
+        addDate: Date,
+        note: string,
+        tag: string // used for pic
     }
-    return _id;
-}
-function creatSelectionList() {
-    const selectList: HTMLElement = document.getElementById("selection");
-    let selectElement: HTMLElement[] = new Array(2);
-
-    selectElement[0] = document.createElement("select");
-    selectElement[0].textContent = "TEST2";
-
-    selectList.appendChild(selectElement[0]);
-}
-
-function tagsLeangth(): number {
-    let size: number = 0;
-    for (let element in Tags) {
-        if (isNaN(Number(element))) {
-            size++;
+    class Tags {
+        tags: string[] = ["chicken", "pig", "beef", "veal", "lamb", "venison"]
+        getLength(): number {
+            return this.tags.length;
+        }
+        getTag(id: number) {
+            return this.tags[id];
         }
     }
-    return size
+
+    const tags: Tags = new Tags();
+    const form: HTMLFormElement = <HTMLFormElement>document.getElementById("importForm");
+    const addButton: HTMLElement = document.getElementById("formButton");
+    let idList = new Set();
+
+    //loads all the stuff
+    function loadItems() {
+        creatSelectionList();
+    }
+
+    loadItems();
+    addButton.addEventListener("click", addItem);
+
+    function addItem(event: Event) {
+        event.preventDefault();
+    }
+
+    function creatSelectionList() {
+        const selectList: HTMLElement = document.getElementById("selection");
+        let selectElement: HTMLElement[] = new Array(tags.getLength());
+        for (let i: number = 0; i < tags.getLength(); i++) {
+            selectElement[i] = document.createElement("option");
+            selectElement[i].textContent = tags.getTag(i);
+            selectElement[i].setAttribute("value", i + "");
+            selectList.appendChild(selectElement[i]);
+        }
+
+    }
 }
