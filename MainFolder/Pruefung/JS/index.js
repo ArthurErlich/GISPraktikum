@@ -10,8 +10,15 @@ var Pruefung;
         note: "Text bla bla",
         tag: "huhn"
     };
-    //for each?
-    createItem(testgfgu);
+    const pfad = "/items";
+    const url = "http://localhost:3500";
+    load();
+    async function load() {
+        let itmes = await getItems();
+        itmes.forEach(element => {
+            createItem(element);
+        });
+    }
     function createItem(gefrieGut) {
         let items = document.getElementById("items");
         //server anfragen und liste der Items holen
@@ -63,6 +70,21 @@ var Pruefung;
             "11",
             "12"];
         return date.getUTCDate() + "." + month[date.getMonth()] + "." + date.getFullYear();
+    }
+    async function getItems() {
+        let items;
+        console.log("connecting to HTTP server");
+        try {
+            let response = await fetch(url + pfad, { method: "get" });
+            let text = await response.text();
+            items = JSON.parse(text);
+        }
+        catch (error) {
+            console.error("server is Offline");
+            console.log(error);
+            throw new Error(error);
+        }
+        return items;
     }
 })(Pruefung || (Pruefung = {}));
 //# sourceMappingURL=index.js.map

@@ -17,9 +17,19 @@ namespace Pruefung {
         note: "Text bla bla",
         tag: "huhn"
     }
+    const pfad: string = "/items";
+    const url: string = "http://localhost:3500"
 
-    //for each?
-    createItem(testgfgu);
+    load();
+
+    async function load() {
+        let itmes: GefrieGut[] = await getItems();
+
+        itmes.forEach(element => {
+            createItem(element);
+        });
+
+    }
 
     function createItem(gefrieGut: GefrieGut) {
         let items: HTMLElement = document.getElementById("items");
@@ -39,7 +49,8 @@ namespace Pruefung {
     function creatLink(gefrieGut: GefrieGut): HTMLElement {
         const link: HTMLElement = document.createElement("a");
         link.className = "itemLink";
-        link.setAttribute("href", "../HTML/details.html?id=" + gefrieGut._id) let itmeInner: HTMLElement[] = createItemAtributes(gefrieGut);
+        link.setAttribute("href", "../HTML/details.html?id=" + gefrieGut._id);
+        let itmeInner: HTMLElement[] = createItemAtributes(gefrieGut);
 
         itmeInner.forEach(element => {
             link.appendChild(element);
@@ -84,6 +95,23 @@ namespace Pruefung {
             "12"];
         return date.getUTCDate() + "." + month[date.getMonth()] + "." + date.getFullYear();
     }
+    async function getItems(): Promise<GefrieGut[]> {
+        let items: GefrieGut[];
+        console.log("connecting to HTTP server");
 
+        try {
+            let response: Response = await fetch(url + pfad, { method: "get" });
+            let text = await response.text()
+            items = JSON.parse(text);
+
+        } catch (error) {
+            console.error("server is Offline");
+            console.log(error);
+            throw new Error(error);
+        }
+        return items;
+    }
 
 }
+
+
