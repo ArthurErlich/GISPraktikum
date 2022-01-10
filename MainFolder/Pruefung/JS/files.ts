@@ -8,8 +8,8 @@ export interface GefrieGut {
     tag: string // used for pic
 }
 export enum Tags {
-    "chicken",
-    "pig",
+    "chicken" = 0,
+    "pig" = 1,
     "beef",
     "veal",// kalb;
     "lamb",

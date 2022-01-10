@@ -20,14 +20,12 @@ async function load() {
     itmes.forEach(element => {
         createItem(element);
     });
-
 }
 
 function createItem(gefrieGut: GefrieGut) {
     let items: HTMLElement = document.getElementById("items");
     //server anfragen und liste der Items holen
     items.appendChild(createBox(gefrieGut)); //GefrieGut interface übergeben
-
 }
 
 function createBox(gefrieGut: GefrieGut): HTMLElement {
@@ -46,9 +44,7 @@ function creatLink(gefrieGut: GefrieGut): HTMLElement {
 
     itmeInner.forEach(element => {
         link.appendChild(element);
-    }
-
-    );
+    });
     return link;
 }
 
