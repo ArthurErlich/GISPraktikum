@@ -52,15 +52,22 @@ input:focus {
     background-color: rgb(241, 241, 241);
 }
 
-.navbarButton {
-    float: left;
-    margin-left: 5px;
-    margin-right: 5px;
+#navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+
 }
 
+.navbarButton {
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+}
+
+
 .navbarButton .navLink {
-    height: 100%;
-    width: 100%;
     text-align: center;
     padding: 8px;
     background-color: $colorBackground;
@@ -253,7 +260,7 @@ a {
     background-color: $colorElemnts;
     text-align: center;
     padding: 5px;
-    min-width: 250px;
-    min-height: 250px;
-    transition: background-color 0.2s;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    min-width: 350px;
 }

@@ -5,9 +5,9 @@ const mongo = require("mongodb");
 const hostname = "127.0.0.1"; // localhost
 const port = 3500;
 const pfad = "/items";
-const pfadItem = "/tag";
 const pfadDelet = "/remove";
 const pfadAdd = "/add";
+const pfadEdit = "/edit";
 const mongoUrl = "mongodb://localhost:27017"; // locale MongoDB
 const dbCollection = "foodList";
 const db = "food";
@@ -44,15 +44,6 @@ const server = http.createServer(async (request, response) => {
                     break;
                 case "POST":
                     console.log(" POST");
-                    break;
-            }
-            break;
-        case pfadItem:
-            switch (request.method) {
-                case "GET":
-                    console.log(" GET");
-                    response.setHeader("Content-Type", "application/json");
-                    response.end(JSON.stringify("nice"));
                     break;
             }
             break;

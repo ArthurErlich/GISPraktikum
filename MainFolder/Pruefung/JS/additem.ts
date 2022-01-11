@@ -33,9 +33,13 @@ namespace Pruefung {
     const form: HTMLFormElement = <HTMLFormElement>document.getElementById("importForm");
     const addButton: HTMLElement = document.getElementById("formButtonAdd");
 
+    const pfadEdit: string = "/edit";
+    const url: string = "http://localhost:3500"
+
 
     loadItems();
     addButton.addEventListener("click", addItem);
+
 
 
     //loads all the stuff

@@ -1,6 +1,6 @@
 /*
 export interface GefrieGut {
-    _id: string,
+    _id?: string,
     name: string,
     spoilDate: Date,
     addDate: Date,

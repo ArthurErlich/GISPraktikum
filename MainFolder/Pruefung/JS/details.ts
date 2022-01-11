@@ -10,12 +10,13 @@ namespace Pruefung {
     }
 
     class Tags {
-        tags: string[] = ["chicken",
-            "pig",
-            "beef",
-            "veal",
-            "lamb",
-            "venison"]
+        tags: string[] =
+            ["chicken",
+                "pig",
+                "beef",
+                "veal",
+                "lamb",
+                "venison"]
         getLength(): number {
             return this.tags.length;
         }
@@ -27,11 +28,11 @@ namespace Pruefung {
 
 
     const url: string = "http://localhost:3500"
-    const pfadTag: string = "/tag"
+    const pfadEdit: string = "/edit";
 
     //NICE
     let searchURI: URLSearchParams = new URLSearchParams(window.location.search);
-    console.log(searchURI.get("tag"));
+    console.log(searchURI.get("id"));
 
     loadIndex();
     async function loadIndex() {
@@ -50,16 +51,17 @@ namespace Pruefung {
 
     function createBox(gefrieGut: GefrieGut): HTMLElement {
         const itemBox: HTMLElement = document.createElement("div");
-        let itmeInner: HTMLElement[] = createItemAtributes(gefrieGut);
-
+        let atributes: HTMLElement[] = createItemAtributes(gefrieGut);
         itemBox.className = "item flexChild";
         itemBox.dataset.id = gefrieGut._id;
 
-        itmeInner.forEach(element => {
+        atributes.forEach(element => {
             itemBox.appendChild(element);
         });
+
         return itemBox;
     }
+
 
     function createItemAtributes(gefrieGut: GefrieGut): HTMLElement[] {
         let item_atirbutes: HTMLElement[] = new Array(4);
@@ -72,13 +74,41 @@ namespace Pruefung {
         item_atirbutes[1].className = "item_name";
         item_atirbutes[1].className = "item_addlDate";
         item_atirbutes[2].className = "item_spoilDate";
+        item_atirbutes[3].className = "item_editRemouve";
 
         item_atirbutes[0].textContent = gefrieGut.tag;
         item_atirbutes[1].textContent = gefrieGut.name;
         item_atirbutes[1].textContent = dateConverter(new Date());
         item_atirbutes[2].textContent = dateConverter(new Date());
 
+        let editRemove: HTMLElement[] = createEditRemove();
+        editRemove.forEach(element => {
+            item_atirbutes[3].appendChild(element);
+        });
+
+
         return item_atirbutes;
+    }
+    function createEditRemove(): HTMLElement[] {
+        let editFunction: HTMLElement[] = new Array(2);
+
+        editFunction[0] = creatLinkRemove();
+
+        editFunction[1] = document.createElement("button");
+
+        return;
+    }
+
+    function creatLinkRemove(_id: string): HTMLElement {
+        const link: HTMLElement = document.createElement("a");
+        const removeButton: HTMLElement = document.createElement("button");
+        removeButton.textContent = "REMOVE";
+
+        link.className = "itemLink";
+        link.setAttribute("href", "../HTML/additem.html?id=" + _id);
+        link.id = "item_edit";
+        link.appendChild(removeButton);
+        return link;
     }
     //From aufgabe8
     function dateConverter(date: Date): string {
@@ -103,7 +133,7 @@ namespace Pruefung {
         console.log("connecting to HTTP server");
 
         try {
-            let response: Response = await fetch(url + pfadTag + "?" + search + "=", {
+            let response: Response = await fetch(url + pfadEdit + "?" + search + "=", {
                 method: "get"
             });
             let text = await response.text()
@@ -114,7 +144,7 @@ namespace Pruefung {
         } catch (error) {
             console.error("server is Offline");
             console.log(error);
-            return null;
+            throw new Error(error);
         }
 
     }

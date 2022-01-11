@@ -22,6 +22,8 @@ var Pruefung;
     const tags = new Tags();
     const form = document.getElementById("importForm");
     const addButton = document.getElementById("formButtonAdd");
+    const pfadEdit = "/edit";
+    const url = "http://localhost:3500";
     loadItems();
     addButton.addEventListener("click", addItem);
     //loads all the stuff

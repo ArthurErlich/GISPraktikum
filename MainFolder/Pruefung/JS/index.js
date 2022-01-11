@@ -18,6 +18,7 @@ var Pruefung;
     const pfad = "/items";
     const url = "http://localhost:3500";
     loadIndex();
+    //filtersystem!
     async function loadIndex() {
         let itmes = await getItems();
         itmes.forEach(element => {

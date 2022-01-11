@@ -26,6 +26,7 @@ namespace Pruefung {
     const url: string = "http://localhost:3500"
 
     loadIndex();
+    //filtersystem!
 
     async function loadIndex() {
         let itmes: GefrieGut[] = await getItems();

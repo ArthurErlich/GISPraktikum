@@ -39,15 +39,25 @@ input:focus {
   background-color: #f1f1f1;
 }
 
+#navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+}
+
 .navbarButton {
-  float: left;
   margin-left: 5px;
   margin-right: 5px;
+  padding-top: 9px;
+  padding-bottom: 9px;
 }
 
 .navbarButton .navLink {
-  height: 100%;
-  width: 100%;
   text-align: center;
   padding: 8px;
   background-color: #dcf3ff;
@@ -250,9 +260,8 @@ a {
   background-color: #257ca3;
   text-align: center;
   padding: 5px;
-  min-width: 250px;
-  min-height: 250px;
-  -webkit-transition: background-color 0.2s;
-  transition: background-color 0.2s;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  min-width: 350px;
 }
 /*# sourceMappingURL=stylesheet.css.map */

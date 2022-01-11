@@ -16,10 +16,10 @@ var Pruefung;
         }
     }
     const url = "http://localhost:3500";
-    const pfadTag = "/tag";
+    const pfadEdit = "/edit";
     //NICE
     let searchURI = new URLSearchParams(window.location.search);
-    console.log(searchURI.get("tag"));
+    console.log(searchURI.get("id"));
     loadIndex();
     async function loadIndex() {
         let itmes = await getItems(searchURI);
@@ -34,10 +34,10 @@ var Pruefung;
     }
     function createBox(gefrieGut) {
         const itemBox = document.createElement("div");
-        let itmeInner = createItemAtributes(gefrieGut);
+        let atributes = createItemAtributes(gefrieGut);
         itemBox.className = "item flexChild";
         itemBox.dataset.id = gefrieGut._id;
-        itmeInner.forEach(element => {
+        atributes.forEach(element => {
             itemBox.appendChild(element);
         });
         return itemBox;
@@ -51,11 +51,32 @@ var Pruefung;
         item_atirbutes[1].className = "item_name";
         item_atirbutes[1].className = "item_addlDate";
         item_atirbutes[2].className = "item_spoilDate";
+        item_atirbutes[3].className = "item_editRemouve";
         item_atirbutes[0].textContent = gefrieGut.tag;
         item_atirbutes[1].textContent = gefrieGut.name;
         item_atirbutes[1].textContent = dateConverter(new Date());
         item_atirbutes[2].textContent = dateConverter(new Date());
+        let editRemove = createEditRemove();
+        editRemove.forEach(element => {
+            item_atirbutes[3].appendChild(element);
+        });
         return item_atirbutes;
+    }
+    function createEditRemove() {
+        let editFunction = new Array(2);
+        editFunction[0] = creatLinkRemove();
+        editFunction[1] = document.createElement("button");
+        return;
+    }
+    function creatLinkRemove(_id) {
+        const link = document.createElement("a");
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "REMOVE";
+        link.className = "itemLink";
+        link.setAttribute("href", "../HTML/additem.html?id=" + _id);
+        link.id = "item_edit";
+        link.appendChild(removeButton);
+        return link;
     }
     //From aufgabe8
     function dateConverter(date) {
@@ -78,7 +99,7 @@ var Pruefung;
         let items;
         console.log("connecting to HTTP server");
         try {
-            let response = await fetch(url + pfadTag + "?" + search + "=", {
+            let response = await fetch(url + pfadEdit + "?" + search + "=", {
                 method: "get"
             });
             let text = await response.text();
@@ -89,7 +110,7 @@ var Pruefung;
         catch (error) {
             console.error("server is Offline");
             console.log(error);
-            return null;
+            throw new Error(error);
         }
     }
 })(Pruefung || (Pruefung = {}));

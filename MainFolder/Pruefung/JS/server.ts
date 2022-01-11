@@ -5,9 +5,9 @@ const hostname: string = "127.0.0.1"; // localhost
 const port: number = 3500;
 
 const pfad: string = "/items";
-const pfadItem: string = "/tag";
 const pfadDelet: string = "/remove";
 const pfadAdd: string = "/add"
+const pfadEdit: string = "/edit";
 
 
 const mongoUrl: string = "mongodb://localhost:27017"; // locale MongoDB
@@ -53,15 +53,7 @@ const server: http.Server = http.createServer(
                         break;
                 }
                 break;
-            case pfadItem:
-                switch (request.method) {
-                    case "GET":
-                        console.log(" GET");
-                        response.setHeader("Content-Type", "application/json");
-                        response.end(JSON.stringify("nice"));
-                        break;
-                }
-                break;
+
             default:
                 response.statusCode = 404;
                 break;
