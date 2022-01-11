@@ -5,14 +5,15 @@ const hostname: string = "127.0.0.1"; // localhost
 const port: number = 3500;
 
 const pfad: string = "/items";
-const pfadItem: string = "/selectet";
+const pfadItem: string = "/tag";
 const pfadDelet: string = "/remove";
 const pfadAdd: string = "/add"
 
+
 const mongoUrl: string = "mongodb://localhost:27017"; // locale MongoDB
 
-const dbCollection: string = "eventNode";
-const db: string = "Events"
+const dbCollection: string = "foodList";
+const db: string = "food"
 
 let mongoClient: mongo.MongoClient = new mongo.MongoClient(mongoUrl); //mongo Client 
 
@@ -26,7 +27,6 @@ const server: http.Server = http.createServer(
 
         switch (url.pathname) {
             case pfad:
-
                 try {
                     console.log("\x1b[33m", "conecting to DB...");
                     const client = await mongoClient.connect();
@@ -53,7 +53,15 @@ const server: http.Server = http.createServer(
                         break;
                 }
                 break;
-
+            case pfadItem:
+                switch (request.method) {
+                    case "GET":
+                        console.log(" GET");
+                        response.setHeader("Content-Type", "application/json");
+                        response.end(JSON.stringify("nice"));
+                        break;
+                }
+                break;
             default:
                 response.statusCode = 404;
                 break;

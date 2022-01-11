@@ -14,12 +14,12 @@ namespace Pruefung {
 
     class Tags {
 
-        tags: string[] = ["chicken",
-            "pig",
-            "beef",
-            "veal",
-            "lamb",
-            "venison"]
+        tags: string[] = ["Chicken",
+            "Pig",
+            "Beef",
+            "Veal",
+            "Lamb",
+            "Venison"]
         getLength(): number {
             return this.tags.length;
         }
@@ -32,6 +32,7 @@ namespace Pruefung {
     const tags: Tags = new Tags();
     const form: HTMLFormElement = <HTMLFormElement>document.getElementById("importForm");
     const addButton: HTMLElement = document.getElementById("formButtonAdd");
+
 
     loadItems();
     addButton.addEventListener("click", addItem);

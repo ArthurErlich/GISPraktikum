@@ -6,12 +6,12 @@ import { Tags } from "./files";
 var Pruefung;
 (function (Pruefung) {
     class Tags {
-        tags = ["chicken",
-            "pig",
-            "beef",
-            "veal",
-            "lamb",
-            "venison"];
+        tags = ["Chicken",
+            "Pig",
+            "Beef",
+            "Veal",
+            "Lamb",
+            "Venison"];
         getLength() {
             return this.tags.length;
         }

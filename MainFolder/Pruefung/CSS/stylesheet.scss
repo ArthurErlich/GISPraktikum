@@ -39,10 +39,14 @@ input {
     border: none;
     border-radius: $borderRadius;
     width: 150px;
+    transition: background-color, 0.5;
 }
 
 input:focus,
-input:active {
+input:active,
+option:focus,
+textarea:focus,
+input:focus {
     border: none;
     outline: none;
     background-color: rgb(241, 241, 241);
@@ -151,7 +155,6 @@ select {
     border-radius: $borderRadius;
     border: none;
     width: 150px;
-
 }
 
 label {
@@ -159,9 +162,9 @@ label {
     margin-right: 5px;
 }
 
-option:focus,
-input:focus,
-input:active {
+textarea {
+    font-family: $font;
+    border-radius: $borderRadius;
     border: none;
 }
 
@@ -229,9 +232,28 @@ a {
 /*hinzufüg Seite*/
 .inputwrapper {
     margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
     max-width: 500px;
+}
+
+#note {
+    width: 350px;
+    height: 100px;
+    resize: none;
+
 }
 
 #formButtonAdd {
     padding: 5px;
+}
+
+/*edit Seite*/
+.itemDetails {
+    background-color: $colorElemnts;
+    text-align: center;
+    padding: 5px;
+    min-width: 250px;
+    min-height: 250px;
+    transition: background-color 0.2s;
 }

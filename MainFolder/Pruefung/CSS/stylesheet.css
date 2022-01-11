@@ -25,10 +25,15 @@ input {
   border: none;
   border-radius: 2px;
   width: 150px;
+  -webkit-transition: background-color, 0.5;
+  transition: background-color, 0.5;
 }
 
 input:focus,
-input:active {
+input:active,
+option:focus,
+textarea:focus,
+input:focus {
   border: none;
   outline: none;
   background-color: #f1f1f1;
@@ -148,9 +153,9 @@ label {
   margin-right: 5px;
 }
 
-option:focus,
-input:focus,
-input:active {
+textarea {
+  font-family: "Courier New", Courier, monospace;
+  border-radius: 2px;
   border: none;
 }
 
@@ -225,10 +230,29 @@ a {
 /*hinzufüg Seite*/
 .inputwrapper {
   margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 500px;
+}
+
+#note {
+  width: 350px;
+  height: 100px;
+  resize: none;
 }
 
 #formButtonAdd {
   padding: 5px;
+}
+
+/*edit Seite*/
+.itemDetails {
+  background-color: #257ca3;
+  text-align: center;
+  padding: 5px;
+  min-width: 250px;
+  min-height: 250px;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
 }
 /*# sourceMappingURL=stylesheet.css.map */

@@ -5,12 +5,12 @@ const mongo = require("mongodb");
 const hostname = "127.0.0.1"; // localhost
 const port = 3500;
 const pfad = "/items";
-const pfadItem = "/selectet";
+const pfadItem = "/tag";
 const pfadDelet = "/remove";
 const pfadAdd = "/add";
 const mongoUrl = "mongodb://localhost:27017"; // locale MongoDB
-const dbCollection = "eventNode";
-const db = "Events";
+const dbCollection = "foodList";
+const db = "food";
 let mongoClient = new mongo.MongoClient(mongoUrl); //mongo Client 
 const server = http.createServer(async (request, response) => {
     response.statusCode = 200;
@@ -44,6 +44,15 @@ const server = http.createServer(async (request, response) => {
                     break;
                 case "POST":
                     console.log(" POST");
+                    break;
+            }
+            break;
+        case pfadItem:
+            switch (request.method) {
+                case "GET":
+                    console.log(" GET");
+                    response.setHeader("Content-Type", "application/json");
+                    response.end(JSON.stringify("nice"));
                     break;
             }
             break;
