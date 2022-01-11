@@ -22,12 +22,17 @@ var Pruefung;
     console.log(searchURI.get("id"));
     loadIndex();
     async function loadIndex() {
-        let itmes = await getItems(searchURI);
-        itmes.forEach(element => {
-            createItem(element);
-        });
+        try {
+            let itmes = await getItems(searchURI);
+            itmes.forEach(element => {
+                createItemInput(element);
+            });
+        }
+        catch (error) {
+            alert(error);
+        }
     }
-    function createItem(gefrieGut) {
+    function createItemInput(gefrieGut) {
         const flexBox = document.getElementById("itemDetails");
         //server anfragen und liste der Items holen
         flexBox.appendChild(createBox(gefrieGut)); //GefrieGut interface übergeben
@@ -56,17 +61,19 @@ var Pruefung;
         item_atirbutes[1].textContent = gefrieGut.name;
         item_atirbutes[1].textContent = dateConverter(new Date());
         item_atirbutes[2].textContent = dateConverter(new Date());
-        let editRemove = createEditRemove();
+        let editRemove = createEditRemove(gefrieGut._id);
         editRemove.forEach(element => {
             item_atirbutes[3].appendChild(element);
         });
         return item_atirbutes;
     }
-    function createEditRemove() {
+    function createEditRemove(_id) {
         let editFunction = new Array(2);
-        editFunction[0] = creatLinkRemove();
+        editFunction[0] = creatLinkRemove(_id);
         editFunction[1] = document.createElement("button");
-        return;
+        editFunction[1].id = "item_remove";
+        editFunction[1].dataset.id = _id;
+        return editFunction;
     }
     function creatLinkRemove(_id) {
         const link = document.createElement("a");
@@ -109,8 +116,7 @@ var Pruefung;
         }
         catch (error) {
             console.error("server is Offline");
-            console.log(error);
-            throw new Error(error);
+            throw new Error(error + "\nServer is Offline");
         }
     }
 })(Pruefung || (Pruefung = {}));

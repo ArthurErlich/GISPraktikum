@@ -21,17 +21,55 @@ var Pruefung;
     }
     const tags = new Tags();
     const form = document.getElementById("importForm");
-    const addButton = document.getElementById("formButtonAdd");
     const pfadEdit = "/edit";
+    const pfadAdd = "/add";
     const url = "http://localhost:3500";
     loadItems();
-    addButton.addEventListener("click", addItem);
+    form.addEventListener("submit", addItem);
     //loads all the stuff
     function loadItems() {
         creatSelectionList();
     }
-    function addItem(event) {
-        event.preventDefault();
+    async function addItem(eventButton) {
+        eventButton.preventDefault();
+        let formData = new FormData(eventButton.currentTarget);
+        let product = formData.get("product");
+        let selection = (formData.get("selection"));
+        let note = (formData.get("note"));
+        let spoildate = new Date(formData.get("spoildate"));
+        let formElements = form.elements;
+        console.log("cheking input");
+        if (product === "") {
+            console.error("product  is empty");
+            formElements.namedItem("product").className = "wrongInput";
+            return;
+        }
+        if (selection === "") {
+            console.error("selection is empty");
+            formElements.namedItem("selection").className = "wrongInput";
+            return;
+        }
+        if (isNaN(Date.parse(spoildate.toString()))) {
+            console.error("spoildate is empty");
+            formElements.namedItem("spoildate").className = "wrongInput";
+            return;
+        }
+        let addDate = new Date();
+        let item = {
+            name: product,
+            spoilDate: spoildate,
+            addDate: addDate,
+            note: note,
+            tag: selection,
+        };
+        try {
+            console.log("sending Item to Server");
+            await postItem(item);
+        }
+        catch (error) {
+            alert(error + "\nServer ist offline!");
+        }
+        console.log("items send");
     }
     function creatSelectionList() {
         const selectList = document.getElementById("selection");
@@ -42,6 +80,13 @@ var Pruefung;
             selectElement[i].setAttribute("value", i + "");
             selectList.appendChild(selectElement[i]);
         }
+    }
+    async function postItem(item) {
+        console.log(JSON.stringify(item));
+        await fetch(url + pfadAdd, {
+            method: "post",
+            body: JSON.stringify(item),
+        });
     }
 })(Pruefung || (Pruefung = {}));
 //# sourceMappingURL=additem.js.map

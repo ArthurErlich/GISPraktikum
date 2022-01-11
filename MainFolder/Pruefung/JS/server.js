@@ -47,6 +47,24 @@ const server = http.createServer(async (request, response) => {
                     break;
             }
             break;
+        case pfadAdd:
+            switch (request.method) {
+                case "POST":
+                    console.log("reciving Item");
+                    let input;
+                    request.on("data", (data) => {
+                        input += data;
+                    });
+                    request.on("end", async () => {
+                        input = input.replace("undefined", ""); // the Stringfy has an undifnied in front?
+                        console.log((input));
+                    });
+                    response.end();
+                    break;
+                default:
+                    break;
+            }
+            break;
         default:
             response.statusCode = 404;
             break;

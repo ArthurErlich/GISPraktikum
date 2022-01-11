@@ -36,14 +36,18 @@ namespace Pruefung {
 
     loadIndex();
     async function loadIndex() {
-        let itmes: GefrieGut[] = await getItems(searchURI);
+        try {
+            let itmes: GefrieGut[] = await getItems(searchURI);
+            itmes.forEach(element => {
+                createItemInput(element);
+            });
+        } catch (error) {
+            alert(error);
+        }
 
-        itmes.forEach(element => {
-            createItem(element);
-        });
     }
 
-    function createItem(gefrieGut: GefrieGut) {
+    function createItemInput(gefrieGut: GefrieGut) {
         const flexBox: HTMLElement = document.getElementById("itemDetails");
         //server anfragen und liste der Items holen
         flexBox.appendChild(createBox(gefrieGut)); //GefrieGut interface übergeben
@@ -81,7 +85,7 @@ namespace Pruefung {
         item_atirbutes[1].textContent = dateConverter(new Date());
         item_atirbutes[2].textContent = dateConverter(new Date());
 
-        let editRemove: HTMLElement[] = createEditRemove();
+        let editRemove: HTMLElement[] = createEditRemove(gefrieGut._id);
         editRemove.forEach(element => {
             item_atirbutes[3].appendChild(element);
         });
@@ -89,14 +93,16 @@ namespace Pruefung {
 
         return item_atirbutes;
     }
-    function createEditRemove(): HTMLElement[] {
+    function createEditRemove(_id: string): HTMLElement[] {
         let editFunction: HTMLElement[] = new Array(2);
 
-        editFunction[0] = creatLinkRemove();
+        editFunction[0] = creatLinkRemove(_id);
 
         editFunction[1] = document.createElement("button");
+        editFunction[1].id = "item_remove";
+        editFunction[1].dataset.id = _id;
 
-        return;
+        return editFunction;
     }
 
     function creatLinkRemove(_id: string): HTMLElement {
@@ -143,9 +149,9 @@ namespace Pruefung {
 
         } catch (error) {
             console.error("server is Offline");
-            console.log(error);
-            throw new Error(error);
+            throw new Error(error + "\nServer is Offline");
         }
 
     }
+
 }

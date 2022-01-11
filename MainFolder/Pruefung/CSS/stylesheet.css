@@ -163,6 +163,11 @@ label {
   margin-right: 5px;
 }
 
+.wrongInput {
+  outline: solid 2px red;
+  border-radius: 2px;
+}
+
 textarea {
   font-family: "Courier New", Courier, monospace;
   border-radius: 2px;

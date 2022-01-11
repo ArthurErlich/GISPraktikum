@@ -19,10 +19,9 @@ namespace Pruefung {
             "Beef",
             "Veal",
             "Lamb",
-            "Venison"]
-        getLength(): number {
-            return this.tags.length;
-        }
+            "Venison"] getLength(): number {
+                return this.tags.length;
+            }
 
         getTag(id: number) {
             return this.tags[id];
@@ -31,24 +30,71 @@ namespace Pruefung {
 
     const tags: Tags = new Tags();
     const form: HTMLFormElement = <HTMLFormElement>document.getElementById("importForm");
-    const addButton: HTMLElement = document.getElementById("formButtonAdd");
 
     const pfadEdit: string = "/edit";
+    const pfadAdd: string = "/add";
     const url: string = "http://localhost:3500"
 
 
     loadItems();
-    addButton.addEventListener("click", addItem);
-
-
+    form.addEventListener("submit", addItem,);
 
     //loads all the stuff
     function loadItems() {
         creatSelectionList();
     }
 
-    function addItem(event: Event) {
-        event.preventDefault();
+    async function addItem(eventButton: Event) {
+        eventButton.preventDefault();
+
+        let formData: FormData = new FormData(<HTMLFormElement>eventButton.currentTarget);
+
+        let product: string = <string>formData.get("product");
+        let selection: string = <string>(formData.get("selection"));
+        let note: string = <string>(formData.get("note"));
+        let spoildate: Date = new Date(<string>formData.get("spoildate"));
+
+        let formElements: HTMLFormControlsCollection = form.elements;
+
+
+        console.log("cheking input");
+
+        if (product === "") {
+            console.error("product  is empty");
+            (<HTMLElement>formElements.namedItem("product")).className = "wrongInput";
+            return;
+        }
+
+        if (selection === "") {
+            console.error("selection is empty");
+            (<HTMLElement>formElements.namedItem("selection")).className = "wrongInput";
+            return;
+        }
+
+        if (isNaN(Date.parse(spoildate.toString()))) {
+            console.error("spoildate is empty");
+            (<HTMLElement>formElements.namedItem("spoildate")).className = "wrongInput";
+            return;
+        }
+
+        let addDate: Date = new Date();
+
+        let item: GefrieGut = {
+            name: product,
+            spoilDate: spoildate,
+            addDate: addDate,
+            note: note,
+            tag: selection,
+        }
+
+        try {
+            console.log("sending Item to Server");
+            await postItem(item);
+        }
+        catch (error) {
+            alert(error + "\nServer ist offline!")
+        }
+        console.log("items send");
     }
 
     function creatSelectionList() {
@@ -62,5 +108,13 @@ namespace Pruefung {
             selectList.appendChild(selectElement[i]);
         }
 
+    }
+
+    async function postItem(item: GefrieGut) {
+        console.log(JSON.stringify(item));
+        await fetch(url + pfadAdd, {
+            method: "post",
+            body: JSON.stringify(item),
+        });
     }
 }

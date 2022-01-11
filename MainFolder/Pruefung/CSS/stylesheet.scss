@@ -169,6 +169,11 @@ label {
     margin-right: 5px;
 }
 
+.wrongInput {
+    outline: solid 2px red;
+    border-radius: $borderRadius;
+}
+
 textarea {
     font-family: $font;
     border-radius: $borderRadius;

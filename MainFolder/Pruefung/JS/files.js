@@ -20,5 +20,23 @@ export class Tags {
         return this.tags[id];
     }
 }
+
+//From aufgabe8
+   export function dateConverter(date: Date): string {
+        //W3Scool Array https://www.w3schools.com/jsref/jsref_getmonth.asp
+        const month = ["01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "09",
+            "10",
+            "11",
+            "12"];
+        return date.getUTCDate() + "." + month[date.getMonth()] + "." + date.getFullYear();
+    }
 */ 
 //# sourceMappingURL=files.js.map
