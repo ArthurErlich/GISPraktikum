@@ -76,7 +76,7 @@ namespace Pruefung {
 
         item_atirbutes[0].textContent = gefrieGut.tag;
         item_atirbutes[1].textContent = gefrieGut.name;
-        item_atirbutes[2].textContent = dateConverter(new Date());
+        item_atirbutes[2].textContent = "Haltbar bis: " + dateConverter(new Date());
 
         return item_atirbutes;
     }

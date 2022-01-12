@@ -8,7 +8,9 @@ const pfad = "/items";
 const pfadDelet = "/remove";
 const pfadAdd = "/add";
 const pfadEdit = "/edit";
+const pfadView = "/view";
 const mongoUrl = "mongodb://localhost:27017"; // locale MongoDB
+// ony using this const variable becouse i dont need dynamic DB-Access
 const dbCollection = "foodList";
 const db = "food";
 let mongoClient = new mongo.MongoClient(mongoUrl); //mongo Client 
@@ -19,31 +21,15 @@ const server = http.createServer(async (request, response) => {
     console.log("\x1b[33m", "the rquest path: " + url.pathname);
     switch (url.pathname) {
         case pfad:
-            try {
-                console.log("\x1b[33m", "conecting to DB...");
-                const client = await mongoClient.connect();
-                if (!client) {
-                    console.log("\x1b[33m", "fetshing the Database...");
-                    mongoClient.db(db);
-                }
-            }
-            catch (error) {
-                console.error("\x1b[31m", "connection time out wiht DB");
-                console.log("\x1b[0m");
-                response.statusCode = 404;
-                return;
-            }
-            finally {
-                mongoClient.close();
-            }
             switch (request.method) {
                 case "GET":
-                    console.log(" GET");
                     response.setHeader("Content-Type", "application/json");
-                    response.end(JSON.stringify("nice"));
+                    await mongoClient.connect();
+                    let dbResponse = await dbGetAll();
+                    console.log("\x1b[33m", "sending datat to client: " + dbResponse);
+                    response.end(dbResponse);
                     break;
                 case "POST":
-                    console.log(" POST");
                     break;
             }
             break;
@@ -57,12 +43,47 @@ const server = http.createServer(async (request, response) => {
                     });
                     request.on("end", async () => {
                         input = input.replace("undefined", ""); // the Stringfy has an undifnied in front?
-                        console.log((input));
+                        console.log("\x1b[31m", "got the Data from client: " + input);
+                        try {
+                            console.log("\x1b[33m", "conecting to DB...");
+                            await mongoClient.connect();
+                            await dbSet(input);
+                        }
+                        catch (error) {
+                            console.error("\x1b[31m", "connection time out wiht DB");
+                            console.log("\x1b[0m");
+                            response.statusCode = 404;
+                            return;
+                        }
+                        finally {
+                            mongoClient.close();
+                            response.end();
+                        }
                     });
-                    response.end();
                     break;
                 default:
                     break;
+            }
+        case pfadView:
+            let id = url.searchParams.get("id");
+            id = id.slice(0, -1); // get rid of "0" on end of the id string
+            try {
+                console.log("\x1b[33m", "conecting to DB...");
+                console.log("\x1b[33m", "searching itme with ID: " + id);
+                await mongoClient.connect();
+                let dbRsponse = await dbGetID(id);
+                console.log(dbRsponse);
+                response.end(dbRsponse);
+            }
+            catch (error) {
+                console.error("\x1b[31m", error);
+                console.log("\x1b[0m");
+                response.statusCode = 404;
+                return;
+            }
+            finally {
+                mongoClient.close();
+                response.end(); //let the client kono that the response is done
             }
             break;
         default:
@@ -74,14 +95,46 @@ server.listen(port, hostname, () => {
     console.clear();
     console.log("\x1b[32m", `Server running at http://${hostname}:${port}/`);
 });
-async function getItems() {
-    return;
+async function dbGetAll() {
+    let result = await mongoClient
+        .db(db)
+        .collection(dbCollection)
+        .find()
+        .toArray();
+    console.log("\x1b[32m", "got the data");
+    console.log("\x1b[32m", result);
+    return JSON.stringify(result);
+}
+async function dbGetID(id) {
+    let result = await mongoClient
+        .db(db)
+        .collection(dbCollection)
+        .find({ _id: new mongo.ObjectId(id) })
+        .toArray();
+    console.log("\x1b[32m", "got the data");
+    console.log("\x1b[32m", result);
+    return JSON.stringify(result);
+}
+async function dbSet(event) {
+    console.log("\x1b[33m", "send Data:" + JSON.parse(event) + +" " + (JSON.parse(event).id));
+    await mongoClient.db(db).collection(dbCollection).insertOne(JSON.parse(event));
+    console.log("\x1b[32m", "Data recived in DB");
+}
+async function dbRemove(eventID) {
+    //There something wint BISON format--> I think it is tha Dataformat Number, if I save the _id as string, there wont be such an Error.
+    console.log("\x1b[33m", "removing elment with ID: " + eventID);
+    try {
+        await mongoClient.db(db).collection(dbCollection).deleteOne({ _id: new mongo.ObjectId(eventID) }); //new mongo.ObjectId(eventID) //TODO: evnetID to Number
+        console.log("\x1b[32m", "Data removed");
+    }
+    catch (error) {
+        console.log("\x1b[32m", error);
+    }
 }
 /*
 Coler code
 "\x1b[31m" red
 "\x1b[32m" green
 "\x1b[33m" yellow
-
 */ 
 //# sourceMappingURL=server.js.map

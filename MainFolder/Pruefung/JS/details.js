@@ -16,20 +16,22 @@ var Pruefung;
         }
     }
     const url = "http://localhost:3500";
-    const pfadEdit = "/edit";
+    const pfadView = "/view";
+    const tags = new Tags();
     //NICE
     let searchURI = new URLSearchParams(window.location.search);
     console.log(searchURI.get("id"));
     loadIndex();
     async function loadIndex() {
         try {
-            let itmes = await getItems(searchURI);
+            let itmes = await getItem(searchURI);
             itmes.forEach(element => {
                 createItemInput(element);
             });
         }
         catch (error) {
-            alert(error);
+            console.error(error);
+            //alert(error);
         }
     }
     function createItemInput(gefrieGut) {
@@ -40,7 +42,7 @@ var Pruefung;
     function createBox(gefrieGut) {
         const itemBox = document.createElement("div");
         let atributes = createItemAtributes(gefrieGut);
-        itemBox.className = "item flexChild";
+        itemBox.className = "itemDetails flexChild";
         itemBox.dataset.id = gefrieGut._id;
         atributes.forEach(element => {
             itemBox.appendChild(element);
@@ -48,22 +50,24 @@ var Pruefung;
         return itemBox;
     }
     function createItemAtributes(gefrieGut) {
-        let item_atirbutes = new Array(4);
+        let item_atirbutes = new Array(6);
         for (let i = 0; i < item_atirbutes.length; i++) {
             item_atirbutes[i] = document.createElement("div");
         }
         item_atirbutes[0].className = "item_pic";
         item_atirbutes[1].className = "item_name";
-        item_atirbutes[1].className = "item_addlDate";
-        item_atirbutes[2].className = "item_spoilDate";
-        item_atirbutes[3].className = "item_editRemouve";
-        item_atirbutes[0].textContent = gefrieGut.tag;
-        item_atirbutes[1].textContent = gefrieGut.name;
-        item_atirbutes[1].textContent = dateConverter(new Date());
-        item_atirbutes[2].textContent = dateConverter(new Date());
+        item_atirbutes[2].className = "item_addDate";
+        item_atirbutes[3].className = "item_spoilDate";
+        item_atirbutes[4].className = "item_note";
+        item_atirbutes[5].className = "item_editRemouve";
+        item_atirbutes[0].textContent = tags.getTag(parseInt(gefrieGut.tag));
+        item_atirbutes[1].textContent = "Name: " + gefrieGut.name;
+        item_atirbutes[2].textContent = "Hinzugefügt am: " + dateConverter(new Date(gefrieGut.addDate));
+        item_atirbutes[3].textContent = "Haltbar bis: " + dateConverter(new Date(gefrieGut.spoilDate));
+        item_atirbutes[4].textContent = "Notizen: " + gefrieGut.note;
         let editRemove = createEditRemove(gefrieGut._id);
         editRemove.forEach(element => {
-            item_atirbutes[3].appendChild(element);
+            item_atirbutes[5].appendChild(element);
         });
         return item_atirbutes;
     }
@@ -73,15 +77,16 @@ var Pruefung;
         editFunction[1] = document.createElement("button");
         editFunction[1].id = "item_remove";
         editFunction[1].dataset.id = _id;
+        editFunction[1].textContent = "REMOVE";
         return editFunction;
     }
     function creatLinkRemove(_id) {
         const link = document.createElement("a");
         const removeButton = document.createElement("button");
-        removeButton.textContent = "REMOVE";
+        removeButton.textContent = "EDIT";
         link.className = "itemLink";
         link.setAttribute("href", "../HTML/additem.html?id=" + _id);
-        link.id = "item_edit";
+        link.id = "item_remove";
         link.appendChild(removeButton);
         return link;
     }
@@ -102,11 +107,15 @@ var Pruefung;
             "12"];
         return date.getUTCDate() + "." + month[date.getMonth()] + "." + date.getFullYear();
     }
-    async function getItems(search) {
+    function addPic(tag) {
+        return new HTMLElement;
+    }
+    //möglichkeit mehrere items zu bekommen!
+    async function getItem(search) {
         let items;
         console.log("connecting to HTTP server");
         try {
-            let response = await fetch(url + pfadEdit + "?" + search + "=", {
+            let response = await fetch(url + pfadView + "?" + search + "=", {
                 method: "get"
             });
             let text = await response.text();

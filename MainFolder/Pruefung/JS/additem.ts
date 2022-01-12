@@ -19,9 +19,11 @@ namespace Pruefung {
             "Beef",
             "Veal",
             "Lamb",
-            "Venison"] getLength(): number {
-                return this.tags.length;
-            }
+            "Venison"]
+
+        getLength(): number {
+            return this.tags.length;
+        }
 
         getTag(id: number) {
             return this.tags[id];
