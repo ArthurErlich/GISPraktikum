@@ -32,7 +32,7 @@ namespace Pruefung {
     const tags: Tags = new Tags();
 
     //NICE
-    let searchURI: URLSearchParams = new URLSearchParams(window.location.search);
+    const searchURI: URLSearchParams = new URLSearchParams(window.location.search);
     console.log(searchURI.get("id"));
 
     loadIndex();

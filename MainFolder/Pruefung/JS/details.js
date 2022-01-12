@@ -19,7 +19,7 @@ var Pruefung;
     const pfadView = "/view";
     const tags = new Tags();
     //NICE
-    let searchURI = new URLSearchParams(window.location.search);
+    const searchURI = new URLSearchParams(window.location.search);
     console.log(searchURI.get("id"));
     loadIndex();
     async function loadIndex() {

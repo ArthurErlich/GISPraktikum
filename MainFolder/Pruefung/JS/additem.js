@@ -24,11 +24,15 @@ var Pruefung;
     const pfadEdit = "/edit";
     const pfadAdd = "/add";
     const url = "http://localhost:3500";
+    const searchURI = new URLSearchParams(window.location.search);
     loadItems();
     form.addEventListener("submit", addItem);
     //loads all the stuff
     function loadItems() {
         creatSelectionList();
+        if (searchURI.get("id") !== "") {
+            console.log("FILLING PAGE!");
+        }
     }
     async function addItem(eventButton) {
         eventButton.preventDefault();

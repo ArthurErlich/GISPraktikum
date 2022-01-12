@@ -37,6 +37,8 @@ namespace Pruefung {
     const pfadAdd: string = "/add";
     const url: string = "http://localhost:3500"
 
+    const searchURI: URLSearchParams = new URLSearchParams(window.location.search);
+
 
     loadItems();
     form.addEventListener("submit", addItem,);
@@ -44,6 +46,9 @@ namespace Pruefung {
     //loads all the stuff
     function loadItems() {
         creatSelectionList();
+        if (searchURI.get("id") !== "") {
+            console.log("FILLING PAGE!");
+        }
     }
 
     async function addItem(eventButton: Event) {
