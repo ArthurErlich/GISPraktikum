@@ -1,22 +1,50 @@
 {
   "rules": {
-    "align": [true, "parameters", "arguments", "statements"],
+    "align": [
+      true,
+      "parameters",
+      "arguments",
+      "statements"
+    ],
     "ban": false,
     "class-name": true,
-    "comment-format": [false, "check-space", "check-lowercase"],
+    "comment-format": [
+      false,
+      "check-space",
+      "check-lowercase"
+    ],
     "curly": false,
     "eofline": false,
     "forin": false,
-    "indent": [true, "spaces", 2],
+    "indent": [
+      true,
+      "spaces",
+      2
+    ],
     "interface-name": false,
     "jsdoc-format": false,
     "label-position": true,
-    "max-line-length": [false, 140],
-    "member-ordering": [true, { "order": "fields-first" }],
+    "max-line-length": [
+      false,
+      140
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": "fields-first"
+      }
+    ],
     "no-any": true,
     "no-arg": true,
     "no-bitwise": false,
-    "no-console": [false, "debug", "info", "time", "timeEnd", "trace"],
+    "no-console": [
+      false,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
     "no-construct": true,
     "no-parameter-properties": true,
     "no-debugger": false,
@@ -36,15 +64,26 @@
     "no-unused-expression": true,
     "no-unused-variable": true,
     "no-use-before-declare": true,
-    "no-var-requires": false,
+    "no-var-requires": true,
     "no-conditional-assignment": true,
     "no-shadowed-variable": false,
-    "one-line": [true, "check-open-brace", "check-catch", "check-whitespace"],
-    "quotemark": [true, "double"],
+    "one-line": [
+      true,
+      "check-open-brace",
+      "check-catch",
+      "check-whitespace"
+    ],
+    "quotemark": [
+      true,
+      "double"
+    ],
     "radix": false,
     "semicolon": true,
     "switch-default": false,
-    "triple-equals": [false, "allow-null-check"],
+    "triple-equals": [
+      false,
+      "allow-null-check"
+    ],
     "typedef": [
       true,
       "call-signature",
@@ -63,8 +102,16 @@
         "variable-declaration": "nospace"
       }
     ],
-    "use-strict": [false, "check-module", "check-function"],
-    "variable-name": [true, "check-format", "allow-leading-underscore"],
+    "use-strict": [
+      false,
+      "check-module",
+      "check-function"
+    ],
+    "variable-name": [
+      true,
+      "check-format",
+      "allow-leading-underscore"
+    ],
     "whitespace": [
       true,
       "check-branch",
@@ -73,6 +120,9 @@
       "check-separator",
       "check-type"
     ],
-    "file-header": [false, ""]
+    "file-header": [
+      false,
+      ""
+    ]
   }
 }

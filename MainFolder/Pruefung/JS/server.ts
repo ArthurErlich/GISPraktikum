@@ -74,6 +74,7 @@ const server: http.Server = http.createServer(
                     default:
                         break;
                 }
+                break;
             case pfadView:
                 let id: string = url.searchParams.get("id");
                 id = id.slice(0, -1); // get rid of "0" on end of the id string

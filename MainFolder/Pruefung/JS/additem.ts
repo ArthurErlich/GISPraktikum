@@ -105,7 +105,7 @@ namespace Pruefung {
     }
 
     function creatSelectionList() {
-        const selectList: HTMLElement = document.getElementById("selection");
+        let selectList: HTMLElement = document.getElementById("selection");
         let selectElement: HTMLElement[] = new Array(tags.getLength());
 
         for (let i: number = 0; i < tags.getLength(); i++) {
