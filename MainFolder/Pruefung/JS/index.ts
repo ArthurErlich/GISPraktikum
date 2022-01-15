@@ -39,6 +39,7 @@ namespace Pruefung {
 
     function createItem(gefrieGut: GefrieGut) {
         let items: HTMLElement = document.getElementById("items");
+
         //server anfragen und liste der Items holen
         items.appendChild(createBox(gefrieGut)); //GefrieGut interface übergeben
     }
@@ -108,7 +109,6 @@ namespace Pruefung {
             });
             let text = await response.text()
             items = JSON.parse(text);
-            console.log(items);
 
         } catch (error) {
             console.error("server is Offline");
