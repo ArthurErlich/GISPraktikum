@@ -29,6 +29,7 @@ namespace Pruefung {
 
     const url: string = "http://localhost:3500"
     const pfadView: string = "/view";
+    const pfadDelet: string = "/remove";
     const tags: Tags = new Tags();
 
     //NICE
@@ -101,18 +102,20 @@ namespace Pruefung {
     function createEditRemove(_id: string): HTMLElement[] {
         let editFunction: HTMLElement[] = new Array(2);
 
-        editFunction[0] = creatLinkRemove(_id);
+        editFunction[0] = creatLinkEdit(_id);
 
         editFunction[1] = document.createElement("button");
         editFunction[1].id = "item_remove";
         editFunction[1].dataset.id = _id;
         editFunction[1].textContent = "REMOVE";
-
-
+        editFunction[1].addEventListener("click", function deletElement(event: Event) {
+            event.preventDefault();
+            removeItem(searchURI);
+        });
         return editFunction;
     }
 
-    function creatLinkRemove(_id: string): HTMLElement {
+    function creatLinkEdit(_id: string): HTMLElement {
         const link: HTMLElement = document.createElement("a");
         const removeButton: HTMLElement = document.createElement("button");
 
@@ -140,13 +143,12 @@ namespace Pruefung {
             "12"];
         return date.getUTCDate() + "." + month[date.getMonth()] + "." + date.getFullYear();
     }
-
+    //picture
     function addPic(tag: string): HTMLElement {
 
         return new HTMLElement;
     }
 
-    //möglichkeit mehrere items zu bekommen!
     async function getItem(search: URLSearchParams): Promise<GefrieGut[]> {
         let items: GefrieGut[];
         console.log("connecting to HTTP server");
@@ -165,6 +167,14 @@ namespace Pruefung {
             throw new Error(error + "\nServer is Offline");
         }
 
+    }
+    async function removeItem(search: URLSearchParams) {
+        console.log("remuving item");
+        await fetch(url + pfadDelet + "?" + search + "=", {
+            method: "get"
+        });
+        //open homepage
+        window.open("../HTML/index.html", "_parent");
     }
 
 }

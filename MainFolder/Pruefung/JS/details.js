@@ -17,6 +17,7 @@ var Pruefung;
     }
     const url = "http://localhost:3500";
     const pfadView = "/view";
+    const pfadDelet = "/remove";
     const tags = new Tags();
     //NICE
     const searchURI = new URLSearchParams(window.location.search);
@@ -73,14 +74,18 @@ var Pruefung;
     }
     function createEditRemove(_id) {
         let editFunction = new Array(2);
-        editFunction[0] = creatLinkRemove(_id);
+        editFunction[0] = creatLinkEdit(_id);
         editFunction[1] = document.createElement("button");
         editFunction[1].id = "item_remove";
         editFunction[1].dataset.id = _id;
         editFunction[1].textContent = "REMOVE";
+        editFunction[1].addEventListener("click", function deletElement(event) {
+            event.preventDefault();
+            removeItem(searchURI);
+        });
         return editFunction;
     }
-    function creatLinkRemove(_id) {
+    function creatLinkEdit(_id) {
         const link = document.createElement("a");
         const removeButton = document.createElement("button");
         removeButton.textContent = "EDIT";
@@ -107,10 +112,10 @@ var Pruefung;
             "12"];
         return date.getUTCDate() + "." + month[date.getMonth()] + "." + date.getFullYear();
     }
+    //picture
     function addPic(tag) {
         return new HTMLElement;
     }
-    //möglichkeit mehrere items zu bekommen!
     async function getItem(search) {
         let items;
         console.log("connecting to HTTP server");
@@ -127,6 +132,14 @@ var Pruefung;
             console.error("server is Offline");
             throw new Error(error + "\nServer is Offline");
         }
+    }
+    async function removeItem(search) {
+        console.log("remuving item");
+        await fetch(url + pfadDelet + "?" + search + "=", {
+            method: "get"
+        });
+        //open homepage
+        window.open("../HTML/index.html", "_parent");
     }
 })(Pruefung || (Pruefung = {}));
 //# sourceMappingURL=details.js.map
