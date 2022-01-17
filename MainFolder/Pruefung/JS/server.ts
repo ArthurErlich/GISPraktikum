@@ -177,14 +177,14 @@ async function dbGetID(id: string): Promise<string> {
 }
 
 async function dbSet(event: string): Promise<void> {
-    console.log("\x1b[33m", "send Data:" + JSON.parse(event) + +" " + (JSON.parse(event)._id));
+    console.log("\x1b[33m", "send Data:" + JSON.parse(event) + " " + (JSON.parse(event)._id));
     await mongoClient.db(db)
         .collection(dbCollection)
         .insertOne(JSON.parse(event));
     console.log("\x1b[32m", "Data recived in DB");
 }
 async function dbEdit(eventID: string, event: string): Promise<void> {
-    console.log("\x1b[33m", "send Data:" + JSON.parse(event) + +" " + eventID);
+    console.log("\x1b[33m", "send Data:" + JSON.parse(event) + " " + eventID);
     await mongoClient.db(db)
         .collection(dbCollection)
         .replaceOne({ _id: new mongo.ObjectId(eventID) }, JSON.parse(event));
