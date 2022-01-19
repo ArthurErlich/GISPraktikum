@@ -147,7 +147,6 @@ const server: http.Server = http.createServer(
                 }
                 break;
         }
-
     });
 
 server.listen(port, hostname, () => {

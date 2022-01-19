@@ -162,7 +162,6 @@ namespace Pruefung {
             selectElement[i].setAttribute("value", i + "");
             selectList.appendChild(selectElement[i]);
         }
-
     }
 
     async function postItem(item: GefrieGut) {
