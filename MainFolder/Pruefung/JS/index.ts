@@ -99,6 +99,7 @@ namespace Pruefung {
             "12"];
         return date.getUTCDate() + "." + month[date.getMonth()] + "." + date.getFullYear();
     }
+
     async function getItems(): Promise<GefrieGut[]> {
         let items: GefrieGut[];
         console.log("connecting to HTTP server");
