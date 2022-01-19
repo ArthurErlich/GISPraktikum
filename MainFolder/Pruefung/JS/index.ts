@@ -56,9 +56,9 @@ namespace Pruefung {
         const link: HTMLElement = document.createElement("a");
         link.className = "itemLink";
         link.setAttribute("href", "../HTML/details.html?id=" + gefrieGut._id);
-        let itmeInner: HTMLElement[] = createItemAtributes(gefrieGut);
+        let itemInner: HTMLElement[] = createItemAtributes(gefrieGut);
 
-        itmeInner.forEach(element => {
+        itemInner.forEach(element => {
             link.appendChild(element);
         });
         return link;
