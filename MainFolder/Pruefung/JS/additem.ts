@@ -145,11 +145,10 @@ namespace Pruefung {
             "12"];
         //inline If
         let day: string = (date.getUTCDate() < 10 ? "0" : "") + date.getUTCDate();
-        console.log(day);
         return date.getFullYear() + "-" + month[date.getMonth()] + "-" + day;
     }
 
-    function creatSelectionList() {
+    function creatSelectionList(): void {
         let selectList: HTMLElement = document.getElementById("selection");
         let selectElement: HTMLElement[] = new Array(tags.getLength());
 
@@ -161,7 +160,7 @@ namespace Pruefung {
         }
     }
 
-    async function postItem(item: GefrieGut) {
+    async function postItem(item: GefrieGut): Promise<void> {
         console.log(JSON.stringify(item));
         await fetch(url + pfadAdd, {
             method: "post",

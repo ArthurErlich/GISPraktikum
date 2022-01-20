@@ -9,6 +9,7 @@ const pfadDelet = "/remove";
 const pfadAdd = "/add";
 const pfadEdit = "/edit";
 const pfadView = "/view";
+const pfadSort = "/sort";
 const mongoUrl = "mongodb://localhost:27017"; // locale MongoDB
 // ony using this const variable becouse i dont need dynamic DB-Access
 const dbCollection = "foodList";
@@ -80,7 +81,7 @@ const server = http.createServer(async (request, response) => {
                 console.log("\x1b[33m", "searching itme with ID: " + id);
                 await mongoClient.connect();
                 let dbRsponse = await dbGetID(id);
-                console.log(dbRsponse);
+                //console.log(dbRsponse);
                 response.end(dbRsponse);
             }
             catch (error) {
@@ -144,6 +145,64 @@ const server = http.createServer(async (request, response) => {
                 response.end();
             }
             break;
+        case pfadSort:
+            switch (url.searchParams.get("sortBy")) {
+                case "name":
+                    try {
+                        console.log("\x1b[33m", "conecting to DB...");
+                        await mongoClient.connect();
+                        let dbRsponse = await dbGetSortName();
+                        response.end(dbRsponse);
+                    }
+                    catch (error) {
+                        console.error("\x1b[31m", "connection time out wiht DB" + error);
+                        console.log("\x1b[0m");
+                        response.statusCode = 404;
+                    }
+                    finally {
+                        mongoClient.close();
+                        response.end();
+                    }
+                    break;
+                case "type":
+                    try {
+                        console.log("\x1b[33m", "conecting to DB...");
+                        await mongoClient.connect();
+                        let dbRsponse = await dbGetSortTag();
+                        response.end(dbRsponse);
+                    }
+                    catch (error) {
+                        console.error("\x1b[31m", "connection time out wiht DB" + error);
+                        console.log("\x1b[0m");
+                        response.statusCode = 404;
+                    }
+                    finally {
+                        mongoClient.close();
+                        response.end();
+                    }
+                    break;
+                case "date":
+                    try {
+                        console.log("\x1b[33m", "conecting to DB...");
+                        await mongoClient.connect();
+                        let dbRsponse = await dbGetSortDate();
+                        response.end(dbRsponse);
+                    }
+                    catch (error) {
+                        console.error("\x1b[31m", "connection time out wiht DB" + error);
+                        console.log("\x1b[0m");
+                        response.statusCode = 404;
+                    }
+                    finally {
+                        mongoClient.close();
+                        response.end();
+                    }
+                    break;
+                default:
+                    response.statusCode = 404;
+                    break;
+            }
+            break;
     }
 });
 server.listen(port, hostname, () => {
@@ -166,6 +225,39 @@ async function dbGetID(id) {
         .db(db)
         .collection(dbCollection)
         .find({ _id: new mongo.ObjectId(id) })
+        .toArray();
+    console.log("\x1b[32m", "got the data");
+    console.log("\x1b[32m", result);
+    return JSON.stringify(result);
+}
+async function dbGetSortName() {
+    let result = await mongoClient
+        .db(db)
+        .collection(dbCollection)
+        .find()
+        .sort({ "name": 1 })
+        .toArray();
+    console.log("\x1b[32m", "got the data");
+    console.log("\x1b[32m", result);
+    return JSON.stringify(result);
+}
+async function dbGetSortDate() {
+    let result = await mongoClient
+        .db(db)
+        .collection(dbCollection)
+        .find()
+        .sort({ "spoilDate": 1 })
+        .toArray();
+    console.log("\x1b[32m", "got the data");
+    console.log("\x1b[32m", result);
+    return JSON.stringify(result);
+}
+async function dbGetSortTag() {
+    let result = await mongoClient
+        .db(db)
+        .collection(dbCollection)
+        .find()
+        .sort({ "tag": 1 })
         .toArray();
     console.log("\x1b[32m", "got the data");
     console.log("\x1b[32m", result);
@@ -201,5 +293,5 @@ Coler code
 "\x1b[31m" red
 "\x1b[32m" green
 "\x1b[33m" yellow
-*/ 
+*/
 //# sourceMappingURL=server.js.map

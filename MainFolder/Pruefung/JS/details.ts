@@ -33,7 +33,7 @@ namespace Pruefung {
     console.log("The Search URI: " + searchURI.get("id"));
 
     loadIndex();
-    async function loadIndex() {
+    async function loadIndex(): Promise<void> {
         try {
             let itmes: GefrieGut[] = await getItem(searchURI);
             itmes.forEach(element => {
@@ -151,13 +151,10 @@ namespace Pruefung {
             "10",
             "11",
             "12"];
-        return date.getUTCDate() + "." + month[date.getMonth()] + "." + date.getFullYear();
+        let day: string = (date.getUTCDate() < 10 ? "0" : "") + date.getUTCDate();
+        return day + "." + month[date.getUTCMonth()] + "." + date.getFullYear();
     }
-    //picture
-    function addPic(tag: string): HTMLElement {
 
-        return new HTMLElement;
-    }
 
     async function getItem(search: URLSearchParams): Promise<GefrieGut[]> {
         let items: GefrieGut[];

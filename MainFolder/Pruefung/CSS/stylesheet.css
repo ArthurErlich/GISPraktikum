@@ -221,6 +221,15 @@ a {
   line-height: 1.5;
 }
 
+.sort {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 15px 0px 15px 0px;
+  margin-top: 25px;
+  max-width: 1000px;
+  background-color: white;
+}
+
 .item {
   background-color: #257ca3;
   text-align: center;

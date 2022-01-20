@@ -9,6 +9,7 @@ const pfadDelet: string = "/remove";
 const pfadAdd: string = "/add"
 const pfadEdit: string = "/edit";
 const pfadView: string = "/view";
+const pfadSort: string = "/sort";
 
 
 const mongoUrl: string = "mongodb://localhost:27017"; // locale MongoDB
@@ -89,7 +90,7 @@ const server: http.Server = http.createServer(
                     console.log("\x1b[33m", "searching itme with ID: " + id);
                     await mongoClient.connect();
                     let dbRsponse: string = await dbGetID(id)
-                    console.log(dbRsponse);
+                    //console.log(dbRsponse);
                     response.end(dbRsponse);
 
                 } catch (error) {
@@ -151,6 +152,63 @@ const server: http.Server = http.createServer(
                     response.end();
                 }
                 break;
+            case pfadSort:
+                switch (url.searchParams.get("sortBy")) {
+                    case "name":
+                        try {
+                            console.log("\x1b[33m", "conecting to DB...");
+                            await mongoClient.connect();
+                            let dbRsponse: string = await dbGetSortName();
+                            response.end(dbRsponse);
+
+                        } catch (error) {
+                            console.error("\x1b[31m", "connection time out wiht DB" + error);
+                            console.log("\x1b[0m");
+                            response.statusCode = 404;
+                        } finally {
+                            mongoClient.close();
+                            response.end();
+                        }
+                        break;
+
+                    case "type":
+                        try {
+                            console.log("\x1b[33m", "conecting to DB...");
+                            await mongoClient.connect();
+                            let dbRsponse: string = await dbGetSortTag();
+                            response.end(dbRsponse);
+
+                        } catch (error) {
+                            console.error("\x1b[31m", "connection time out wiht DB" + error);
+                            console.log("\x1b[0m");
+                            response.statusCode = 404;
+                        } finally {
+                            mongoClient.close();
+                            response.end();
+                        }
+                        break;
+                    case "date":
+                        try {
+                            console.log("\x1b[33m", "conecting to DB...");
+                            await mongoClient.connect();
+                            let dbRsponse: string = await dbGetSortDate();
+                            response.end(dbRsponse);
+
+                        } catch (error) {
+                            console.error("\x1b[31m", "connection time out wiht DB" + error);
+                            console.log("\x1b[0m");
+                            response.statusCode = 404;
+                        } finally {
+                            mongoClient.close();
+                            response.end();
+                        }
+                        break;
+
+                    default:
+                        response.statusCode = 404;
+                        break;
+                }
+                break;
         }
     });
 
@@ -175,6 +233,39 @@ async function dbGetID(id: string): Promise<string> {
         .db(db)
         .collection(dbCollection)
         .find({ _id: new mongo.ObjectId(id) })
+        .toArray();
+    console.log("\x1b[32m", "got the data");
+    console.log("\x1b[32m", result);
+    return JSON.stringify(result);
+}
+async function dbGetSortName(): Promise<string> {
+    let result = await mongoClient
+        .db(db)
+        .collection(dbCollection)
+        .find()
+        .sort({ "name": 1 })
+        .toArray();
+    console.log("\x1b[32m", "got the data");
+    console.log("\x1b[32m", result);
+    return JSON.stringify(result);
+}
+async function dbGetSortDate(): Promise<string> {
+    let result = await mongoClient
+        .db(db)
+        .collection(dbCollection)
+        .find()
+        .sort({ "spoilDate": 1 })
+        .toArray();
+    console.log("\x1b[32m", "got the data");
+    console.log("\x1b[32m", result);
+    return JSON.stringify(result);
+}
+async function dbGetSortTag(): Promise<string> {
+    let result = await mongoClient
+        .db(db)
+        .collection(dbCollection)
+        .find()
+        .sort({ "tag": 1 })
         .toArray();
     console.log("\x1b[32m", "got the data");
     console.log("\x1b[32m", result);

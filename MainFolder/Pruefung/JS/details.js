@@ -121,11 +121,8 @@ var Pruefung;
             "10",
             "11",
             "12"];
-        return date.getUTCDate() + "." + month[date.getMonth()] + "." + date.getFullYear();
-    }
-    //picture
-    function addPic(tag) {
-        return new HTMLElement;
+        let day = (date.getUTCDate() < 10 ? "0" : "") + date.getUTCDate();
+        return day + "." + month[date.getUTCMonth()] + "." + date.getFullYear();
     }
     async function getItem(search) {
         let items;

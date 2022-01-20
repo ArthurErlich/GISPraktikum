@@ -116,7 +116,6 @@ var Pruefung;
             "12"];
         //inline If
         let day = (date.getUTCDate() < 10 ? "0" : "") + date.getUTCDate();
-        console.log(day);
         return date.getFullYear() + "-" + month[date.getMonth()] + "-" + day;
     }
     function creatSelectionList() {
