@@ -11,13 +11,17 @@ export interface GefrieGut {
 
 //changet enums to clas
 export class Tags {
-    tags: string[] = ["chicken", "pig", "beef", "veal", "lamb", "venison"]
-
-    getLength(): number {
-        return this.tags.length;
-    }
-    getTag(id: number) {
-        return this.tags[id];
+        tags: string[] = ["Huenchen", "Schwein", "Kuh", "Schaf", "Wildschein"];
+        pics: number[] = [128020, 128022, 128004, 128017, 128023];
+        getLength(): number {
+            return this.tags.length;
+        }
+        getTag(id: number) {
+            return this.tags[id];
+        }
+        getPic(id: number) {
+            return this.pics[id];
+        }
     }
 }
 

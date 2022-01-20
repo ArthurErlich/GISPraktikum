@@ -32,10 +32,16 @@ const server: http.Server = http.createServer(
                 switch (request.method) {
                     case "GET":
                         response.setHeader("Content-Type", "application/json");
-                        await mongoClient.connect();
-                        let dbResponse: string = await dbGetAll();
-                        console.log("\x1b[33m", "sending datat to client: " + dbResponse);
-                        response.end(dbResponse);
+                        try {
+                            await mongoClient.connect();
+                            console.log("\x1b[33m", "conecting to DB...");
+                            let dbResponse: string = await dbGetAll();
+                            response.end(dbResponse);
+                        } catch (error) {
+                            console.error("\x1b[31m", "connection time out wiht DB");
+                            console.log("\x1b[0m");
+                            response.statusCode = 404;
+                        }
                         break;
                     case "POST":
 
@@ -51,7 +57,6 @@ const server: http.Server = http.createServer(
                         request.on("data", (data) => {
                             input += data;
                         });
-
                         request.on("end", async () => {
                             input = input.replace("undefined", "");// the Stringfy has an undifnied in front?
                             console.log("\x1b[33m", "got the Data from client: " + input);
@@ -162,6 +167,7 @@ async function dbGetAll(): Promise<string> {
         .toArray();
     console.log("\x1b[32m", "got the data");
     console.log("\x1b[32m", result);
+    console.log("\x1b[33m", "sending datat to client");
     return JSON.stringify(result);
 }
 async function dbGetID(id: string): Promise<string> {
@@ -174,7 +180,6 @@ async function dbGetID(id: string): Promise<string> {
     console.log("\x1b[32m", result);
     return JSON.stringify(result);
 }
-
 async function dbSet(event: string): Promise<void> {
     console.log("\x1b[33m", "send Data:" + JSON.parse(event) + " " + (JSON.parse(event)._id));
     await mongoClient.db(db)

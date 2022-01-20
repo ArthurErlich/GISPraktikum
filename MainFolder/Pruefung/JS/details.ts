@@ -10,22 +10,18 @@ namespace Pruefung {
     }
 
     class Tags {
-        tags: string[] =
-            ["chicken",
-                "pig",
-                "beef",
-                "veal",
-                "lamb",
-                "venison"]
+        tags: string[] = ["Huenchen", "Schwein", "Kuh", "Schaf", "Wildschein"];
+        pics: number[] = [128020, 128022, 128004, 128017, 128023];
         getLength(): number {
             return this.tags.length;
         }
-
         getTag(id: number) {
             return this.tags[id];
         }
+        getPic(id: number) {
+            return this.pics[id];
+        }
     }
-
 
     const url: string = "http://localhost:3500"
     const pfadView: string = "/view";
@@ -34,7 +30,7 @@ namespace Pruefung {
 
     //NICE
     const searchURI: URLSearchParams = new URLSearchParams(window.location.search);
-    console.log(searchURI.get("id"));
+    console.log("The Search URI: " + searchURI.get("id"));
 
     loadIndex();
     async function loadIndex() {
@@ -42,7 +38,9 @@ namespace Pruefung {
             let itmes: GefrieGut[] = await getItem(searchURI);
             itmes.forEach(element => {
                 createItemInput(element);
+                setHeroText(element.name);
             });
+
         } catch (error) {
             console.error(error);
 
@@ -51,6 +49,10 @@ namespace Pruefung {
 
     }
 
+    function setHeroText(name: string): void {
+        const heroText: HTMLElement = document.getElementById("itemCatogory");
+        heroText.textContent = name;
+    }
     function createItemInput(gefrieGut: GefrieGut) {
         const flexBox: HTMLElement = document.getElementById("itemDetails");
         //server anfragen und liste der Items holen
@@ -72,7 +74,7 @@ namespace Pruefung {
 
 
     function createItemAtributes(gefrieGut: GefrieGut): HTMLElement[] {
-        let item_atirbutes: HTMLElement[] = new Array(6);
+        let item_atirbutes: HTMLElement[] = new Array(7);
 
         for (let i: number = 0; i < item_atirbutes.length; i++) {
             item_atirbutes[i] = document.createElement("div");
@@ -83,21 +85,29 @@ namespace Pruefung {
         item_atirbutes[2].className = "item_addDate";
         item_atirbutes[3].className = "item_spoilDate";
         item_atirbutes[4].className = "item_note";
-        item_atirbutes[5].className = "item_editRemouve";
+        item_atirbutes[5].appendChild(createTextArea(gefrieGut.note));
+        item_atirbutes[6].className = "item_editRemouve";
 
-        item_atirbutes[0].textContent = tags.getTag(parseInt(gefrieGut.tag));
+        item_atirbutes[0].textContent = String.fromCodePoint(tags.getPic(parseInt(gefrieGut.tag)));
         item_atirbutes[1].textContent = "Name: " + gefrieGut.name;
         item_atirbutes[2].textContent = "Hinzugefügt am: " + dateConverter(new Date(gefrieGut.addDate));
         item_atirbutes[3].textContent = "Haltbar bis: " + dateConverter(new Date(gefrieGut.spoilDate));
-        item_atirbutes[4].textContent = "Notizen: " + gefrieGut.note;
+        item_atirbutes[4].textContent = "Notizen:";
 
         let editRemove: HTMLElement[] = createEditRemove(gefrieGut._id);
         editRemove.forEach(element => {
-            item_atirbutes[5].appendChild(element);
+            item_atirbutes[6].appendChild(element);
         });
 
 
         return item_atirbutes;
+    }
+    function createTextArea(note: string): HTMLElement {
+        let textArea: HTMLElement = document.createElement("div");
+        textArea.className = "textArea_Details";
+        textArea.textContent = note;
+        return textArea;
+
     }
     function createEditRemove(_id: string): HTMLElement[] {
         let editFunction: HTMLElement[] = new Array(2);
@@ -107,7 +117,7 @@ namespace Pruefung {
         editFunction[1] = document.createElement("button");
         editFunction[1].id = "item_remove";
         editFunction[1].dataset.id = _id;
-        editFunction[1].textContent = "REMOVE";
+        editFunction[1].textContent = "Löschen";
         editFunction[1].addEventListener("click", function deletElement(event: Event) {
             event.preventDefault();
             removeItem(searchURI);
@@ -119,7 +129,7 @@ namespace Pruefung {
         const link: HTMLElement = document.createElement("a");
         const removeButton: HTMLElement = document.createElement("button");
 
-        removeButton.textContent = "EDIT";
+        removeButton.textContent = "Bearbeiten";
         link.className = "itemLink";
         link.setAttribute("href", "../HTML/additem.html?id=" + _id);
         link.id = "item_remove";
@@ -170,11 +180,18 @@ namespace Pruefung {
     }
     async function removeItem(search: URLSearchParams) {
         console.log("remuving item");
-        await fetch(url + pfadDelet + "?" + search + "=", {
-            method: "get"
-        });
-        //open homepage
-        window.open("../HTML/index.html", "_parent");
+        try {
+            await fetch(url + pfadDelet + "?" + search + "=", {
+                method: "get"
+            });
+            //open homepage
+            window.open("../HTML/index.html", "_parent");
+        } catch (error) {
+            console.error("Fehler beim Löschen");
+
+        }
+
+
     }
 
 }

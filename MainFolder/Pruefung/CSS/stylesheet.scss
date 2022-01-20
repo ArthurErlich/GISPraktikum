@@ -1,7 +1,8 @@
 $borderRadius: 2px;
-$font: 'Courier New',
-Courier,
-monospace;
+
+$font: 'Varela Round',
+sans-serif;
+
 $colorBackground: #dcf3ff;
 $colorBackgroundDark:#baf2ef;
 $colorHeadFooter: #a2d2df;
@@ -12,6 +13,9 @@ $colorShadow:#396d7c;
 $colorPrime:rgb(46, 46, 46);
 $colorSecond:White;
 $colorThird: Green;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@300&family=Varela+Round&display=swap');
 
 body {
 
@@ -231,14 +235,21 @@ a {
 }
 
 .item .itemLink {
-    display: block;
     height: 100%;
     width: 100%;
+
 }
 
 .item:hover {
     background-color: $colorHeadFooter;
     transition: background-color 0.5s;
+}
+
+.item_editRemouve .itemLink,
+.item_editRemouve .item_remove {
+    font-family: $font;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 /*hinzufüg Seite*/
@@ -247,6 +258,10 @@ a {
     margin-left: auto;
     margin-right: auto;
     max-width: 500px;
+}
+
+.item_pic {
+    font-size: 64px;
 }
 
 #note {
@@ -262,10 +277,22 @@ a {
 
 /*edit Seite*/
 .itemDetails {
-    background-color: $colorElemnts;
-    text-align: left;
+    background-color: $colorHeadFooter;
+    text-align: center;
     padding: 5px;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     min-width: 350px;
+}
+
+.textArea_Details {
+    background-color: #dcf3ff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    word-break: break-all;
+    max-width: 250px;
+    border-radius: &$borderRadius;
 }

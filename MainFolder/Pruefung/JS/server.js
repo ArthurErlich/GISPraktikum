@@ -24,10 +24,17 @@ const server = http.createServer(async (request, response) => {
             switch (request.method) {
                 case "GET":
                     response.setHeader("Content-Type", "application/json");
-                    await mongoClient.connect();
-                    let dbResponse = await dbGetAll();
-                    console.log("\x1b[33m", "sending datat to client: " + dbResponse);
-                    response.end(dbResponse);
+                    try {
+                        await mongoClient.connect();
+                        console.log("\x1b[33m", "conecting to DB...");
+                        let dbResponse = await dbGetAll();
+                        response.end(dbResponse);
+                    }
+                    catch (error) {
+                        console.error("\x1b[31m", "connection time out wiht DB");
+                        console.log("\x1b[0m");
+                        response.statusCode = 404;
+                    }
                     break;
                 case "POST":
                     break;
@@ -151,6 +158,7 @@ async function dbGetAll() {
         .toArray();
     console.log("\x1b[32m", "got the data");
     console.log("\x1b[32m", result);
+    console.log("\x1b[33m", "sending datat to client");
     return JSON.stringify(result);
 }
 async function dbGetID(id) {
@@ -164,14 +172,14 @@ async function dbGetID(id) {
     return JSON.stringify(result);
 }
 async function dbSet(event) {
-    console.log("\x1b[33m", "send Data:" + JSON.parse(event) + +" " + (JSON.parse(event)._id));
+    console.log("\x1b[33m", "send Data:" + JSON.parse(event) + " " + (JSON.parse(event)._id));
     await mongoClient.db(db)
         .collection(dbCollection)
         .insertOne(JSON.parse(event));
     console.log("\x1b[32m", "Data recived in DB");
 }
 async function dbEdit(eventID, event) {
-    console.log("\x1b[33m", "send Data:" + JSON.parse(event) + +" " + eventID);
+    console.log("\x1b[33m", "send Data:" + JSON.parse(event) + " " + eventID);
     await mongoClient.db(db)
         .collection(dbCollection)
         .replaceOne({ _id: new mongo.ObjectId(eventID) }, JSON.parse(event));

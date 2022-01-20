@@ -6,17 +6,16 @@ import { Tags } from "./files";
 var Pruefung;
 (function (Pruefung) {
     class Tags {
-        tags = ["Chicken",
-            "Pig",
-            "Beef",
-            "Veal",
-            "Lamb",
-            "Venison"];
+        tags = ["Huenchen", "Schwein", "Kuh", "Schaf", "Wildschein"];
+        pics = [128020, 128022, 128004, 128017, 128023];
         getLength() {
             return this.tags.length;
         }
         getTag(id) {
             return this.tags[id];
+        }
+        getPic(id) {
+            return this.pics[id];
         }
     }
     const tags = new Tags();
@@ -125,7 +124,7 @@ var Pruefung;
         let selectElement = new Array(tags.getLength());
         for (let i = 0; i < tags.getLength(); i++) {
             selectElement[i] = document.createElement("option");
-            selectElement[i].textContent = tags.getTag(i);
+            selectElement[i].textContent = String.fromCodePoint(tags.getPic(i)) + " " + tags.getTag(i);
             selectElement[i].setAttribute("value", i + "");
             selectList.appendChild(selectElement[i]);
         }
