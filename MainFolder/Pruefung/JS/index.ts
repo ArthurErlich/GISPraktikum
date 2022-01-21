@@ -39,18 +39,56 @@ namespace Pruefung {
 
 
     function loadSite(): void {
-
-        loadUnsortet();
         creatSelectionList();
+        loadItems();
         form.addEventListener("submit", submitSort,);
 
     }
 
     //TODO: localStorage Hinzufügen um die Kategoriy zu suchen/bzw den Namen zu suchen
-    async function loadUnsortet(): Promise<void> {
+    async function loadItems(): Promise<void> {
+        const form: HTMLFormElement = <HTMLFormElement>document.getElementById("filter");
+        let formContorl: HTMLFormControlsCollection = form.elements;
+        let formSetting: string[];
+
+        if (localStorage.getItem("filterSetting")) {
+            formSetting = JSON.parse(localStorage.getItem("filterSetting"));
+            if (formSetting[0] !== null) {
+                (<HTMLInputElement>formContorl.namedItem("abgelaufen")).checked = true;
+            }
+            if (formSetting[1] !== null) {
+                (<HTMLInputElement>formContorl.namedItem("baldabgelaufen")).checked = true;
+            }
+            if (formSetting[2] !== '') {
+                (<HTMLInputElement>formContorl.namedItem("suche")).value = formSetting[2];
+            }
+            if (formSetting[3] !== "null") {
+                (<HTMLInputElement>formContorl.namedItem("kategorie")).value = formSetting[3];
+            }
+        }
         removeNodes();
         let itmes: GefrieGut[] = await getItems();
         itmes.forEach(element => {
+            if (formSetting[0] !== null) {
+                if (!isSpoiled(new Date(element.spoilDate))) {
+                    return;
+                }
+            }
+
+            if (formSetting[1] !== null) {
+                if (!isNearlySpoiled(new Date(element.spoilDate))) {
+                    return;
+                }
+            }
+            if (formSetting[2] !== "") {
+                if (!element.name.toLowerCase().includes(formSetting[2].toLowerCase())) {
+                    return;
+                }
+            }
+            if (formSetting[3] !== "null") {
+                if (element.tag !== formSetting[3])
+                    return;
+            }
             createItem(element);
         });
     }
@@ -72,9 +110,13 @@ namespace Pruefung {
         let nearlySpoiled: string = <string>formData.get("baldabgelaufen");
 
         //check if ""
-        let nameSort: string = <string>formData.get("name");
+        let nameSort: string = <string>formData.get("suche");
         let typeSort: string = <string>formData.get("kategorie");
-        console.log(typeSort);
+
+        let formSetting: string[] = [spoiled, nearlySpoiled, nameSort, typeSort];
+
+        localStorage.removeItem("filterSetting");
+        localStorage.setItem("filterSetting", JSON.stringify(formSetting));
 
         removeNodes();
 
@@ -168,7 +210,7 @@ namespace Pruefung {
     }
     function creatSelectionList(): void {
         let selectChecker: string[] = ["Abgelaufen", "Bald abgelaufen"];
-        let selectSearch: string[] = ["Name"];
+        let selectSearch: string[] = ["Suche"];
         let selectKategory: string = "Kategorie";
 
         let selectList: HTMLElement = document.getElementById("sort_Kategory");

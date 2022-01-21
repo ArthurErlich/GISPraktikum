@@ -31,7 +31,7 @@ var Pruefung;
         const a = document.createElement("a");
         const author = document.createElement("div");
         a.id = "backLink";
-        a.setAttribute("href", "/MainFolder/MainStartPage.html");
+        a.setAttribute("href", "../../MainStartPage.html");
         a.textContent = "AufgabenPage";
         author.id = "author";
         author.textContent = "made by: Arthur Erlich";

@@ -27,15 +27,52 @@ var Pruefung;
     //load time
     loadSite();
     function loadSite() {
-        loadUnsortet();
         creatSelectionList();
+        loadItems();
         form.addEventListener("submit", submitSort);
     }
     //TODO: localStorage Hinzufügen um die Kategoriy zu suchen/bzw den Namen zu suchen
-    async function loadUnsortet() {
+    async function loadItems() {
+        const form = document.getElementById("filter");
+        let formContorl = form.elements;
+        let formSetting;
+        if (localStorage.getItem("filterSetting")) {
+            formSetting = JSON.parse(localStorage.getItem("filterSetting"));
+            if (formSetting[0] !== null) {
+                formContorl.namedItem("abgelaufen").checked = true;
+            }
+            if (formSetting[1] !== null) {
+                formContorl.namedItem("baldabgelaufen").checked = true;
+            }
+            if (formSetting[2] !== '') {
+                formContorl.namedItem("suche").value = formSetting[2];
+            }
+            if (formSetting[3] !== "null") {
+                formContorl.namedItem("kategorie").value = formSetting[3];
+            }
+        }
         removeNodes();
         let itmes = await getItems();
         itmes.forEach(element => {
+            if (formSetting[0] !== null) {
+                if (!isSpoiled(new Date(element.spoilDate))) {
+                    return;
+                }
+            }
+            if (formSetting[1] !== null) {
+                if (!isNearlySpoiled(new Date(element.spoilDate))) {
+                    return;
+                }
+            }
+            if (formSetting[2] !== "") {
+                if (!element.name.toLowerCase().includes(formSetting[2].toLowerCase())) {
+                    return;
+                }
+            }
+            if (formSetting[3] !== "null") {
+                if (element.tag !== formSetting[3])
+                    return;
+            }
             createItem(element);
         });
     }
@@ -53,9 +90,11 @@ var Pruefung;
         let spoiled = formData.get("abgelaufen");
         let nearlySpoiled = formData.get("baldabgelaufen");
         //check if ""
-        let nameSort = formData.get("name");
+        let nameSort = formData.get("suche");
         let typeSort = formData.get("kategorie");
-        console.log(typeSort);
+        let formSetting = [spoiled, nearlySpoiled, nameSort, typeSort];
+        localStorage.removeItem("filterSetting");
+        localStorage.setItem("filterSetting", JSON.stringify(formSetting));
         removeNodes();
         let itmes = await getItems();
         itmes.forEach(element => {
@@ -133,7 +172,7 @@ var Pruefung;
     }
     function creatSelectionList() {
         let selectChecker = ["Abgelaufen", "Bald abgelaufen"];
-        let selectSearch = ["Name"];
+        let selectSearch = ["Suche"];
         let selectKategory = "Kategorie";
         let selectList = document.getElementById("sort_Kategory");
         let sortCheker = createSortChecker(selectChecker);

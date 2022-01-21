@@ -32,9 +32,8 @@ namespace Pruefung {
         const author: HTMLElement = document.createElement("div");
 
         a.id = "backLink";
-        a.setAttribute("href", "/MainFolder/MainStartPage.html");
+        a.setAttribute("href", "../../MainStartPage.html");
         a.textContent = "AufgabenPage";
-
         author.id = "author";
         author.textContent = "made by: Arthur Erlich";
 
