@@ -46,7 +46,7 @@ const server: http.Server = http.createServer(
                         }
                         break;
                     case "POST":
-
+                        //if i do a post mehtode in /items
                         break;
                 }
                 break;
@@ -114,7 +114,7 @@ const server: http.Server = http.createServer(
                     console.log("\x1b[33m", "got the Data from client: " + input);
                     try {
                         let id: string = url.searchParams.get("id");
-                        id = id.slice(0, -1); // get rid of "0" on end of the id string
+                        id = id.slice(0, -1); // get rid of "=" on end of the id string
 
                         console.log("\x1b[33m", "conecting to DB...");
                         await mongoClient.connect();
@@ -153,6 +153,7 @@ const server: http.Server = http.createServer(
             default:
                 response.statusCode = 404;
                 break;
+
         }
     });
 
