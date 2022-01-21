@@ -23,7 +23,6 @@ var Pruefung;
     const form = document.getElementById("filter");
     const tags = new Tags();
     const pfad = "/items";
-    const pfadSort = "/sort";
     const url = "http://localhost:3500";
     //load time
     loadSite();
@@ -32,7 +31,7 @@ var Pruefung;
         creatSelectionList();
         form.addEventListener("submit", submitSort);
     }
-    //TODO: Button Hinzufügen um die Kategoriy zu suchen/bzw den Namen zu suchen
+    //TODO: localStorage Hinzufügen um die Kategoriy zu suchen/bzw den Namen zu suchen
     async function loadUnsortet() {
         removeNodes();
         let itmes = await getItems();
@@ -40,15 +39,6 @@ var Pruefung;
             createItem(element);
         });
     }
-    /* alte Sortierufunkiton in der MongoDB
-    async function sortBy(sort: string): Promise<void> {
-        removeNodes();
-        let itmes: GefrieGut[] = await getItemsSort(sort);
-        itmes.forEach(element => {
-            createItem(element);
-        });
-    }
-    */
     function removeNodes() {
         //löscht das FirstChild solange es eins gibt
         console.log("Reseting itemlist...");
@@ -260,22 +250,35 @@ var Pruefung;
         }
         return items;
     }
-    async function getItemsSort(sort) {
-        let items;
-        console.log("connecting to HTTP server");
-        try {
-            let response = await fetch(url + pfadSort + "?sortBy=" + sort, {
-                method: "get"
-            });
-            let text = await response.text();
-            items = JSON.parse(text);
-            console.log("fetch finished");
-        }
-        catch (error) {
-            console.error("server is Offline");
-            console.log(error);
-        }
-        return items;
-    }
 })(Pruefung || (Pruefung = {}));
+//#region old Stuff
+/*
+//const pfadSort: string = "/sort";
+async function getItemsSort(sort: string): Promise<GefrieGut[]> {
+    let items: GefrieGut[];
+    console.log("connecting to HTTP server");
+    try {
+        let response: Response = await fetch(url + pfadSort + "?sortBy=" + sort, {
+            method: "get"
+        });
+        let text = await response.text()
+        items = JSON.parse(text);
+        console.log("fetch finished");
+    } catch (error) {
+        console.error("server is Offline");
+        console.log(error);
+    }
+    return items;
+}
+    //alte Sortierufunkiton in der MongoDB
+
+    async function sortBy(sort: string): Promise<void> {
+        removeNodes();
+        let itmes: GefrieGut[] = await getItemsSort(sort);
+        itmes.forEach(element => {
+            createItem(element);
+        });
+    }
+    */
+//#endregion
 //# sourceMappingURL=index.js.map

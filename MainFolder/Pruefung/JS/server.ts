@@ -1,7 +1,6 @@
 import * as http from "http";
 import * as mongo from "mongodb";
 
-const BSON = require('bson');
 
 const hostname: string = "127.0.0.1"; // localhost
 const port: number = 3500;
@@ -11,7 +10,7 @@ const pfadDelet: string = "/remove";
 const pfadAdd: string = "/add"
 const pfadEdit: string = "/edit";
 const pfadView: string = "/view";
-const pfadSort: string = "/sort";
+
 
 
 const mongoUrl: string = "mongodb://localhost:27017"; // locale MongoDB
@@ -150,26 +149,7 @@ const server: http.Server = http.createServer(
                     response.end();
                 }
                 break;
-            case pfadSort:
-            /*
-            try {
-                await mongoClient.connect();
-                let searchParas: string = url.searchParams.get("sortBy");
-                console.log("\x1b[33m", "conecting to DB...");
-                console.log("\x1b[33m", "sorting by: " + searchParas);
-                let dbRsponse: string = await dbGetSort(searchParas);
-                response.end(dbRsponse);
 
-            } catch (error) {
-                console.error("\x1b[31m", "connection time out wiht DB" + error);
-                console.log("\x1b[0m");
-                response.statusCode = 404;
-            } finally {
-                mongoClient.close();
-                response.end();
-            }
-            break;
-            */
             default:
                 response.statusCode = 404;
                 break;
@@ -202,20 +182,7 @@ async function dbGetID(id: string): Promise<string> {
     console.log("\x1b[32m", result);
     return JSON.stringify(result);
 }
-/*
-async function dbGetSort(sort: string): Promise<string> {
-    let sortFormat: [string, number][] = JSON.parse(sort);
-    let result = await mongoClient
-        .db(db)
-        .collection(dbCollection)
-        .find()
-        .sort() //works, even if there is an error here
-        .toArray();
-    console.log("\x1b[32m", "got the data");
-    console.log("\x1b[32m", result);
-    return JSON.stringify(result);
-}
-*/
+
 async function dbSet(event: string): Promise<void> {
     console.log("\x1b[33m", "send Data:" + JSON.parse(event) + " " + (JSON.parse(event)._id));
     await mongoClient.db(db)
@@ -240,6 +207,7 @@ async function dbRemove(eventID: string): Promise<void> {
         console.log("\x1b[32m", error);
     }
 }
+//#region Old stuff
 /*
 Coler code
 "\x1b[31m" red
@@ -249,6 +217,8 @@ Coler code
 
 
 /* Some test functions
+
+//const pfadSort: string = "/sort";
 async function dbGetSortName(): Promise<string> {
     let result = await mongoClient
         .db(db)
@@ -282,4 +252,39 @@ async function dbGetSortTag(): Promise<string> {
     console.log("\x1b[32m", result);
     return JSON.stringify(result);
 }
+async function dbGetSort(sort: string): Promise<string> {
+    let sortFormat: [string, number][] = JSON.parse(sort);
+    let result = await mongoClient
+        .db(db)
+        .collection(dbCollection)
+        .find()
+        .sort() //works, even if there is an error here
+        .toArray();
+    console.log("\x1b[32m", "got the data");
+    console.log("\x1b[32m", result);
+    return JSON.stringify(result);
+}
 */
+
+/*
+case pfadSort:
+
+try {
+   await mongoClient.connect();
+   let searchParas: string = url.searchParams.get("sortBy");
+   console.log("\x1b[33m", "conecting to DB...");
+   console.log("\x1b[33m", "sorting by: " + searchParas);
+   let dbRsponse: string = await dbGetSort(searchParas);
+   response.end(dbRsponse);
+
+} catch (error) {
+   console.error("\x1b[31m", "connection time out wiht DB" + error);
+   console.log("\x1b[0m");
+   response.statusCode = 404;
+} finally {
+   mongoClient.close();
+   response.end();
+}
+break;
+*/
+//#endregion
