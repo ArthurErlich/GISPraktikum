@@ -131,18 +131,8 @@ namespace Pruefung {
     }
     function dateConverter(date: Date): string {
         //W3Scool Array https://www.w3schools.com/jsref/jsref_getmonth.asp
-        const month = ["01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "10",
-            "11",
-            "12"];
+        const month = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+
         //inline If
         let day: string = (date.getUTCDate() < 10 ? "0" : "") + date.getUTCDate();
         return date.getFullYear() + "-" + month[date.getMonth()] + "-" + day;

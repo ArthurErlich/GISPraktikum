@@ -38,17 +38,16 @@ namespace Pruefung {
     //load time
     loadSite();
 
+
     function loadSite(): void {
-        sort();
+
+        loadUnsortet();
         creatSelectionList();
+        form.addEventListener("submit", submitSort,);
+
     }
 
     //TODO: Button Hinzufügen um die Kategoriy zu suchen/bzw den Namen zu suchen
-
-    async function sort(): Promise<void> {
-        await sortByName();
-    }
-
     async function loadUnsortet(): Promise<void> {
         removeNodes();
         let itmes: GefrieGut[] = await getItems();
@@ -57,35 +56,64 @@ namespace Pruefung {
         });
     }
 
-    async function sortByName(): Promise<void> {
+    /* alte Sortierufunkiton in der MongoDB
+    async function sortBy(sort: string): Promise<void> {
         removeNodes();
-        let itmes: GefrieGut[] = await getItemsSort("name");
+        let itmes: GefrieGut[] = await getItemsSort(sort);
         itmes.forEach(element => {
             createItem(element);
         });
     }
-
-    async function sortByType(): Promise<void> {
-        removeNodes();
-        let itmes: GefrieGut[] = await getItemsSort("type");
-        itmes.forEach(element => {
-            createItem(element);
-        });
-    }
-
-    async function sortBySpoilDate(): Promise<void> {
-        removeNodes();
-        let itmes: GefrieGut[] = await getItemsSort("date");
-        itmes.forEach(element => {
-            createItem(element);
-        });
-    }
+    */
     function removeNodes(): void {
         //löscht das FirstChild solange es eins gibt
         console.log("Reseting itemlist...");
         while (itemsElement.firstChild) {
             itemsElement.removeChild(itemsElement.firstChild);
         }
+    }
+
+    async function submitSort(eventButton: Event): Promise<void> {
+        eventButton.preventDefault();
+        let formData: FormData = new FormData(<HTMLFormElement>eventButton.currentTarget);
+
+        //check if null
+        let spoiled: string = <string>formData.get("abgelaufen");
+        let nearlySpoiled: string = <string>formData.get("baldabgelaufen");
+
+        //check if ""
+        let nameSort: string = <string>formData.get("name");
+        let typeSort: string = <string>formData.get("kategorie");
+        console.log(typeSort);
+
+        removeNodes();
+
+        let itmes: GefrieGut[] = await getItems();
+        itmes.forEach(element => {
+            if (spoiled !== null) {
+                if (!isSpoiled(new Date(element.spoilDate))) {
+                    return;
+                }
+            }
+
+            if (nearlySpoiled !== null) {
+                if (!isNearlySpoiled(new Date(element.spoilDate))) {
+                    return;
+                }
+            }
+            if (nameSort !== "") {
+                if (!element.name.toLowerCase().includes(nameSort.toLowerCase())) {
+                    return;
+                }
+            }
+            if (typeSort !== "null") {
+                if (element.tag !== typeSort)
+                    return;
+            }
+            createItem(element);
+        });
+
+
     }
 
     function createItem(gefrieGut: GefrieGut): void {
@@ -98,8 +126,11 @@ namespace Pruefung {
 
         itemBox.className = "item flexChild";
         if (isSpoiled(new Date(gefrieGut.spoilDate))) {
-            itemBox.className += " wrongInput";
+            itemBox.className += " redOutline";
+        } else if (isNearlySpoiled(new Date(gefrieGut.spoilDate))) {
+            itemBox.className += " jellowOutline";
         }
+
         itemBox.dataset.id = gefrieGut._id;
         itemBox.appendChild(creatLink(gefrieGut));
         return itemBox;
@@ -118,6 +149,11 @@ namespace Pruefung {
         if (isSpoiled(new Date(gefrieGut.spoilDate))) {
             let achtung: HTMLElement = document.createElement("div");
             achtung.textContent = "Mindesthaltbarkeit überschritten"
+            link.appendChild(achtung);
+        }
+        else if (isNearlySpoiled(new Date(gefrieGut.spoilDate))) {
+            let achtung: HTMLElement = document.createElement("div");
+            achtung.textContent = "Mindesthaltbarkeit bald überschritten"
             link.appendChild(achtung);
         }
         return link;
@@ -141,19 +177,112 @@ namespace Pruefung {
         return item_atirbutes;
     }
     function creatSelectionList(): void {
-        let selectArray: string[] = ["Name", "Ablauf Datum", "Typ"];
+        let selectChecker: string[] = ["Abgelaufen", "Bald abgelaufen"];
+        let selectSearch: string[] = ["Name"];
+        let selectKategory: string = "Kategorie";
 
         let selectList: HTMLElement = document.getElementById("sort_Kategory");
-        let selectElement: HTMLElement[] = new Array(selectArray.length);
+
+        let sortCheker: HTMLElement[] = createSortChecker(selectChecker);
+        let sortSearch: HTMLElement[] = createSortSearch(selectSearch);
+
+        sortCheker.forEach(checker => {
+            selectList.appendChild(checker);
+        });
+        sortSearch.forEach(search => {
+            selectList.appendChild(search);
+        });
+
+        selectList.appendChild(createSortKategorie(selectKategory));
+
+    }
+    function createSortChecker(selectNames: string[]): HTMLElement[] {
+        let divWrapper: HTMLElement[] = new Array(selectNames.length);
+        let selectLabel: HTMLElement[] = new Array(selectNames.length);
+        let selectChecker: HTMLElement[] = new Array(selectNames.length);
+
+        for (let i: number = 0; i < selectNames.length; i++) {
+            selectLabel[i] = document.createElement("label");
+            selectLabel[i].setAttribute("for", stringTypeFromater(selectNames[i]));
+            selectLabel[i].textContent = selectNames[i];
+
+            selectChecker[i] = document.createElement("input");
+            selectChecker[i].setAttribute("type", "checkbox");
+            selectChecker[i].setAttribute("value", stringTypeFromater(selectNames[i]));
+            selectChecker[i].setAttribute("name", stringTypeFromater(selectNames[i]));
+
+            divWrapper[i] = document.createElement("div");
+            divWrapper[i].className = "searchCheck";
+
+            divWrapper[i].appendChild(selectLabel[i]);
+            divWrapper[i].appendChild(selectChecker[i]);
+        }
+        return divWrapper;
+
+    }
+
+    function createSortSearch(selectNames: string[]): HTMLElement[] {
+        let divWrapper: HTMLElement[] = new Array(selectNames.length);
+        let selectLabel: HTMLElement[] = new Array(selectNames.length);
+        let selectSearch: HTMLElement[] = new Array(selectNames.length);
+
+        for (let i: number = 0; i < selectNames.length; i++) {
+            selectLabel[i] = document.createElement("label");
+            selectLabel[i].setAttribute("for", stringTypeFromater(selectNames[i]));
+            selectLabel[i].textContent = selectNames[i];
+
+            selectSearch[i] = document.createElement("input");
+            selectSearch[i].setAttribute("type", "text");
+            selectSearch[i].setAttribute("name", stringTypeFromater(selectNames[i]));
+
+            divWrapper[i] = document.createElement("div");
+            divWrapper[i].className = "searchSearch";
+
+            divWrapper[i].appendChild(selectLabel[i]);
+            divWrapper[i].appendChild(selectSearch[i]);
+        }
+        return divWrapper;
+    }
+
+    function createSortKategorie(selectNames: string): HTMLElement {
+        let divWrapper: HTMLElement;
+        let selectLabel: HTMLElement;
+        let selectSearch: HTMLElement;
+
+        selectLabel = document.createElement("label");
+        selectLabel.setAttribute("for", stringTypeFromater(selectNames));
+        selectLabel.textContent = selectNames;
+
+        selectSearch = document.createElement("select");
+        selectSearch.setAttribute("name", stringTypeFromater(selectNames));
+
+        let selectElement: HTMLElement[] = new Array(tags.getLength());
+
+        let selectEmpty: HTMLElement = document.createElement("option");
+        selectEmpty.textContent = "";
+        selectEmpty.setAttribute("value", "null");
+        selectSearch.appendChild(selectEmpty);
 
         for (let i: number = 0; i < tags.getLength(); i++) {
             selectElement[i] = document.createElement("option");
-            selectElement[i].textContent = selectArray[i];
+            selectElement[i].textContent = String.fromCodePoint(tags.getPic(i)) + " " + tags.getTag(i);
             selectElement[i].setAttribute("value", i + "");
-            selectList.appendChild(selectElement[i]);
+            selectSearch.appendChild(selectElement[i]);
         }
-    }
 
+        divWrapper = document.createElement("div");
+        divWrapper.className = "searchSearch";
+
+        divWrapper.appendChild(selectLabel);
+        divWrapper.appendChild(selectSearch);
+
+        return divWrapper;
+    }
+    function stringTypeFromater(s: string): string {
+        s = s.toLowerCase();
+        s = s.replaceAll(" ", "");
+        return s;
+    }
 
     function dateConverter(date: Date): string {
         //W3Scool Array https://www.w3schools.com/jsref/jsref_getmonth.asp
@@ -166,7 +295,19 @@ namespace Pruefung {
         let nowDate: Date = new Date();
         let now: number = nowDate.valueOf();
 
+
+
         return spoil <= now ? true : false;
+    }
+
+    function isNearlySpoiled(spoilDate: Date): boolean {
+        let spoil: number = spoilDate.valueOf();
+        let nowDate: Date = new Date();
+
+        let threDays: number = 259200000; //3 days in milliseconds
+        let now: number = nowDate.valueOf();
+
+        return spoil - threDays <= now ? true : false;
     }
 
     async function getItems(): Promise<GefrieGut[]> {

@@ -178,6 +178,16 @@ label {
     border-radius: $borderRadius;
 }
 
+.redOutline {
+    outline: solid 4px rgb(202, 78, 78);
+    border-radius: $borderRadius;
+}
+
+.jellowOutline {
+    outline: solid 4px rgb(230, 171, 76);
+    border-radius: $borderRadius;
+}
+
 textarea {
     font-family: $font;
     border-radius: $borderRadius;
@@ -226,6 +236,7 @@ a {
 }
 
 .sort {
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
     padding: 15px 0px 15px 0px;
@@ -233,7 +244,29 @@ a {
     max-width: 1000px;
     background-color: white;
 }
-.sort 
+
+.searchCheck,
+.searchSearch {
+    text-align: left;
+    padding: 5px;
+}
+
+.searchCheck label {
+    margin: 0;
+}
+
+.searchCheck [type="checkbox"] {
+    text-align: left;
+    width: auto;
+}
+
+.searchSearch input[type="text"],
+.searchSearch select {
+    text-align: left;
+    width: 100px;
+    outline: solid 1px black;
+}
+
 
 .item {
     background-color: $colorElemnts;
@@ -283,6 +316,13 @@ a {
 
 #formButtonAdd {
     padding: 5px;
+}
+
+.itemFlex {
+    max-width: 1000px;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /*edit Seite*/
