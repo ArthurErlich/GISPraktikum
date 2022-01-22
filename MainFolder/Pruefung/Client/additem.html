@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta id="pageName" data-pagename="additem" name="Einfügen von Gefriergut">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Style-->
+    <link rel="stylesheet" href="CSS/stylesheet.css" />
+    <!--JavaScript-->
+    <script src="JS/scirpt.js" defer></script>
+    <script src="JS/additem.js" defer></script>
+    <!--<script src="..//JS/files.js" defer></script>-->
+    <Access-Control-Allow-Origin>
+</head>
+
+<body>
+    <header>
+        <nav id="navbar">
+        </nav>
+    </header>
+
+    <main>
+        <form id="importForm">
+            <div class="flexContainer inputwrapper">
+                <div class="field flexChild">
+                    <label for="product">Produckname</label><br>
+                    <input name="product" type="text">
+                </div>
+                <div class="field flexChild">
+                    <label for="selection">Produkttype</label><br>
+                    <select id="selection" name="selection">
+                        <!-- TEST<option value="test">test</option>-->
+                    </select>
+                </div>
+                <div class="field flexChild">
+                    <label for="spoildate">Ablaufdatum</label><br>
+                    <input id="spoildate" name="spoildate" type="date">
+                </div>
+                <div class="field flexChild">
+                    <label for="note">Notizen</label><br>
+                    <textarea id="note" name="note" type="text"></textarea>
+                </div>
+            </div>
+            <div class="flexContainer inputwrapper">
+                <button type="submit" id="formButtonAdd" class="flexChild">Hinzufügen</button>
+            </div>
+        </form>
+    </main>
+    <footer id="footer">
+    </footer>
+</body>
+
+</html>
