@@ -27,7 +27,7 @@ namespace Pruefung {
         }
     }
 
-    const tags: Tags = new Tags();
+    const tags: Tags = new Tags();//normalerweis würde ich das Static in dem File.ts machen.
     const form: HTMLFormElement = <HTMLFormElement>document.getElementById("importForm");
 
     const pfadEdit: string = "/edit";
@@ -37,7 +37,6 @@ namespace Pruefung {
 
     const searchURI: URLSearchParams = new URLSearchParams(window.location.search);
     console.log(searchURI.get("id"));
-
 
     loadItems();
     form.addEventListener("submit", addItem,);
@@ -54,7 +53,7 @@ namespace Pruefung {
             fillFrom();
         }
     }
-    async function fillFrom() {
+    async function fillFrom(): Promise<void> {
         let formElements: HTMLFormControlsCollection = form.elements;
         let itemList: GefrieGut[] = await getItem(searchURI);
         let item: GefrieGut = itemList[0]; // just the first item is needed!
@@ -67,7 +66,7 @@ namespace Pruefung {
 
     }
 
-    async function addItem(eventButton: Event) {
+    async function addItem(eventButton: Event): Promise<void> {
         eventButton.preventDefault();
 
         let formData: FormData = new FormData(<HTMLFormElement>eventButton.currentTarget);
@@ -157,7 +156,7 @@ namespace Pruefung {
             body: JSON.stringify(item),
         });
     }
-    async function editItem(search: URLSearchParams, item: GefrieGut) {
+    async function editItem(search: URLSearchParams, item: GefrieGut): Promise<void> {
         console.log(JSON.stringify(item));
         await fetch(url + pfadEdit + "?" + search + "=", {
             method: "post",

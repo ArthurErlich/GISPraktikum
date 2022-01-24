@@ -41,6 +41,7 @@ const server = http.createServer(async (request, response) => {
                     break;
             }
             break;
+        //case pfad ENDE
         case pfadAdd:
             switch (request.method) {
                 case "POST":
@@ -69,10 +70,9 @@ const server = http.createServer(async (request, response) => {
                         }
                     });
                     break;
-                default:
-                    break;
             }
             break;
+        //case pfadAdd ENDE
         case pfadView:
             try {
                 let id = url.searchParams.get("id");
@@ -81,7 +81,6 @@ const server = http.createServer(async (request, response) => {
                 console.log("\x1b[33m", "searching itme with ID: " + id);
                 await mongoClient.connect();
                 let dbRsponse = await dbGetID(id);
-                //console.log(dbRsponse);
                 response.end(dbRsponse);
             }
             catch (error) {
@@ -95,6 +94,7 @@ const server = http.createServer(async (request, response) => {
                 response.end(); //let the client know that the response is done
             }
             break;
+        //case pfadView ENDE
         case pfadEdit:
             console.log("reciving Item");
             let input;
@@ -123,6 +123,7 @@ const server = http.createServer(async (request, response) => {
                 }
             });
             break;
+        // case pfadEdit ENDE
         case pfadDelet:
             try {
                 let id = url.searchParams.get("id");
@@ -142,15 +143,18 @@ const server = http.createServer(async (request, response) => {
                 response.end();
             }
             break;
+        //case pfadDelet: ENDE
         default:
-            response.statusCode = 404;
+            response.statusCode = 404; //fals der Link irgendwo hin fürt zum NodeJS Server
             break;
+        //
     }
 });
 server.listen(port, hostname, () => {
     console.clear();
     console.log("\x1b[32m", `Server running at http://${hostname}:${port}/`);
 });
+// Die Funktionen erklären sich von selbst
 async function dbGetAll() {
     let result = await mongoClient
         .db(db)
@@ -189,7 +193,9 @@ async function dbEdit(eventID, event) {
 async function dbRemove(eventID) {
     console.log("\x1b[33m", "removing elment with ID: " + eventID);
     try {
-        await mongoClient.db(db).collection(dbCollection).deleteOne({ _id: new mongo.ObjectId(eventID) }); //new mongo.ObjectId(eventID) 
+        await mongoClient.db(db)
+            .collection(dbCollection)
+            .deleteOne({ _id: new mongo.ObjectId(eventID) });
         console.log("\x1b[32m", "Data removed");
     }
     catch (error) {

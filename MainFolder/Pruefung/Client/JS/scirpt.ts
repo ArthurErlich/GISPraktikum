@@ -2,8 +2,8 @@ namespace Pruefung {
     insertNavbar();
     inserFooter();
 
-    //crates multiple used tags
-    function insertNavbar() {
+    //Navigationsleiste für alle HTML Seiten
+    function insertNavbar(): void {
         const navbar: HTMLElement = document.getElementById("navbar");
         const pageName = document.getElementById("pageName").dataset.pagename;
         switch (pageName) {
@@ -26,7 +26,8 @@ namespace Pruefung {
         }
     }
 
-    function inserFooter() {
+    //Footer für alle Seiten
+    function inserFooter(): void {
         const footer: HTMLElement = document.getElementById("footer");
         const a: HTMLElement = document.createElement("a");
         const author: HTMLElement = document.createElement("div");

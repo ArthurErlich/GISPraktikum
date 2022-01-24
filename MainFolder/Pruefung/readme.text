@@ -1,5 +1,5 @@
 Im Client ist die index.html, das ist die Startseite.
-Um den Node.js Server und die Datenbank zu starten kann man die startMongoDBandHTTPServer.bat ausführen, wenn die nicht geht dann jewals HTTP.bat und MongoDB.bat.
+Um den Node.js Server und die Datenbank zu starten kann man die startMongoDBandHTTPServer.bat ausführen, wenn die nicht geht dann jewals HTTP.bat und MongoDB.bat. Um zu Filtern muss nur ausgwählt werden und Filtern gedrückt werden. Das speichert auch die Auswahl. Abgelaufen ist rot umrandet, bald abgelaufen (3 Tagen zum MHD) ist gelb umrandet. Um mehr über das Produkt zu erfahren, kann es einfach angeklickt werden.
 
 In der MongoDB sind ein paar Beispiele in der Datenbank enthalten, die können gelöscht werden. 
 Außerdem gibt es fängt der Node.js Server Fehler ab, ist zum Beispiel die DB nicht gestartet, wird der Server nicht abstürzen und ein Fehler log in der Konsole ausgeben. Der Client wird auch einen Fehler ausgeben der mit try/catch abgefangen wird.
@@ -24,7 +24,11 @@ bsp Datei:
 "note":"TEXT NOTE2",
 "tag":"0"}
 
-Mir ist bewusst, dass einige Abgaben sehr ähnlich außen werden wie meine (try/catch, gefärbte logs,...). Es liegt daran, dass ich eine GitHub Repo mit den Aufgaben erstellt habe, die ist nach dem ich ein meinen Code zufällig gesehen habe Privat. Der Code wurde herumgeschickt und kopiert.
+Mir ist bewusst, dass einige Abgaben sehr ähnlich außen werden, wie meine (try/catch, gefärbte logs,...). Es liegt daran, dass ich eine GitHub Repo mit den Aufgaben erstellt habe, die ist nach dem ich ein meinen Code zufällig gesehen habe Privat eingestellt worden. Der Code wurde herumgeschickt und kopiert. 
+Link zum Repo:https://github.com/ArthurErlich/GISPraktikum
+Bzw pages: https://arthurerlich.github.io/GISPraktikum/MainFolder/MainStartPage.html
 
-Trotz allem wünsche ich ihnen frohes herumklicken und bewerten der Abgabe
-mit freundlichen Grüßen Arthur Erlich.
+Trotz allem wünsche ich Ihnen frohes herumklicken und bewerten der Abgabe.
+
+Mit freundlichen Grüßen 
+Arthur Erlich.

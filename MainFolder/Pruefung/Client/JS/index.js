@@ -31,11 +31,18 @@ var Pruefung;
         loadItems();
         form.addEventListener("submit", submitSort);
     }
-    //TODO: localStorage Hinzufügen um die Kategoriy zu suchen/bzw den Namen zu suchen
     async function loadItems() {
         const form = document.getElementById("filter");
         let formContorl = form.elements;
         let formSetting;
+        let items;
+        try {
+            items = await getItems();
+        }
+        catch (error) {
+            console.error("server offline?");
+            items = null;
+        }
         if (localStorage.getItem("filterSetting")) {
             formSetting = JSON.parse(localStorage.getItem("filterSetting"));
             if (formSetting[0] !== null) {
@@ -52,29 +59,30 @@ var Pruefung;
             }
         }
         removeNodes();
-        let itmes = await getItems();
-        itmes.forEach(element => {
-            if (formSetting[0] !== null) {
-                if (!isSpoiled(new Date(element.spoilDate))) {
-                    return;
+        if (items !== null) {
+            items.forEach(element => {
+                if (formSetting[0] !== null) {
+                    if (!isSpoiled(new Date(element.spoilDate))) {
+                        return;
+                    }
                 }
-            }
-            if (formSetting[1] !== null) {
-                if (!isNearlySpoiled(new Date(element.spoilDate))) {
-                    return;
+                if (formSetting[1] !== null) {
+                    if (!isNearlySpoiled(new Date(element.spoilDate))) {
+                        return;
+                    }
                 }
-            }
-            if (formSetting[2] !== "") {
-                if (!element.name.toLowerCase().includes(formSetting[2].toLowerCase())) {
-                    return;
+                if (formSetting[2] !== "") {
+                    if (!element.name.toLowerCase().includes(formSetting[2].toLowerCase())) {
+                        return;
+                    }
                 }
-            }
-            if (formSetting[3] !== "null") {
-                if (element.tag !== formSetting[3])
-                    return;
-            }
-            createItem(element);
-        });
+                if (formSetting[3] !== "null") {
+                    if (element.tag !== formSetting[3])
+                        return;
+                }
+                createItem(element);
+            });
+        }
     }
     function removeNodes() {
         //löscht das FirstChild solange es eins gibt
@@ -100,6 +108,7 @@ var Pruefung;
         itmes.forEach(element => {
             if (spoiled !== null) {
                 if (!isSpoiled(new Date(element.spoilDate))) {
+                    //springt raus sobald beides erfüllt ist.
                     return;
                 }
             }
@@ -117,6 +126,7 @@ var Pruefung;
                 if (element.tag !== typeSort)
                     return;
             }
+            //erst hier wird das Element erstellt
             createItem(element);
         });
     }
@@ -126,6 +136,7 @@ var Pruefung;
     }
     function createBox(gefrieGut) {
         const itemBox = document.createElement("div");
+        //hier wird der Rahemn für MHD eingefügt
         itemBox.className = "item flexChild";
         if (isSpoiled(new Date(gefrieGut.spoilDate))) {
             itemBox.className += " redOutline";
@@ -133,6 +144,7 @@ var Pruefung;
         else if (isNearlySpoiled(new Date(gefrieGut.spoilDate))) {
             itemBox.className += " jellowOutline";
         }
+        //das dataset wird nicht benutzt, ist für die Zukunft vorhanden und mann kan die Ids mit der DB verlgiechen
         itemBox.dataset.id = gefrieGut._id;
         itemBox.appendChild(creatLink(gefrieGut));
         return itemBox;
@@ -142,6 +154,7 @@ var Pruefung;
         link.className = "itemLink";
         link.setAttribute("href", "details.html?id=" + gefrieGut._id);
         let itemInner = createItemAtributes(gefrieGut);
+        // ich liebe dieses forEach!
         itemInner.forEach(element => {
             link.appendChild(element);
         });
@@ -157,6 +170,7 @@ var Pruefung;
         }
         return link;
     }
+    //Her werden die Element in der Übersicht mit allen Daten gefüllt.
     function createItemAtributes(gefrieGut) {
         let item_atirbutes = new Array(3);
         for (let i = 0; i < item_atirbutes.length; i++) {
@@ -170,11 +184,13 @@ var Pruefung;
         item_atirbutes[2].textContent = "Haltbar bis: " + dateConverter(new Date(gefrieGut.spoilDate));
         return item_atirbutes;
     }
+    //Erstellung der Filterauswahl
     function creatSelectionList() {
         let selectChecker = ["Abgelaufen", "Bald abgelaufen"];
         let selectSearch = ["Suche"];
         let selectKategory = "Kategorie";
         let selectList = document.getElementById("sort_Kategory");
+        //Funktionen für die Erstllung der Chekcboxen und dem Suchfeld
         let sortCheker = createSortChecker(selectChecker);
         let sortSearch = createSortSearch(selectSearch);
         sortCheker.forEach(checker => {
@@ -210,7 +226,7 @@ var Pruefung;
         let selectSearch = new Array(selectNames.length);
         for (let i = 0; i < selectNames.length; i++) {
             selectLabel[i] = document.createElement("label");
-            selectLabel[i].setAttribute("for", stringTypeFromater(selectNames[i]));
+            selectLabel[i].setAttribute("for", stringTypeFromater(selectNames[i])); //entfernt die leerzeichen im string
             selectLabel[i].textContent = selectNames[i];
             selectSearch[i] = document.createElement("input");
             selectSearch[i].setAttribute("type", "text");
@@ -227,7 +243,7 @@ var Pruefung;
         let selectLabel;
         let selectSearch;
         selectLabel = document.createElement("label");
-        selectLabel.setAttribute("for", stringTypeFromater(selectNames));
+        selectLabel.setAttribute("for", stringTypeFromater(selectNames)); //einzige möglichkeit im js die Emojis sichtabr zu machen
         selectLabel.textContent = selectNames;
         selectSearch = document.createElement("select");
         selectSearch.setAttribute("name", stringTypeFromater(selectNames));
@@ -259,6 +275,7 @@ var Pruefung;
         let day = (date.getUTCDate() < 10 ? "0" : "") + date.getUTCDate();
         return day + "." + month[date.getUTCMonth()] + "." + date.getFullYear();
     }
+    //einfacher Verlgeich um zu schauen ob ein Datum überschritten wird valueOf: milliseconds since midnight, January 1, 1970 UTC.
     function isSpoiled(spoilDate) {
         let spoil = spoilDate.valueOf();
         let nowDate = new Date();
@@ -286,6 +303,7 @@ var Pruefung;
         catch (error) {
             console.error("server is Offline");
             console.log(error);
+            throw new Error("server offline!");
         }
         return items;
     }

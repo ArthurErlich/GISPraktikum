@@ -3,7 +3,7 @@ var Pruefung;
 (function (Pruefung) {
     insertNavbar();
     inserFooter();
-    //crates multiple used tags
+    //Navigationsleiste für alle HTML Seiten
     function insertNavbar() {
         const navbar = document.getElementById("navbar");
         const pageName = document.getElementById("pageName").dataset.pagename;
@@ -26,6 +26,7 @@ var Pruefung;
                 break;
         }
     }
+    //Footer für alle Seiten
     function inserFooter() {
         const footer = document.getElementById("footer");
         const a = document.createElement("a");

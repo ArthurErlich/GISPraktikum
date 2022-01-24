@@ -18,7 +18,7 @@ var Pruefung;
             return this.pics[id];
         }
     }
-    const tags = new Tags();
+    const tags = new Tags(); //normalerweis würde ich das Static in dem File.ts machen.
     const form = document.getElementById("importForm");
     const pfadEdit = "/edit";
     const pfadAdd = "/add";
