@@ -74,7 +74,6 @@ namespace Pruefung {
                     return;
                 }
             }
-
             if (formSetting[1] !== null) {
                 if (!isNearlySpoiled(new Date(element.spoilDate))) {
                     return;
