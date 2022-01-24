@@ -1,0 +1,30 @@
+Im Client ist die index.html, das ist die Startseite.
+Um den Node.js Server und die Datenbank zu starten kann man die startMongoDBandHTTPServer.bat ausführen, wenn die nicht geht dann jewals HTTP.bat und MongoDB.bat.
+
+In der MongoDB sind ein paar Beispiele in der Datenbank enthalten, die können gelöscht werden. 
+Außerdem gibt es fängt der Node.js Server Fehler ab, ist zum Beispiel die DB nicht gestartet, wird der Server nicht abstürzen und ein Fehler log in der Konsole ausgeben. Der Client wird auch einen Fehler ausgeben der mit try/catch abgefangen wird.
+
+Footer so wie die Navigationsleiste wird in der TS generiert. In der scirpt.ts ist für jede HTML Seite der wichtige Code hinterlegt. Jede Seite hat eine eigenen Script. Am Anfang war die Idee, mit Export und Import Klassen und Interface zu implementieren, doch dies hat nicht geklappt und deswegen habe ich die Klassen/Interface jemals in die 3 Skripte kopiert. Die ist im files.ts programmiert.
+
+Bei der Übersichtseite werden die Güter in eine Flexbox gepackt, dadurch ist die Seite Dynamisch und passt sich überall an. Footer und Navigation ist genauso aufgebaut. Da ich einen Ultrawide habe achte ich auch darauf, dass die Seite auf einem 21:9 Format passt.
+
+CSS wurde in scss (sass) geschrieben um z. B. die Farbe in Variablen zu packen.
+
+Node.js Server läuft auf dem Port 3500 und der MongoDB Server auf dem Port 27017.
+
+Das Paket3 wurde zur Bearbeitung gewählt.
+
+Die Datenbankstruktur sieht so aus:
+-> food.foodList
+bsp Datei:
+{"_id":{"$oid":"61de229545e49cad9706662e"},
+"name":"Hünchen Schenkel",
+"spoilDate":"2022-01-12T00:00:00.000Z",
+"addDate":"2022-01-15T17:16:43.526Z",
+"note":"TEXT NOTE2",
+"tag":"0"}
+
+Mir ist bewusst, dass einige Abgaben sehr ähnlich außen werden wie meine (try/catch, gefärbte logs,...). Es liegt daran, dass ich eine GitHub Repo mit den Aufgaben erstellt habe, die ist nach dem ich ein meinen Code zufällig gesehen habe Privat. Der Code wurde herumgeschickt und kopiert.
+
+Trotz allem wünsche ich ihnen frohes herumklicken und bewerten der Abgabe
+mit freundlichen Grüßen Arthur Erlich.
