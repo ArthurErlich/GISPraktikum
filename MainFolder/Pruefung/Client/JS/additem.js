@@ -61,17 +61,17 @@ var Pruefung;
         let item;
         console.log("cheking input");
         if (product === "") {
-            console.error("product  is empty");
+            console.log("product  is empty");
             formElements.namedItem("product").className = "wrongInput";
             return;
         }
         if (selection === "") {
-            console.error("selection is empty");
+            console.log("selection is empty");
             formElements.namedItem("selection").className = "wrongInput";
             return;
         }
         if (isNaN(Date.parse(spoildate.toString()))) {
-            console.error("spoildate is empty");
+            console.log("spoildate is empty");
             formElements.namedItem("spoildate").className = "wrongInput";
             return;
         }
