@@ -366,7 +366,7 @@ namespace Pruefung {
             let response: Response = await fetch(url + pfad, {
                 method: "get"
             });
-            let text = await response.text()
+            let text = await response.text();
             items = JSON.parse(text);
             console.log("fetch finished");
         } catch (error) {
